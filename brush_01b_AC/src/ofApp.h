@@ -4,7 +4,7 @@
 
 #include "ofxiOS.h"
 #include "ofxOpenCv.h"
-#include "ofxFB.h"
+#include "ofxiPhoneSocial.h"
 
 class ofApp : public ofxiOSApp{
     
@@ -32,9 +32,7 @@ public:
     void draw_info();
     void draw_audioStats();
     void draw_vid();
-    
-    void launchedWithURL(string url);
-    
+        
     // app
     const int       total_time_ms = 3 * 60 * 1000; // 3 mim
     const int       target_fps = 60;
@@ -75,7 +73,7 @@ public:
     bool bNeedSaveImg;
 
     
-    ofxFacebook fb;
+    ofxiPhoneSocial *social;
 };
 
 

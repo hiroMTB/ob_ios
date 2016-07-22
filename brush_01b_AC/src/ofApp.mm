@@ -13,10 +13,6 @@ inline int signval(T n){
     return (n > 0) - (n < 0);
 }
 
-void ofApp::launchedWithURL(string url){
-    fb.getAnswer(url);
-}
-
 void ofApp::setup(){
     ofSetFrameRate(target_fps);
     ofSetVerticalSync(true);
@@ -412,7 +408,7 @@ void ofApp::touchDoubleTap(ofTouchEventArgs & touch){
     pixRgb.setChannel(2, pixRgba.getChannel(2));
     ofImage img(pixRgb);
     
-    fb.post(img,"My Cool OB image!!!");
+    social->share("Post from OralB BrushApp", img);
 }
 
 void ofApp::touchCancelled(ofTouchEventArgs & touch){}
