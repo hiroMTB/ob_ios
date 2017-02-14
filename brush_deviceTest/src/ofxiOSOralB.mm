@@ -1,41 +1,29 @@
 //
-//  ofxOralB.mm
+//  ofxiOSOralB.m
 //
-//  Created by hiroshi matoba on 08/02/2017.
+//  Created by MatobaHiroshi on 2/13/17.
 //
 //
+
+#import <Foundation/Foundation.h>
 
 #include "ofxOralB.h"
+#include "ofxOralBApp.h"
+#include "ofMain.h"
 
 /*
- 
-    obj c
- 
+        obj c callback
  */
+@interface ofxiOSOralBDelegate : NSObject<OBTSDKDelegate>
+@end
 
-@implementation ofxOralBDelegate{
-    
-}
+static ofxiOSOralBDelegate * iOSOralBDelegate;
 
+@implementation ofxiOSOralBDelegate
 - (id) init
 {
     self = [super init];
-    [self addNotification];
     return self;
-}
-
-- (void)nearbyToothbrushesDidChange:(NSArray *)nearbyToothbrushes
-{
-    NSLog(@"nearbyToothbrushesDidChange");
-    [nearbyToothbrushes enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSLog(@"%d: %@", idx, obj);
-    }];
-    
-    /*
-     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:TableViewSectionToothbrushes] withRowAnimation:UITableViewRowAnimationAutomatic];
-    });
-     */
 }
 
 - (void) addNotification
@@ -50,33 +38,43 @@
     [notificationCenter removeObserver:self];
 }
 
-- (void)developerAuthChanged:(NSNotification *)notification
+- (void) developerAuthChanged : (NSNotification *) notification
 {
     NSLog(@"ofxOralB : developerAuthChanged:");
 }
 
-- (void)userAuthChanged:(NSNotification *)notification
+- (void) userAuthChanged : (NSNotification *) notification
 {
     NSLog(@"ofxOralB : userAuthChanged:");
 }
 
+- (void) nearbyToothbrushesDidChange : (NSArray *)nearbyToothbrushes{
+    NSLog(@"nearbyToothbrushesDidChange");
+    
+    vector<OBTBrush*> br;
+    for(int i=0; i<nearbyToothbrushes.count; i++){
+        OBTBrush * brush = [nearbyToothbrushes objectAtIndex:i];
+        br.push_back( brush );
+    };
+
+    ofxOralBApp * obApp = (ofxOralBApp*)( ofGetAppPtr() );
+    obApp->nearbyToothbrushesDidChange(br);
+}
 
 @end
 
 
 /*
-
-    c++
-
+        C++ impl
 */
 ofxOralB::ofxOralB(){
-    oralB = [ [ofxOralBDelegate alloc] init];
-    [oralB addNotification];
+    iOSOralBDelegate = [ [ofxiOSOralBDelegate alloc] init];
+    [iOSOralBDelegate addNotification];
 }
 
 ofxOralB::~ofxOralB(){
-    [oralB removeNotification];
-    [oralB release];
+    [iOSOralBDelegate removeNotification];
+    [iOSOralBDelegate release];
 }
 
 void ofxOralB::setupWithAppID( string _appID, string _appKey){

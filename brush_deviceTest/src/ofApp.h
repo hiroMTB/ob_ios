@@ -6,8 +6,9 @@
 #include "ofxOpenCv.h"
 #include "ofxiPhoneSocial.h"
 #include "ofxOralB.h"
+#include "ofxOralBApp.h"
 
-class ofApp : public ofxiOSApp{
+class ofApp : public ofxiOSApp, public ofxOralBApp{
     
 public:
     void setup() override;
@@ -33,7 +34,10 @@ public:
     void draw_info();
     void draw_audioStats();
     void draw_vid();
-        
+    
+    // OralB event
+    void nearbyToothbrushesDidChange( vector<OBTBrush*> bs ) override;
+    
     // app
     const int       total_time_ms = 3 * 60 * 1000; // 3 mim
     const int       target_fps = 60;
@@ -75,7 +79,7 @@ public:
 
     
     ofxiPhoneSocial social;
-    ofxOralB ob;
+    ofxOralB oralb;
     
 };
 

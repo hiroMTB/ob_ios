@@ -11,7 +11,6 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		457F96051E4B818600729AD5 /* OBTSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457F96041E4B818600729AD5 /* OBTSDK.framework */; };
-		457F96081E4B83C700729AD5 /* ofxOralB.mm in Sources */ = {isa = PBXBuildFile; fileRef = 457F96061E4B83C700729AD5 /* ofxOralB.mm */; };
 		4D83BA821D4180CB0010CCF4 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D83BA811D4180CB0010CCF4 /* Accounts.framework */; };
 		4DCB97271CF3BC7E00FCE897 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 678E130B1795153C005B6D19 /* Default.png */; };
 		4DCB97281CF3BC7E00FCE897 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 678E130D17951540005B6D19 /* Default@2x.png */; };
@@ -31,6 +30,7 @@
 		678E130817951530005B6D19 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 678E130717951530005B6D19 /* Icon@2x.png */; };
 		678E130A17951536005B6D19 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 678E130917951536005B6D19 /* Icon.png */; };
 		67DFA53619F92A69003B3434 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67DFA53419F92A5E003B3434 /* Accelerate.framework */; };
+		848D5C301E5213E600CF0791 /* ofxiOSOralB.mm in Sources */ = {isa = PBXBuildFile; fileRef = 848D5C2F1E5213E600CF0791 /* ofxiOSOralB.mm */; };
 		BB16EBD20F2B2A9500518274 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB16EBD10F2B2A9500518274 /* OpenGLES.framework */; };
 		BB16EBD90F2B2AB500518274 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB16EBD80F2B2AB500518274 /* QuartzCore.framework */; };
 		BBE5EAB80F49AD8400F28951 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBE5EAB70F49AD8400F28951 /* AudioToolbox.framework */; };
@@ -67,7 +67,6 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* ofxiOS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiOS_Prefix.pch; sourceTree = "<group>"; };
 		457F96041E4B818600729AD5 /* OBTSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OBTSDK.framework; path = "../../../../sdk/OralB_SDK/ios-sdk/OBTSDK.framework"; sourceTree = "<group>"; };
-		457F96061E4B83C700729AD5 /* ofxOralB.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxOralB.mm; sourceTree = "<group>"; };
 		457F96071E4B83C700729AD5 /* ofxOralB.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = ofxOralB.h; sourceTree = "<group>"; };
 		4D54C75F1CEFBFDD009C9215 /* obGeoDrawer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = obGeoDrawer.hpp; sourceTree = "<group>"; };
 		4D54C7601CEFBFDD009C9215 /* obStats.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = obStats.hpp; sourceTree = "<group>"; };
@@ -277,6 +276,8 @@
 		678E130D17951540005B6D19 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "bin/data/Default@2x.png"; sourceTree = "<group>"; };
 		678E130F17951549005B6D19 /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x~iphone.png"; path = "bin/data/Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
 		67DFA53419F92A5E003B3434 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		848D5C2F1E5213E600CF0791 /* ofxiOSOralB.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxiOSOralB.mm; sourceTree = "<group>"; };
+		848D5C311E527AA100CF0791 /* ofxOralBApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOralBApp.h; sourceTree = "<group>"; };
 		BB16EBD10F2B2A9500518274 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BB16EBD80F2B2AB500518274 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BB24DDC910DA781C00E9C588 /* ofxiOS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ofxiOS-Info.plist"; sourceTree = "<group>"; };
@@ -910,8 +911,9 @@
 				4D54C75F1CEFBFDD009C9215 /* obGeoDrawer.hpp */,
 				4D54C7601CEFBFDD009C9215 /* obStats.hpp */,
 				4D9061891CF497EB00A3CA7D /* obUtil.hpp */,
-				457F96061E4B83C700729AD5 /* ofxOralB.mm */,
 				457F96071E4B83C700729AD5 /* ofxOralB.h */,
+				848D5C2F1E5213E600CF0791 /* ofxiOSOralB.mm */,
+				848D5C311E527AA100CF0791 /* ofxOralBApp.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1031,12 +1033,12 @@
 				4DE8DBA41D4259BA000B9D1A /* ofxiPhoneSocial.mm in Sources */,
 				E4D8936F11527B74007E1F53 /* ofApp.mm in Sources */,
 				4DCB98241CF3BEE300FCE897 /* ofxCvImage.cpp in Sources */,
+				848D5C301E5213E600CF0791 /* ofxiOSOralB.mm in Sources */,
 				4DCB98221CF3BEE300FCE897 /* ofxCvGrayscaleImage.cpp in Sources */,
 				4DCB98251CF3BEE300FCE897 /* ofxCvShortImage.cpp in Sources */,
 				4DCB98211CF3BEE300FCE897 /* ofxCvFloatImage.cpp in Sources */,
 				4DCB98231CF3BEE300FCE897 /* ofxCvHaarFinder.cpp in Sources */,
 				4DCB981F1CF3BEE300FCE897 /* ofxCvColorImage.cpp in Sources */,
-				457F96081E4B83C700729AD5 /* ofxOralB.mm in Sources */,
 				4DCB98201CF3BEE300FCE897 /* ofxCvContourFinder.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

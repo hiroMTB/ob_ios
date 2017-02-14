@@ -80,10 +80,8 @@ void ofApp::setup(){
     
     string appID = "120307cc-05a3-4f07-9e02-2cd40c966e6b";
     string appKey = "387d8361-0345-423d-ac0c-752f57dacd41";
-    ob.setupWithAppID( appID, appKey);
-    
-    ofAddListener(<#EventType &event#>, <#ListenerClass *listener#>, <#void (ListenerClass::*listenerMethod)(const void *, ArgumentsType &)#>)
-    
+
+    oralb.setupWithAppID( appID, appKey);
 }
 
 void ofApp::audioIn(float * input, int bufferSize, int nCh){
@@ -399,7 +397,6 @@ void ofApp::exit(){}
 void ofApp::touchDown(ofTouchEventArgs & touch){}
 void ofApp::touchMoved(ofTouchEventArgs & touch){}
 void ofApp::touchUp(ofTouchEventArgs & touch){}
-
 void ofApp::touchDoubleTap(ofTouchEventArgs & touch){
     //ob::util::saveImage();
     
@@ -416,9 +413,12 @@ void ofApp::touchDoubleTap(ofTouchEventArgs & touch){
     
     social.share("Post from OralB BrushApp", img);
 }
-
 void ofApp::touchCancelled(ofTouchEventArgs & touch){}
 void ofApp::lostFocus(){}
 void ofApp::gotFocus(){}
 void ofApp::gotMemoryWarning(){}
 void ofApp::deviceOrientationChanged(int newOrientation){}
+
+void ofApp::nearbyToothbrushesDidChange( vector<OBTBrush*> bs ){
+    cout << "yoooooo" << endl;
+}
