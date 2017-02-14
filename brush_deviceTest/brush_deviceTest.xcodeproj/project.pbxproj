@@ -908,12 +908,12 @@
 				E4D8936B11527B74007E1F53 /* main.mm */,
 				E4D8936D11527B74007E1F53 /* ofApp.mm */,
 				E4D8936C11527B74007E1F53 /* ofApp.h */,
+				848D5C311E527AA100CF0791 /* ofxOralBApp.h */,
 				4D54C75F1CEFBFDD009C9215 /* obGeoDrawer.hpp */,
 				4D54C7601CEFBFDD009C9215 /* obStats.hpp */,
 				4D9061891CF497EB00A3CA7D /* obUtil.hpp */,
 				457F96071E4B83C700729AD5 /* ofxOralB.h */,
 				848D5C2F1E5213E600CF0791 /* ofxiOSOralB.mm */,
-				848D5C311E527AA100CF0791 /* ofxOralBApp.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

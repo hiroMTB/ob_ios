@@ -15,6 +15,7 @@
         obj c callback
  */
 @interface ofxiOSOralBDelegate : NSObject<OBTSDKDelegate>
+- (ofxOralBApp*) getApp;
 @end
 
 static ofxiOSOralBDelegate * iOSOralBDelegate;
@@ -48,6 +49,15 @@ static ofxiOSOralBDelegate * iOSOralBDelegate;
     NSLog(@"ofxOralB : userAuthChanged:");
 }
 
+- (ofxOralBApp*) getApp{
+    return (ofxOralBApp*)( ofGetAppPtr() );
+}
+
+/*
+ 
+    SDK delegate
+ 
+ */
 - (void) nearbyToothbrushesDidChange : (NSArray *)nearbyToothbrushes{
     NSLog(@"nearbyToothbrushesDidChange");
     
@@ -57,8 +67,68 @@ static ofxiOSOralBDelegate * iOSOralBDelegate;
         br.push_back( brush );
     };
 
-    ofxOralBApp * obApp = (ofxOralBApp*)( ofGetAppPtr() );
-    obApp->nearbyToothbrushesDidChange(br);
+    [self getApp]->nearbyToothbrushesDidChange(br);
+}
+
+- (void)toothbrushDidConnect:(OBTBrush *)toothbrush
+{
+    [self getApp]->toothbrushDidConnect(toothbrush);
+}
+
+- (void)toothbrushDidDisconnect:(OBTBrush *)toothbrush
+{
+    [self getApp]->toothbrushDidDisconnect(toothbrush);
+}
+
+- (void)toothbrushDidFailWithError:(NSError *)error
+{
+    string des = [[error localizedDescription] UTF8String];
+    string res = [[error localizedFailureReason] UTF8String];
+    string sug = [[error localizedRecoverySuggestion] UTF8String];
+    string errorString = des + ", " + res + ", " + sug;
+    [self getApp]->toothbrushDidFailWithError(errorString);
+}
+
+- (void)toothbrush:(OBTBrush *)toothbrush
+    didLoadSession:(OBTBrushSession *)brushSession
+          progress:(float)progress
+{
+    [self getApp]->toothbrushDidLoadSession(toothbrush, brushSession, progress);
+}
+
+- (void)toothbrush:(OBTBrush *)toothbrush didUpdateRSSI:(float)rssi
+{
+    [self getApp]->toothbrushDidUpdateRSSI(toothbrush, rssi);
+}
+
+- (void)toothbrush:(OBTBrush *)toothbrush didUpdateDeviceState:(OBTDeviceState)deviceState
+{
+    [self getApp]->toothbrushDidUpdateDeviceState(toothbrush, deviceState);
+}
+
+- (void)toothbrush:(OBTBrush *)toothbrush didUpdateBatteryLevel:(float)batteryLevel
+{
+    [self getApp]->toothbrushDidUpdateBatteryLevel(toothbrush, batteryLevel);
+}
+
+- (void)toothbrush:(OBTBrush *)toothbrush didUpdateBrushMode:(OBTBrushMode)brushMode
+{
+    [self getApp]->toothbrushDidUpdateBrushMode(toothbrush, brushMode);
+}
+
+- (void)toothbrush:(OBTBrush *)toothbrush didUpdateBrushingDuration:(NSTimeInterval)brushingDuration
+{
+    [self getApp]->toothbrushDidUpdateBrushingDuration(toothbrush, brushingDuration);
+}
+
+- (void)toothbrush:(OBTBrush *)toothbrush didUpdateSector:(int)sector
+{
+    [self getApp]->toothbrushDidUpdateSector(toothbrush, sector);
+}
+
+- (void)toothbrush:(OBTBrush *)toothbrush didUpdateOverpressure:(BOOL)overpressure
+{
+    [self getApp]->toothbrushDidUpdateOverpressure(toothbrush, overpressure);
 }
 
 @end
