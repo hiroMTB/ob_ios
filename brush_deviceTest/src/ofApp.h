@@ -36,7 +36,20 @@ public:
     void draw_vid();
     
     // OralB event
-    void nearbyToothbrushesDidChange( vector<OBTBrush*> bs ) override;
+    void developerAuthChanged() override;
+    void userAuthChanged() override;
+    void nearbyToothbrushesDidChange(vector<OBTBrush*> nearbyToothbrushes) override;
+    void toothbrushDidConnect(OBTBrush * toothbrush) override;
+    void toothbrushDidDisconnect(OBTBrush * toothbrush) override;
+    void toothbrushDidFailWithError(string error) override;
+    void toothbrushDidLoadSession(OBTBrush * toothbrush, OBTBrushSession * brushSession, float progress) override;
+    void toothbrushDidUpdateRSSI(OBTBrush * toothbrush, float rssi) override;
+    void toothbrushDidUpdateDeviceState(OBTBrush * toothbrush, OBTDeviceState deviceState) override;
+    void toothbrushDidUpdateBatteryLevel(OBTBrush * toothbrush, float batteryLevel) override;
+    void toothbrushDidUpdateBrushMode(OBTBrush * toothbrush, OBTBrushMode brushMode) override;
+    void toothbrushDidUpdateBrushingDuration(OBTBrush * toothbrush, NSTimeInterval brushingDuration) override;
+    void toothbrushDidUpdateSector(OBTBrush * toothbrush, int sector) override;
+    void toothbrushDidUpdateOverpressure(OBTBrush * toothbrush, bool overpressure) override;
     
     // app
     const int       total_time_ms = 3 * 60 * 1000; // 3 mim

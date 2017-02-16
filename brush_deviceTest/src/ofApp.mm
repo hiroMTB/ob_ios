@@ -383,7 +383,7 @@ void ofApp::draw_vid(){
 void ofApp::draw_info(){
     int y = 10;
     int x = 10;
-    int os = 170;
+    int os = 150;
     ofSetColor(0);
     ofDrawBitmapString("fps        " + ofToString(ofGetFrameRate()), x, y);
     ofDrawBitmapString("nChannels  " + ofToString(sound_stream.getNumInputChannels() ), x+=os, y);
@@ -391,6 +391,15 @@ void ofApp::draw_info(){
     ofDrawBitmapString("sampleRate " + ofToString(sound_stream.getSampleRate()), x+=os, y);
     ofDrawBitmapString("track len  " + ofToString((int)track_len), x+=os, y);
 
+    y = 25;
+    x = 10;
+    os = 150;
+    ofDrawBitmapString("SDK        " + oralb.getVersion(), x, y);
+    ofDrawBitmapString("Bluetooth  " + ofToString((int)oralb.getBluetoothAvailableAndEnabled()), x+=os, y);
+    ofDrawBitmapString("DevAuth    " + ofToString((int)oralb.getAuthorizationStatus()), x+=os, y);
+    ofDrawBitmapString("UserAuth   " + ofToString((int)oralb.getUserAuthorizationStatus()), x+=os, y);
+    ofDrawBitmapString("scanning   " + ofToString((int)oralb.isScanning()), x+=os, y);
+    ofDrawBitmapString("connected  " + ofToString((int)oralb.isConnected()), x+=os, y);
 }
 
 void ofApp::exit(){}
@@ -413,12 +422,87 @@ void ofApp::touchDoubleTap(ofTouchEventArgs & touch){
     
     social.share("Post from OralB BrushApp", img);
 }
-void ofApp::touchCancelled(ofTouchEventArgs & touch){}
-void ofApp::lostFocus(){}
-void ofApp::gotFocus(){}
-void ofApp::gotMemoryWarning(){}
-void ofApp::deviceOrientationChanged(int newOrientation){}
+
+void ofApp::touchCancelled(ofTouchEventArgs & touch){
+    cout << __FUNCTION__ << endl;
+}
+
+void ofApp::lostFocus(){
+    cout << __FUNCTION__ << endl;
+}
+
+void ofApp::gotFocus(){
+    cout << __FUNCTION__ << endl;
+}
+
+void ofApp::gotMemoryWarning(){
+    cout << __FUNCTION__ << endl;
+}
+
+void ofApp::deviceOrientationChanged(int newOrientation){
+    cout << __FUNCTION__ << endl;
+}
+
+void ofApp::developerAuthChanged(){
+    cout << __FUNCTION__ << ", ";
+    int status = oralb.getAuthorizationStatus();
+    cout << "status : " << status << endl;
+    
+    if( status == 1 ){
+        oralb.addDelegate();
+        oralb.startScanning();
+        cout << "start scanning..." << endl;
+    }
+}
+
+void ofApp::userAuthChanged(){
+    cout << __FUNCTION__ << endl;
+}
 
 void ofApp::nearbyToothbrushesDidChange( vector<OBTBrush*> bs ){
-    cout << "yoooooo" << endl;
+    cout << __FUNCTION__ << endl;
+}
+
+void ofApp::toothbrushDidConnect(OBTBrush *toothbrush){
+    cout << __FUNCTION__ << endl;
+}
+
+void ofApp::toothbrushDidDisconnect(OBTBrush * toothbrush){
+    cout << __FUNCTION__ << endl;
+}
+
+void ofApp::toothbrushDidFailWithError(string error){
+    cout << __FUNCTION__ << endl;
+}
+
+void ofApp::toothbrushDidLoadSession(OBTBrush * toothbrush, OBTBrushSession * brushSession, float progress){
+    cout << __FUNCTION__ << endl;
+}
+
+void ofApp::toothbrushDidUpdateRSSI(OBTBrush * toothbrush, float rssi){
+    cout << __FUNCTION__ << endl;
+}
+
+void ofApp::toothbrushDidUpdateDeviceState(OBTBrush * toothbrush, OBTDeviceState deviceState){
+    cout << __FUNCTION__ << endl;
+}
+
+void ofApp::toothbrushDidUpdateBatteryLevel(OBTBrush * toothbrush, float batteryLevel){
+    cout << __FUNCTION__ << endl;
+}
+
+void ofApp::toothbrushDidUpdateBrushMode(OBTBrush * toothbrush, OBTBrushMode brushMode){
+    cout << __FUNCTION__ << endl;
+}
+
+void ofApp::toothbrushDidUpdateBrushingDuration(OBTBrush * toothbrush, NSTimeInterval brushingDuration){
+    cout << __FUNCTION__ << endl;
+}
+
+void ofApp::toothbrushDidUpdateSector(OBTBrush * toothbrush, int sector){
+    cout << __FUNCTION__ << endl;
+}
+
+void ofApp::toothbrushDidUpdateOverpressure(OBTBrush * toothbrush, bool overpressure){
+    cout << __FUNCTION__ << endl;
 }

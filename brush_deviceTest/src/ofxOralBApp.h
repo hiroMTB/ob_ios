@@ -13,6 +13,8 @@ class ofxOralBApp{
     
 public:
     
+    virtual void developerAuthChanged(){};
+    virtual void userAuthChanged(){};
     virtual void nearbyToothbrushesDidChange(vector<OBTBrush*> nearbyToothbrushes){};
     virtual void toothbrushDidConnect(OBTBrush * toothbrush){};
     virtual void toothbrushDidDisconnect(OBTBrush * toothbrush){};
