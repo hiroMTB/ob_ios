@@ -20,6 +20,7 @@ public:
     ~ofxOralB();
 
     void setupWithAppID(string appID, string appKey);
+    void presentUserAuthorizationFromViewController();
     void addDelegate();
     int getAuthorizationStatus();
     int getUserAuthorizationStatus();
