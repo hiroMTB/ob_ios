@@ -13,27 +13,8 @@
 		458069BD1E6CAA9800ABF51A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 458069BB1E6CAA9800ABF51A /* Main.storyboard */; };
 		458069BF1E6CAA9800ABF51A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 458069BE1E6CAA9800ABF51A /* Assets.xcassets */; };
 		458069C21E6CAA9800ABF51A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 458069C01E6CAA9800ABF51A /* LaunchScreen.storyboard */; };
-		458069CD1E6CAA9800ABF51A /* DeviceTest2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 458069CC1E6CAA9800ABF51A /* DeviceTest2Tests.m */; };
-		458069D81E6CAA9800ABF51A /* DeviceTest2UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 458069D71E6CAA9800ABF51A /* DeviceTest2UITests.m */; };
 		458069E71E6CAB8500ABF51A /* OBTSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 458069E61E6CAB8500ABF51A /* OBTSDK.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		458069C91E6CAA9800ABF51A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 458069A71E6CAA9800ABF51A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 458069AE1E6CAA9800ABF51A;
-			remoteInfo = DeviceTest2;
-		};
-		458069D41E6CAA9800ABF51A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 458069A71E6CAA9800ABF51A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 458069AE1E6CAA9800ABF51A;
-			remoteInfo = DeviceTest2;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		458069AF1E6CAA9800ABF51A /* DeviceTest2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeviceTest2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,12 +27,6 @@
 		458069BE1E6CAA9800ABF51A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		458069C11E6CAA9800ABF51A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		458069C31E6CAA9800ABF51A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		458069C81E6CAA9800ABF51A /* DeviceTest2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeviceTest2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		458069CC1E6CAA9800ABF51A /* DeviceTest2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceTest2Tests.m; sourceTree = "<group>"; };
-		458069CE1E6CAA9800ABF51A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		458069D31E6CAA9800ABF51A /* DeviceTest2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeviceTest2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		458069D71E6CAA9800ABF51A /* DeviceTest2UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceTest2UITests.m; sourceTree = "<group>"; };
-		458069D91E6CAA9800ABF51A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		458069E61E6CAB8500ABF51A /* OBTSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OBTSDK.framework; path = "../../../../sdk/OralB_SDK/ios-sdk/OBTSDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,20 +39,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		458069C51E6CAA9800ABF51A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		458069D01E6CAA9800ABF51A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -85,8 +46,6 @@
 			isa = PBXGroup;
 			children = (
 				458069B11E6CAA9800ABF51A /* DeviceTest2 */,
-				458069CB1E6CAA9800ABF51A /* DeviceTest2Tests */,
-				458069D61E6CAA9800ABF51A /* DeviceTest2UITests */,
 				458069B01E6CAA9800ABF51A /* Products */,
 				458069E51E6CAB8500ABF51A /* Frameworks */,
 			);
@@ -96,8 +55,6 @@
 			isa = PBXGroup;
 			children = (
 				458069AF1E6CAA9800ABF51A /* DeviceTest2.app */,
-				458069C81E6CAA9800ABF51A /* DeviceTest2Tests.xctest */,
-				458069D31E6CAA9800ABF51A /* DeviceTest2UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,24 +81,6 @@
 				458069B31E6CAA9800ABF51A /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		458069CB1E6CAA9800ABF51A /* DeviceTest2Tests */ = {
-			isa = PBXGroup;
-			children = (
-				458069CC1E6CAA9800ABF51A /* DeviceTest2Tests.m */,
-				458069CE1E6CAA9800ABF51A /* Info.plist */,
-			);
-			path = DeviceTest2Tests;
-			sourceTree = "<group>";
-		};
-		458069D61E6CAA9800ABF51A /* DeviceTest2UITests */ = {
-			isa = PBXGroup;
-			children = (
-				458069D71E6CAA9800ABF51A /* DeviceTest2UITests.m */,
-				458069D91E6CAA9800ABF51A /* Info.plist */,
-			);
-			path = DeviceTest2UITests;
 			sourceTree = "<group>";
 		};
 		458069E51E6CAB8500ABF51A /* Frameworks */ = {
@@ -172,42 +111,6 @@
 			productReference = 458069AF1E6CAA9800ABF51A /* DeviceTest2.app */;
 			productType = "com.apple.product-type.application";
 		};
-		458069C71E6CAA9800ABF51A /* DeviceTest2Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 458069DF1E6CAA9800ABF51A /* Build configuration list for PBXNativeTarget "DeviceTest2Tests" */;
-			buildPhases = (
-				458069C41E6CAA9800ABF51A /* Sources */,
-				458069C51E6CAA9800ABF51A /* Frameworks */,
-				458069C61E6CAA9800ABF51A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				458069CA1E6CAA9800ABF51A /* PBXTargetDependency */,
-			);
-			name = DeviceTest2Tests;
-			productName = DeviceTest2Tests;
-			productReference = 458069C81E6CAA9800ABF51A /* DeviceTest2Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		458069D21E6CAA9800ABF51A /* DeviceTest2UITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 458069E21E6CAA9800ABF51A /* Build configuration list for PBXNativeTarget "DeviceTest2UITests" */;
-			buildPhases = (
-				458069CF1E6CAA9800ABF51A /* Sources */,
-				458069D01E6CAA9800ABF51A /* Frameworks */,
-				458069D11E6CAA9800ABF51A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				458069D51E6CAA9800ABF51A /* PBXTargetDependency */,
-			);
-			name = DeviceTest2UITests;
-			productName = DeviceTest2UITests;
-			productReference = 458069D31E6CAA9800ABF51A /* DeviceTest2UITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -221,18 +124,6 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = WW8R7K6P9Q;
 						ProvisioningStyle = Automatic;
-					};
-					458069C71E6CAA9800ABF51A = {
-						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = WW8R7K6P9Q;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 458069AE1E6CAA9800ABF51A;
-					};
-					458069D21E6CAA9800ABF51A = {
-						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = WW8R7K6P9Q;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 458069AE1E6CAA9800ABF51A;
 					};
 				};
 			};
@@ -250,8 +141,6 @@
 			projectRoot = "";
 			targets = (
 				458069AE1E6CAA9800ABF51A /* DeviceTest2 */,
-				458069C71E6CAA9800ABF51A /* DeviceTest2Tests */,
-				458069D21E6CAA9800ABF51A /* DeviceTest2UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -264,20 +153,6 @@
 				458069C21E6CAA9800ABF51A /* LaunchScreen.storyboard in Resources */,
 				458069BF1E6CAA9800ABF51A /* Assets.xcassets in Resources */,
 				458069BD1E6CAA9800ABF51A /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		458069C61E6CAA9800ABF51A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		458069D11E6CAA9800ABF51A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,36 +169,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		458069C41E6CAA9800ABF51A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				458069CD1E6CAA9800ABF51A /* DeviceTest2Tests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		458069CF1E6CAA9800ABF51A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				458069D81E6CAA9800ABF51A /* DeviceTest2UITests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		458069CA1E6CAA9800ABF51A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 458069AE1E6CAA9800ABF51A /* DeviceTest2 */;
-			targetProxy = 458069C91E6CAA9800ABF51A /* PBXContainerItemProxy */;
-		};
-		458069D51E6CAA9800ABF51A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 458069AE1E6CAA9800ABF51A /* DeviceTest2 */;
-			targetProxy = 458069D41E6CAA9800ABF51A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		458069BB1E6CAA9800ABF51A /* Main.storyboard */ = {
@@ -461,56 +307,6 @@
 			};
 			name = Release;
 		};
-		458069E01E6CAA9800ABF51A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = WW8R7K6P9Q;
-				INFOPLIST_FILE = DeviceTest2Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.dominofactory.DeviceTest2Tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DeviceTest2.app/DeviceTest2";
-			};
-			name = Debug;
-		};
-		458069E11E6CAA9800ABF51A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = WW8R7K6P9Q;
-				INFOPLIST_FILE = DeviceTest2Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.dominofactory.DeviceTest2Tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DeviceTest2.app/DeviceTest2";
-			};
-			name = Release;
-		};
-		458069E31E6CAA9800ABF51A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = WW8R7K6P9Q;
-				INFOPLIST_FILE = DeviceTest2UITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.dominofactory.DeviceTest2UITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = DeviceTest2;
-			};
-			name = Debug;
-		};
-		458069E41E6CAA9800ABF51A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = WW8R7K6P9Q;
-				INFOPLIST_FILE = DeviceTest2UITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.dominofactory.DeviceTest2UITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = DeviceTest2;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -530,22 +326,7 @@
 				458069DE1E6CAA9800ABF51A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		458069DF1E6CAA9800ABF51A /* Build configuration list for PBXNativeTarget "DeviceTest2Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				458069E01E6CAA9800ABF51A /* Debug */,
-				458069E11E6CAA9800ABF51A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		458069E21E6CAA9800ABF51A /* Build configuration list for PBXNativeTarget "DeviceTest2UITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				458069E31E6CAA9800ABF51A /* Debug */,
-				458069E41E6CAA9800ABF51A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
