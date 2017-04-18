@@ -1,8 +1,8 @@
 //
 //  AppDelegate.m
-//  DeviceTest2
+//  DeviceTest
 //
-//  Created by hiroshi matoba on 05/03/2017.
+//  Created by hiroshi matoba on 25/02/2017.
 //  Copyright © 2017 hiroshi matoba. All rights reserved.
 //
 
@@ -16,7 +16,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+
+    //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.orec = [[oralbReceiver alloc] init];
+    [self.orec setup];
     return YES;
 }
 
