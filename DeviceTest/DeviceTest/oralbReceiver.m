@@ -38,7 +38,7 @@
     NSString * version = [OBTSDK version];
     NSLog(@"OBTSDK version %@", version);
     bool bluetoothOK = [OBTSDK bluetoothAvailableAndEnabled];
-    if(bluetoothOK) NSLog(@"bluetooth is avairable");
+    if(bluetoothOK) NSLog(@"OBTSDK bluetooth is avairable");
     else NSLog(@"bluetooth is NOT avairable");
     [self detectBluetooth];
 }
@@ -47,7 +47,7 @@
 {
     if([OBTSDK authorizationStatus] == 1){
         [OBTSDK addDelegate:self];
-        //[OBTSDK startScanning];
+        [OBTSDK startScanning];
         NSLog(@"dev authorization OK");
     }
 }
@@ -59,6 +59,7 @@
 
 - (void) nearbyToothbrushesDidChange : (NSArray *)nearbyToothbrushes
 {
+    NSLog( @"Nearby ToothbrushesDidChange");
     AppDelegate *del = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     ViewController* vc = (ViewController*) del.window.rootViewController;
     vc.tableData = [NSArray arrayWithObjects:@"1111", @"222", @"333", @"4444", nil];
@@ -112,10 +113,6 @@
             NSLog(@"State unknown, update imminent.");
             break;
     }
-    
-    
-    
-    
 }
 
 
