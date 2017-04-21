@@ -19,6 +19,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(developerAuthChanged:) name:OBTDeveloperAuthenticationStatusChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAuthChanged:) name:OBTUserAuthenticationStatusChangedNotification object:nil];
+    
     NSLog(@"Let's start!");
     NSLog(@"BT available and enabled? %@", [OBTSDK bluetoothAvailableAndEnabled] ? @"YES" : @"NO");
     // this needs some time:
@@ -27,9 +30,23 @@
         NSLog(@"BT available and enabled? %@", [OBTSDK bluetoothAvailableAndEnabled] ? @"YES" : @"NO");
     });
     
+    // this needs some time as well
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        [OBTSDK presentUserAuthorizationFromViewController:self completion:^(BOOL success, NSError *error) {
+            if(success) {
+                NSLog(@"back from usr auth page : User Auth OK");
+            } else {
+                NSLog(@"back from user auth page : User Auth faile");
+                NSLog(@"Error : %@, %@", error.localizedDescription, error.localizedFailureReason);
+            }
+        }];
+    });
     
     [OBTSDK addDelegate:self];
-    [OBTSDK setupWithAppID:@"YOUR_APP_ID" appKey:@"YOUR_APP_KEY"];
+    NSString * myId  = @"120307cc-05a3-4f07-9e02-2cd40c966e6b";
+    NSString * myKey = @"387d8361-0345-423d-ac0c-752f57dacd41";
+    [OBTSDK setupWithAppID:myId appKey:myKey];
     [OBTSDK startScanning];
 }
 
@@ -78,6 +95,20 @@
 - (void)toothbrushDidFailWithError:(NSError *)error;
 {
     NSLog(@"toothbrushDidFailWithError: %@", error);
+}
+
+- (void) developerAuthChanged : (NSNotification *) notification
+{
+    if([OBTSDK authorizationStatus] == 1){
+        [OBTSDK addDelegate:self];
+        [OBTSDK startScanning];
+        NSLog(@"dev authorization OK");
+    }
+}
+
+- (void) userAuthChanged : (NSNotification *) notification
+{
+    NSLog(@"user authorization Changed to %@", [OBTSDK userAuthorizationStatus]==OBTUserAuthorizationStatusAuthorized ? @"OK" : @"Error");
 }
 
 @end

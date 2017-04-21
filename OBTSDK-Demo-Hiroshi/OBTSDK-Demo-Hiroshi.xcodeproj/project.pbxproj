@@ -130,7 +130,7 @@
 				TargetAttributes = {
 					4D9F98BB1EA74F9A0054AB68 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = VW439QY774;
+						DevelopmentTeam = WW8R7K6P9Q;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -239,7 +239,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -280,7 +280,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -291,14 +291,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VW439QY774;
+				DEVELOPMENT_TEAM = WW8R7K6P9Q;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/OBTSDK-Demo-Hiroshi",
 				);
 				INFOPLIST_FILE = "OBTSDK-Demo-Hiroshi/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.iconmobile.OBTSDK-Demo-Hiroshi";
+				PRODUCT_BUNDLE_IDENTIFIER = net.dominofactory.DeviceTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -307,14 +307,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VW439QY774;
+				DEVELOPMENT_TEAM = WW8R7K6P9Q;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/OBTSDK-Demo-Hiroshi",
 				);
 				INFOPLIST_FILE = "OBTSDK-Demo-Hiroshi/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.iconmobile.OBTSDK-Demo-Hiroshi";
+				PRODUCT_BUNDLE_IDENTIFIER = net.dominofactory.DeviceTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -338,6 +338,7 @@
 				4D9F98D51EA74F9B0054AB68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
