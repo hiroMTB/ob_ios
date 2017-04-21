@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>toothbrushes</key>
+	<dict>
+		<key>D21</key>
+		<array>
+			<dict>
+				<key>handle_type</key>
+				<string>0x7F</string>
+				<key>handle_name</key>
+				<string>D21 (Experimental)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+					<string>SENSITIVE</string>
+					<string>MASSAGE</string>
+					<string>WHITENING</string>
+				</array>
+			</dict>
+			<dict>
+				<key>handle_type</key>
+				<string>0x40</string>
+				<key>handle_name</key>
+				<string>D21 (X Mode)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+				</array>
+			</dict>
+			<dict>
+				<key>handle_type</key>
+				<string>0x41</string>
+				<key>handle_name</key>
+				<string>D21 (4 Mode)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+					<string>SENSITIVE</string>
+					<string>MASSAGE</string>
+					<string>WHITENING</string>
+				</array>
+			</dict>
+			<dict>
+				<key>handle_type</key>
+				<string>0x42</string>
+				<key>handle_name</key>
+				<string>D21 (3a Mode)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+					<string>SENSITIVE</string>
+					<string>MASSAGE</string>
+				</array>
+			</dict>
+			<dict>
+				<key>handle_type</key>
+				<string>0x43</string>
+				<key>handle_name</key>
+				<string>D21 (2a Mode)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+					<string>SENSITIVE</string>
+				</array>
+			</dict>
+			<dict>
+				<key>handle_type</key>
+				<string>0x44</string>
+				<key>handle_name</key>
+				<string>D21 (2b Mode)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+					<string>MASSAGE</string>
+				</array>
+			</dict>
+			<dict>
+				<key>handle_type</key>
+				<string>0x45</string>
+				<key>handle_name</key>
+				<string>D21 (3b Mode)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+					<string>SENSITIVE</string>
+					<string>WHITENING</string>
+				</array>
+			</dict>
+			<dict>
+				<key>handle_type</key>
+				<string>0x46</string>
+				<key>handle_name</key>
+				<string>D21 (1 Mode)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+				</array>
+			</dict>
+		</array>
+		<key>D36</key>
+		<array>
+			<dict>
+				<key>handle_type</key>
+				<string>0x3F</string>
+				<key>handle_name</key>
+				<string>D36 (Experimental)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+					<string>DEEP</string>
+					<string>SENSITIVE</string>
+					<string>MASSAGE</string>
+					<string>WHITENING</string>
+					<string>TONGUE</string>
+				</array>
+			</dict>
+			<dict>
+				<key>handle_type</key>
+				<string>0x00</string>
+				<key>handle_name</key>
+				<string>D36 (X Mode)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+				</array>
+			</dict>
+			<dict>
+				<key>handle_type</key>
+				<string>0x01</string>
+				<key>handle_name</key>
+				<string>D36 (6 Mode)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+					<string>DEEP</string>
+					<string>SENSITIVE</string>
+					<string>MASSAGE</string>
+					<string>WHITENING</string>
+					<string>TONGUE</string>
+				</array>
+			</dict>
+			<dict>
+				<key>handle_type</key>
+				<string>0x02</string>
+				<key>handle_name</key>
+				<string>D36 (5 Mode)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+					<string>DEEP</string>
+					<string>SENSITIVE</string>
+					<string>MASSAGE</string>
+					<string>WHITENING</string>
+				</array>
+			</dict>
+		</array>
+		<key>D701</key>
+		<array>
+			<dict>
+				<key>handle_type</key>
+				<string>0x2F</string>
+				<key>handle_name</key>
+				<string>D701 (Experimental)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+					<string>TURBO</string>
+					<string>SENSITIVE</string>
+					<string>WHITENING</string>
+					<string>MASSAGE</string>
+					<string>TONGUE</string>
+				</array>
+			</dict>
+			<dict>
+				<key>handle_type</key>
+				<string>0x20</string>
+				<key>handle_name</key>
+				<string>D701 (X Mode)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+				</array>
+			</dict>
+			<dict>
+				<key>handle_type</key>
+				<string>0x21</string>
+				<key>handle_name</key>
+				<string>D701 (6 Mode)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+					<string>TURBO</string>
+					<string>SENSITIVE</string>
+					<string>WHITENING</string>
+					<string>MASSAGE</string>
+					<string>TONGUE</string>
+				</array>
+			</dict>
+			<dict>
+				<key>handle_type</key>
+				<string>0x22</string>
+				<key>handle_name</key>
+				<string>D701 (5 Mode)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+					<string>TURBO</string>
+					<string>SENSITIVE</string>
+					<string>WHITENING</string>
+					<string>MASSAGE</string>
+				</array>
+			</dict>
+			<dict>
+				<key>handle_type</key>
+				<string>0x23</string>
+				<key>handle_name</key>
+				<string>D701 (4 Mode)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+					<string>TURBO</string>
+					<string>SENSITIVE</string>
+					<string>WHITENING</string>
+				</array>
+			</dict>
+			<dict>
+				<key>handle_type</key>
+				<string>0x24</string>
+				<key>handle_name</key>
+				<string>D701 (3 Mode)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+					<string>TURBO</string>
+					<string>SENSITIVE</string>
+				</array>
+			</dict>
+			<dict>
+				<key>handle_type</key>
+				<string>0x25</string>
+				<key>handle_name</key>
+				<string>D701 (2 Mode)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+					<string>SENSITIVE</string>
+				</array>
+			</dict>
+			<dict>
+				<key>handle_type</key>
+				<string>0x26</string>
+				<key>handle_name</key>
+				<string>D701 (1 Mode)</string>
+				<key>available_brush_modes</key>
+				<array>
+					<string>CLEAN</string>
+				</array>
+			</dict>
+		</array>
+	</dict>
+</dict>
+</plist>

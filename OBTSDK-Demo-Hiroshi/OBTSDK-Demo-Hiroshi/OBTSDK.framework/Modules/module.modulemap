@@ -1,0 +1,6 @@
+framework module OBTSDK {
+  umbrella header "OBTSDK.h"
+
+  export *
+  module * { export * }
+}
