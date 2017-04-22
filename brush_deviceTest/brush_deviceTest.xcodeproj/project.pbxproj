@@ -10,7 +10,6 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		457F96051E4B818600729AD5 /* OBTSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457F96041E4B818600729AD5 /* OBTSDK.framework */; };
 		4D83BA821D4180CB0010CCF4 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D83BA811D4180CB0010CCF4 /* Accounts.framework */; };
 		4DCB97271CF3BC7E00FCE897 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 678E130B1795153C005B6D19 /* Default.png */; };
 		4DCB97281CF3BC7E00FCE897 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 678E130D17951540005B6D19 /* Default@2x.png */; };
@@ -31,6 +30,8 @@
 		678E130A17951536005B6D19 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 678E130917951536005B6D19 /* Icon.png */; };
 		67DFA53619F92A69003B3434 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67DFA53419F92A5E003B3434 /* Accelerate.framework */; };
 		848D5C301E5213E600CF0791 /* ofxiOSOralB.mm in Sources */ = {isa = PBXBuildFile; fileRef = 848D5C2F1E5213E600CF0791 /* ofxiOSOralB.mm */; };
+		84E0EE651EABA3CF00B7625C /* OBTSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E0EE641EABA3CF00B7625C /* OBTSDK.framework */; };
+		84E0EE661EABA3CF00B7625C /* OBTSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84E0EE641EABA3CF00B7625C /* OBTSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BB16EBD20F2B2A9500518274 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB16EBD10F2B2A9500518274 /* OpenGLES.framework */; };
 		BB16EBD90F2B2AB500518274 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB16EBD80F2B2AB500518274 /* QuartzCore.framework */; };
 		BBE5EAB80F49AD8400F28951 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBE5EAB70F49AD8400F28951 /* AudioToolbox.framework */; };
@@ -60,13 +61,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		84E0EE671EABA3CF00B7625C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				84E0EE661EABA3CF00B7625C /* OBTSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* brush_deviceTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = brush_deviceTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* ofxiOS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiOS_Prefix.pch; sourceTree = "<group>"; };
-		457F96041E4B818600729AD5 /* OBTSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OBTSDK.framework; path = "../../../../sdk/OralB_SDK/ios-sdk/OBTSDK.framework"; sourceTree = "<group>"; };
 		457F96071E4B83C700729AD5 /* ofxOralB.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = ofxOralB.h; sourceTree = "<group>"; };
 		4D54C75F1CEFBFDD009C9215 /* obGeoDrawer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = obGeoDrawer.hpp; sourceTree = "<group>"; };
 		4D54C7601CEFBFDD009C9215 /* obStats.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = obStats.hpp; sourceTree = "<group>"; };
@@ -278,6 +292,7 @@
 		67DFA53419F92A5E003B3434 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		848D5C2F1E5213E600CF0791 /* ofxiOSOralB.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxiOSOralB.mm; sourceTree = "<group>"; };
 		848D5C311E527AA100CF0791 /* ofxOralBApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOralBApp.h; sourceTree = "<group>"; };
+		84E0EE641EABA3CF00B7625C /* OBTSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OBTSDK.framework; path = "../../../../sdk/OralB_SDK/ios-sdk-1.0.3/OBTSDK.framework"; sourceTree = "<group>"; };
 		BB16EBD10F2B2A9500518274 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BB16EBD80F2B2AB500518274 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BB24DDC910DA781C00E9C588 /* ofxiOS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ofxiOS-Info.plist"; sourceTree = "<group>"; };
@@ -300,7 +315,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				457F96051E4B818600729AD5 /* OBTSDK.framework in Frameworks */,
+				84E0EE651EABA3CF00B7625C /* OBTSDK.framework in Frameworks */,
 				4DE8DB9F1D42599F000B9D1A /* Social.framework in Frameworks */,
 				4D83BA821D4180CB0010CCF4 /* Accounts.framework in Frameworks */,
 				4DCB98371CF3C35D00FCE897 /* AssetsLibrary.framework in Frameworks */,
@@ -335,7 +350,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				457F96041E4B818600729AD5 /* OBTSDK.framework */,
+				84E0EE641EABA3CF00B7625C /* OBTSDK.framework */,
 				4DE8DB9E1D42599F000B9D1A /* Social.framework */,
 				4D83BA811D4180CB0010CCF4 /* Accounts.framework */,
 				678E130917951536005B6D19 /* Icon.png */,
@@ -856,6 +871,16 @@
 			name = local_addons;
 			sourceTree = "<group>";
 		};
+		84E0EE681EABA3EB00B7625C /* ofxOralB */ = {
+			isa = PBXGroup;
+			children = (
+				457F96071E4B83C700729AD5 /* ofxOralB.h */,
+				848D5C311E527AA100CF0791 /* ofxOralBApp.h */,
+				848D5C2F1E5213E600CF0791 /* ofxiOSOralB.mm */,
+			);
+			name = ofxOralB;
+			sourceTree = "<group>";
+		};
 		BB16E9930F2B1E5900518274 /* libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -905,15 +930,13 @@
 		E4D8936A11527B74007E1F53 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				84E0EE681EABA3EB00B7625C /* ofxOralB */,
 				E4D8936B11527B74007E1F53 /* main.mm */,
 				E4D8936D11527B74007E1F53 /* ofApp.mm */,
 				E4D8936C11527B74007E1F53 /* ofApp.h */,
-				848D5C311E527AA100CF0791 /* ofxOralBApp.h */,
 				4D54C75F1CEFBFDD009C9215 /* obGeoDrawer.hpp */,
 				4D54C7601CEFBFDD009C9215 /* obStats.hpp */,
 				4D9061891CF497EB00A3CA7D /* obUtil.hpp */,
-				457F96071E4B83C700729AD5 /* ofxOralB.h */,
-				848D5C2F1E5213E600CF0791 /* ofxiOSOralB.mm */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -929,6 +952,7 @@
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
 				9255DD331112741900D6945E /* ShellScript */,
+				84E0EE671EABA3CF00B7625C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1066,6 +1090,7 @@
 				"GCC_WARN_64_TO_32_BIT_CONVERSION[arch=*64]" = NO;
 				INFOPLIST_FILE = "ofxiOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hiroshi.emptyExample;
 				PRODUCT_NAME = brush_deviceTest;
 				PROVISIONING_PROFILE = "";
@@ -1086,6 +1111,7 @@
 				"GCC_WARN_64_TO_32_BIT_CONVERSION[arch=*64]" = NO;
 				INFOPLIST_FILE = "ofxiOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = hiroshi.emptyExample;
 				PRODUCT_NAME = brush_deviceTest;
 				PROVISIONING_PROFILE = "";
@@ -1106,7 +1132,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphonesimulator*]" = "";
 				COMPRESS_PNG_FILES = NO;
-				FRAMEWORK_SEARCH_PATHS = "../../../../sdk/OralB_SDK/ios-sdk";
+				FRAMEWORK_SEARCH_PATHS = "../../../../sdk/OralB_SDK/ios-sdk-1.0.3";
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -1121,7 +1147,7 @@
 					"$(OF_CORE_HEADERS)",
 					src,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -1152,7 +1178,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphonesimulator*]" = "";
 				COMPRESS_PNG_FILES = NO;
-				FRAMEWORK_SEARCH_PATHS = "../../../../sdk/OralB_SDK/ios-sdk";
+				FRAMEWORK_SEARCH_PATHS = "../../../../sdk/OralB_SDK/ios-sdk-1.0.3";
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -1166,7 +1192,7 @@
 					"$(OF_CORE_HEADERS)",
 					src,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",

@@ -26,6 +26,7 @@ public:
     void exit() override;
 
     void audioIn(float * input, int bufferSize, int nChannels) override;
+    void clearAudioData();
     
     void audioPreProcess();
     void videoPreProcess();
@@ -34,6 +35,7 @@ public:
     void draw_info();
     void draw_audioStats();
     void draw_vid();
+    void checkStart();
     
     // OralB event
     void developerAuthChanged() override;
@@ -90,10 +92,9 @@ public:
     
     bool bNeedSaveImg;
 
-    
     ofxiPhoneSocial social;
     ofxOralB oralb;
-    
+
 };
 
 

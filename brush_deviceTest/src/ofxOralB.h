@@ -26,7 +26,7 @@ public:
     int getUserAuthorizationStatus();
     bool getBluetoothAvailableAndEnabled();
     void startScanning();
-    void stopScannng();
+    void stopScanning();
     void connectToothbrush(OBTBrush * toothbrush);
     void disconnectToothbrush();
     bool isConnected();

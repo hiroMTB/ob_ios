@@ -2,7 +2,7 @@
 #include "obGeoDrawer.hpp"
 #include "obStats.hpp"
 #include "obUtil.hpp"
-
+#import <OBTSDK/OBTBrush.h>
 
 //
 //  if n<0 -1
@@ -15,6 +15,11 @@ inline int signval(T n){
 }
 
 void ofApp::setup(){
+    
+    string appID = "120307cc-05a3-4f07-9e02-2cd40c966e6b";
+    string appKey = "387d8361-0345-423d-ac0c-752f57dacd41";
+    
+    oralb.setupWithAppID( appID, appKey);
     ofSetFrameRate(target_fps);
     ofSetVerticalSync(true);
     //ofSetWindowShape(1920, 1080);
@@ -25,8 +30,8 @@ void ofApp::setup(){
     
     ofSetOrientation( OF_ORIENTATION_DEFAULT );
     
+    bStart = false;
     
-    bStart = true;
     bLog = true;
     audioIn_raw = NULL;
     
@@ -78,10 +83,6 @@ void ofApp::setup(){
     grayImg.allocate( grbW, grbH );
 #endif
     
-    string appID = "120307cc-05a3-4f07-9e02-2cd40c966e6b";
-    string appKey = "387d8361-0345-423d-ac0c-752f57dacd41";
-
-    oralb.setupWithAppID( appID, appKey);
 }
 
 void ofApp::audioIn(float * input, int bufferSize, int nCh){
@@ -91,6 +92,10 @@ void ofApp::audioIn(float * input, int bufferSize, int nCh){
     }else{
         audioIn_raw = NULL;
     }
+}
+
+void ofApp::clearAudioData(){
+    audioIn_data.clear();
 }
 
 void ofApp::audioPreProcess(){
@@ -181,10 +186,11 @@ void ofApp::videoPreProcess(){
 
 void ofApp::update(){
     
-    if( !bStart ) return;
     
     audioPreProcess();
-    videoPreProcess();
+    //videoPreProcess();
+    
+    if( !bStart ) return;
     
     float sampleRate = sound_stream.getSampleRate();
     int totalSampleNum = total_time_ms/1000 * sampleRate;
@@ -204,21 +210,22 @@ void ofApp::draw(){
     //glPointSize(1);
     ofBackground(255);
 
-    ofPushMatrix();
-
+    ofPushMatrix();{
+        
         if(bHandy){
             ofRotateZ(90.0);
             ofTranslate(0, -ofGetWindowWidth());
         }
         
-        ofPushMatrix();
-        ofTranslate(start_point);
-        draw_bg();
-        draw_wave();
-        draw_audioStats();
-        ofPopMatrix();
+        ofPushMatrix();{
+            ofTranslate(start_point);
+            draw_bg();
+            if(bStart) draw_wave();
+            if(bStart) draw_audioStats();
+        }ofPopMatrix();
+        
         draw_info();
-    ofPopMatrix();
+    }ofPopMatrix();
     
     draw_vid();
 
@@ -242,8 +249,9 @@ void ofApp::draw_bg(){
     ofDrawRectangle(0, -yy, indicator.x, yy*2);
     
     // text sec
+    float sampleRate = sound_stream.getSampleRate();
     ofSetColor(0);
-    ofDrawBitmapString(ofToString(ofGetElapsedTimef()), indicator.x, yy+40);
+    ofDrawBitmapString(ofToString(currentSamplePos/sampleRate), indicator.x, yy+40);
     
 }
 
@@ -398,8 +406,20 @@ void ofApp::draw_info(){
     ofDrawBitmapString("Bluetooth  " + ofToString((int)oralb.getBluetoothAvailableAndEnabled()), x+=os, y);
     ofDrawBitmapString("DevAuth    " + ofToString((int)oralb.getAuthorizationStatus()), x+=os, y);
     ofDrawBitmapString("UserAuth   " + ofToString((int)oralb.getUserAuthorizationStatus()), x+=os, y);
-    ofDrawBitmapString("scanning   " + ofToString((int)oralb.isScanning()), x+=os, y);
-    ofDrawBitmapString("connected  " + ofToString((int)oralb.isConnected()), x+=os, y);
+    ofDrawBitmapString("Scanning   " + ofToString((int)oralb.isScanning()), x+=os, y);
+    ofDrawBitmapString("Connected  " + ofToString((int)oralb.isConnected()), x+=os, y);
+
+    if(oralb.isConnected()){
+        y = 40;
+        x = 10;
+        os = 150;
+        OBTBrush * b = oralb.getConnectedToothbrush();
+        ofDrawBitmapString("BRUSH      " + string([[b handleType] UTF8String]), x, y);
+        ofDrawBitmapString("State      " + ofToString([b deviceState]), x+=os*2, y);
+        ofDrawBitmapString("Mode       " + ofToString([b brushMode]), x+=os, y);
+        ofDrawBitmapString("RSSI       " + ofToString([b RSSI]), x+=os, y);
+        ofDrawBitmapString("Batery     " + ofToString([b batteryLevel]), x+=os, y);
+    }
 }
 
 void ofApp::exit(){}
@@ -424,31 +444,25 @@ void ofApp::touchDoubleTap(ofTouchEventArgs & touch){
 }
 
 void ofApp::touchCancelled(ofTouchEventArgs & touch){
-    cout << __FUNCTION__ << endl;
-}
+    ofLogVerbose("ofApp", "%s", __FUNCTION__);}
 
 void ofApp::lostFocus(){
-    cout << __FUNCTION__ << endl;
-}
+    ofLogVerbose("ofApp", "%s", __FUNCTION__);}
 
 void ofApp::gotFocus(){
-    cout << __FUNCTION__ << endl;
-}
+    ofLogVerbose("ofApp", "%s", __FUNCTION__);}
 
 void ofApp::gotMemoryWarning(){
-    cout << __FUNCTION__ << endl;
-}
+    ofLogVerbose("ofApp", "%s", __FUNCTION__);}
 
 void ofApp::deviceOrientationChanged(int newOrientation){
-    cout << __FUNCTION__ << endl;
-}
+    ofLogVerbose("ofApp", "%s", __FUNCTION__);}
 
 void ofApp::developerAuthChanged(){
-    cout << __FUNCTION__ << ", ";
-    int status = oralb.getAuthorizationStatus();
-    cout << "status : " << status << endl;
+    bool bDevAuth = oralb.getAuthorizationStatus() == 1;
+    ofLogVerbose("ofApp", "%s : dev Auth changed to %s", __FUNCTION__, (bDevAuth? "ok" : "error"));
     
-    if( status == 1 ){
+    if( bDevAuth ){
         oralb.addDelegate();
         oralb.startScanning();
         cout << "start scanning..." << endl;
@@ -456,53 +470,78 @@ void ofApp::developerAuthChanged(){
 }
 
 void ofApp::userAuthChanged(){
-    cout << __FUNCTION__ << endl;
+    ofLogVerbose("ofApp", "%s", __FUNCTION__);
 }
 
 void ofApp::nearbyToothbrushesDidChange( vector<OBTBrush*> bs ){
-    cout << __FUNCTION__ << endl;
+    ofLogVerbose("ofApp", "%s : Found %lu brushes", __FUNCTION__, bs.size());
+    if(!oralb.isConnected()){
+        if(bs.size()!=0){
+            oralb.connectToothbrush(bs[0]);
+            //oralb.stopScanning();
+            
+            OBTBrush * b = oralb.getConnectedToothbrush();
+            ofLogVerbose("ofApp", "%s NEW Brush connected", __FUNCTION__);
+            ofLogVerbose("ofApp", "name            : %s", [[b name] UTF8String]);
+            ofLogVerbose("ofApp", "handleType      : %s", [[b handleType] UTF8String]);
+            ofLogVerbose("ofApp", "localHandleID   : %s", [[b localHandleID] UTF8String]);
+            ofLogVerbose("ofApp", "protocolVersion : %i", [b protocolVersion]);
+            ofLogVerbose("ofApp", "softwareVersion : %i", [b softwareVersion]);            
+        }
+    }
 }
 
 void ofApp::toothbrushDidConnect(OBTBrush *toothbrush){
-    cout << __FUNCTION__ << endl;
+    ofLogVerbose("ofApp", "%s", __FUNCTION__);
 }
 
 void ofApp::toothbrushDidDisconnect(OBTBrush * toothbrush){
-    cout << __FUNCTION__ << endl;
+    ofLogVerbose("ofApp", "%s", __FUNCTION__);
+    bStart = false;
 }
 
 void ofApp::toothbrushDidFailWithError(string error){
-    cout << __FUNCTION__ << endl;
+    ofLogVerbose("ofApp", "%s", __FUNCTION__);
 }
 
 void ofApp::toothbrushDidLoadSession(OBTBrush * toothbrush, OBTBrushSession * brushSession, float progress){
-    cout << __FUNCTION__ << endl;
+    ofLogVerbose("ofApp", "%s", __FUNCTION__);
 }
 
 void ofApp::toothbrushDidUpdateRSSI(OBTBrush * toothbrush, float rssi){
-    cout << __FUNCTION__ << endl;
+    ofLogVerbose("ofApp", "%s : %f", __FUNCTION__, rssi);
 }
 
 void ofApp::toothbrushDidUpdateDeviceState(OBTBrush * toothbrush, OBTDeviceState deviceState){
-    cout << __FUNCTION__ << endl;
+    ofLogVerbose("ofApp", "%s : %i", __FUNCTION__, (int)deviceState);
+
+    if(deviceState == OBTDeviceStateBrushing){
+        bStart = true;
+        cout << "ONNNNNNNNNNN" << endl;
+
+    }else{
+        bStart = false;
+        //clearAudioData();
+        cout << "OFFFFFFFFFFf" << endl;
+    }
 }
 
 void ofApp::toothbrushDidUpdateBatteryLevel(OBTBrush * toothbrush, float batteryLevel){
-    cout << __FUNCTION__ << endl;
+    ofLogVerbose("ofApp", "%s ; %f", __FUNCTION__, batteryLevel);
 }
 
 void ofApp::toothbrushDidUpdateBrushMode(OBTBrush * toothbrush, OBTBrushMode brushMode){
-    cout << __FUNCTION__ << endl;
+    ofLogVerbose("ofApp", "%s : %i", __FUNCTION__, (int)brushMode);
 }
 
 void ofApp::toothbrushDidUpdateBrushingDuration(OBTBrush * toothbrush, NSTimeInterval brushingDuration){
-    cout << __FUNCTION__ << endl;
+    ofLogVerbose("ofApp", "%s : %f", __FUNCTION__, (float)brushingDuration);
 }
 
 void ofApp::toothbrushDidUpdateSector(OBTBrush * toothbrush, int sector){
-    cout << __FUNCTION__ << endl;
+    ofLogVerbose("ofApp", "%s : %i", __FUNCTION__, sector);
 }
 
 void ofApp::toothbrushDidUpdateOverpressure(OBTBrush * toothbrush, bool overpressure){
-    cout << __FUNCTION__ << endl;
+    ofLogVerbose("ofApp", "%s : %i", __FUNCTION__, overpressure);
 }

@@ -29,8 +29,8 @@ static ofxiOSOralBDelegate * iOSOralBDelegate;
 
 - (void) addNotification
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(developerAuthChanged:) name:OBT_NOTIFICATION_DEVELOPER_AUTHENTICATION_STATUS_CHANGED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAuthChanged:) name:OBT_NOTIFICATION_USER_AUTHENTICATION_STATUS_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(developerAuthChanged:) name:OBTDeveloperAuthenticationStatusChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userAuthChanged:) name:OBTUserAuthenticationStatusChangedNotification object:nil];
 }
 
 - (void) removeNotification
@@ -77,16 +77,15 @@ static ofxiOSOralBDelegate * iOSOralBDelegate;
 
 - (void)toothbrushDidDisconnect:(OBTBrush *)toothbrush
 {
-    
     [self getApp]->toothbrushDidDisconnect(toothbrush);
 }
 
 - (void)toothbrushDidFailWithError:(NSError *)error
 {
     string des = [[error localizedDescription] UTF8String];
-    string res = [[error localizedFailureReason] UTF8String];
-    string sug = [[error localizedRecoverySuggestion] UTF8String];
-    string errorString = des + ", " + res + ", " + sug;
+    //string res = [[error localizedFailureReason] UTF8String];
+    //string sug = [[error localizedRecoverySuggestion] UTF8String];
+    string errorString = des;   // + ", " + res + ", " + sug;
     [self getApp]->toothbrushDidFailWithError(errorString);
 }
 
@@ -175,7 +174,7 @@ void ofxOralB::startScanning(){
     [OBTSDK startScanning];
 }
 
-void ofxOralB::stopScannng(){
+void ofxOralB::stopScanning(){
     [OBTSDK stopScanning];
 }
 
