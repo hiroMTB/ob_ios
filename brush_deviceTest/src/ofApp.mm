@@ -244,6 +244,19 @@ void ofApp::draw_bg(){
     ofDrawLine(  track_len,    -5, track_len,      +5);
     
     ofSetRectMode(OF_RECTMODE_CORNER);
+
+    ofSetColor(200);
+    if(oralb.isConnected()){
+        ofFill();
+    }else{
+        ofNoFill();
+        ofSetLineWidth(1);
+        ofDrawLine(0,-yy, track_len, yy);
+        ofDrawLine(0,yy, track_len, -yy);
+    }
+    ofDrawRectangle(0, -yy, track_len, yy*2);
+    
+    
     ofSetColor(255,255,0,255);
     ofFill();
     ofDrawRectangle(0, -yy, indicator.x, yy*2);
@@ -486,7 +499,7 @@ void ofApp::nearbyToothbrushesDidChange( vector<OBTBrush*> bs ){
             ofLogVerbose("ofApp", "handleType      : %s", [[b handleType] UTF8String]);
             ofLogVerbose("ofApp", "localHandleID   : %s", [[b localHandleID] UTF8String]);
             ofLogVerbose("ofApp", "protocolVersion : %i", [b protocolVersion]);
-            ofLogVerbose("ofApp", "softwareVersion : %i", [b softwareVersion]);            
+            ofLogVerbose("ofApp", "softwareVersion : %i", [b softwareVersion]);
         }
     }
 }
