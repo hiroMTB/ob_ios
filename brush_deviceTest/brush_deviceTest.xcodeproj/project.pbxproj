@@ -32,6 +32,8 @@
 		848D5C301E5213E600CF0791 /* ofxiOSOralB.mm in Sources */ = {isa = PBXBuildFile; fileRef = 848D5C2F1E5213E600CF0791 /* ofxiOSOralB.mm */; };
 		84E0EE651EABA3CF00B7625C /* OBTSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84E0EE641EABA3CF00B7625C /* OBTSDK.framework */; };
 		84E0EE661EABA3CF00B7625C /* OBTSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 84E0EE641EABA3CF00B7625C /* OBTSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		84F45C4C1EAD36530007F176 /* r8bbase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84F45C3F1EAD36530007F176 /* r8bbase.cpp */; };
+		84F45C4D1EAD36530007F176 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 84F45C431EAD36530007F176 /* README.md */; };
 		BB16EBD20F2B2A9500518274 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB16EBD10F2B2A9500518274 /* OpenGLES.framework */; };
 		BB16EBD90F2B2AB500518274 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB16EBD80F2B2AB500518274 /* QuartzCore.framework */; };
 		BBE5EAB80F49AD8400F28951 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBE5EAB70F49AD8400F28951 /* AudioToolbox.framework */; };
@@ -293,6 +295,19 @@
 		848D5C2F1E5213E600CF0791 /* ofxiOSOralB.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxiOSOralB.mm; sourceTree = "<group>"; };
 		848D5C311E527AA100CF0791 /* ofxOralBApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOralBApp.h; sourceTree = "<group>"; };
 		84E0EE641EABA3CF00B7625C /* OBTSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OBTSDK.framework; path = "../../../../sdk/OralB_SDK/ios-sdk-1.0.3/OBTSDK.framework"; sourceTree = "<group>"; };
+		84F45C2C1EAD36530007F176 /* CDSPBlockConvolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSPBlockConvolver.h; sourceTree = "<group>"; };
+		84F45C2D1EAD36530007F176 /* CDSPFIRFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSPFIRFilter.h; sourceTree = "<group>"; };
+		84F45C2E1EAD36530007F176 /* CDSPFracInterpolator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSPFracInterpolator.h; sourceTree = "<group>"; };
+		84F45C2F1EAD36530007F176 /* CDSPProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSPProcessor.h; sourceTree = "<group>"; };
+		84F45C301EAD36530007F176 /* CDSPRealFFT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSPRealFFT.h; sourceTree = "<group>"; };
+		84F45C311EAD36530007F176 /* CDSPResampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSPResampler.h; sourceTree = "<group>"; };
+		84F45C321EAD36530007F176 /* CDSPSincFilterGen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSPSincFilterGen.h; sourceTree = "<group>"; };
+		84F45C381EAD36530007F176 /* fft4g.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fft4g.h; sourceTree = "<group>"; };
+		84F45C3F1EAD36530007F176 /* r8bbase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = r8bbase.cpp; sourceTree = "<group>"; };
+		84F45C401EAD36530007F176 /* r8bbase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = r8bbase.h; sourceTree = "<group>"; };
+		84F45C411EAD36530007F176 /* r8bconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = r8bconf.h; sourceTree = "<group>"; };
+		84F45C421EAD36530007F176 /* r8butil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = r8butil.h; sourceTree = "<group>"; };
+		84F45C431EAD36530007F176 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		BB16EBD10F2B2A9500518274 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BB16EBD80F2B2AB500518274 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BB24DDC910DA781C00E9C588 /* ofxiOS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ofxiOS-Info.plist"; sourceTree = "<group>"; };
@@ -881,6 +896,27 @@
 			name = ofxOralB;
 			sourceTree = "<group>";
 		};
+		84F45C2B1EAD36530007F176 /* r8brain */ = {
+			isa = PBXGroup;
+			children = (
+				84F45C2C1EAD36530007F176 /* CDSPBlockConvolver.h */,
+				84F45C2D1EAD36530007F176 /* CDSPFIRFilter.h */,
+				84F45C2E1EAD36530007F176 /* CDSPFracInterpolator.h */,
+				84F45C2F1EAD36530007F176 /* CDSPProcessor.h */,
+				84F45C301EAD36530007F176 /* CDSPRealFFT.h */,
+				84F45C311EAD36530007F176 /* CDSPResampler.h */,
+				84F45C321EAD36530007F176 /* CDSPSincFilterGen.h */,
+				84F45C381EAD36530007F176 /* fft4g.h */,
+				84F45C3F1EAD36530007F176 /* r8bbase.cpp */,
+				84F45C401EAD36530007F176 /* r8bbase.h */,
+				84F45C411EAD36530007F176 /* r8bconf.h */,
+				84F45C421EAD36530007F176 /* r8butil.h */,
+				84F45C431EAD36530007F176 /* README.md */,
+			);
+			name = r8brain;
+			path = ../../../addons/r8brain;
+			sourceTree = "<group>";
+		};
 		BB16E9930F2B1E5900518274 /* libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -892,6 +928,7 @@
 		BB16F26B0F2B646B00518274 /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				84F45C2B1EAD36530007F176 /* r8brain */,
 				4DCB972D1CF3BEE300FCE897 /* ofxOpenCv */,
 				4DE8DBA01D4259BA000B9D1A /* ofxiPhoneSocial */,
 			);
@@ -1055,7 +1092,9 @@
 			files = (
 				E4D8936E11527B74007E1F53 /* main.mm in Sources */,
 				4DE8DBA41D4259BA000B9D1A /* ofxiPhoneSocial.mm in Sources */,
+				84F45C4C1EAD36530007F176 /* r8bbase.cpp in Sources */,
 				E4D8936F11527B74007E1F53 /* ofApp.mm in Sources */,
+				84F45C4D1EAD36530007F176 /* README.md in Sources */,
 				4DCB98241CF3BEE300FCE897 /* ofxCvImage.cpp in Sources */,
 				848D5C301E5213E600CF0791 /* ofxiOSOralB.mm in Sources */,
 				4DCB98221CF3BEE300FCE897 /* ofxCvGrayscaleImage.cpp in Sources */,
@@ -1146,6 +1185,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
 					src,
+					../../../addons/r8brain,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = NO;
@@ -1191,6 +1231,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(OF_CORE_HEADERS)",
 					src,
+					../../../addons/r8brain,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = NO;

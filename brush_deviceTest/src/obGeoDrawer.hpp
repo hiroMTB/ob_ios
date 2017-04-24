@@ -7,7 +7,7 @@ namespace ob {
     public:
         ofApp * app;
         ofVec2f indicator;
-        vector<float> * data;
+        vector<double> * data;
         float track_len;
         int buffer_size;
         float xrate;

@@ -28,15 +28,16 @@ namespace ob {
         audioStats.index_max = -123456;
     }
     
-    void calc( const vector<float> & v ){
+    template<typename T>
+    void calc( const vector<T> & v ){
         
-        float prev_min = audioStats.min;
-        float prev_max = audioStats.max;
+        T prev_min = audioStats.min;
+        T prev_max = audioStats.max;
         
         for (int i=5; i<v.size()-5; i++) {
             
-            const float f = v[i];
-            const float af = abs(f);
+            const T f = v[i];
+            const T af = abs(f);
             
             // min
             if( f < audioStats.min ){

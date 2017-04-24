@@ -36,7 +36,7 @@ void ofApp::setup(){
     audioIn_raw = NULL;
     
     // sound
-    int bufferSize = 1920;
+    int bufferSize = 2048;
     int nCh = 1;
     int sampleRate = 48000;
     currentSamplePos = 0;
@@ -48,6 +48,11 @@ void ofApp::setup(){
     }else{
         ofLogNotice("soundStream", "soundStream ok");
     }
+    
+    sampleRate = sound_stream.getSampleRate();
+    bufferSize = sound_stream.getBufferSize();
+    Resamps = new CDSPResampler16( sampleRate, sampleRate_down, bufferSize );
+    totalSampleNum = total_time_ms/1000.0f * sampleRate;
     
     // visual
     int w = ofGetWindowWidth();
@@ -64,6 +69,11 @@ void ofApp::setup(){
     start_point.y = shortside/2;
     indicator.set(0, 0);
     
+    pixPerSample = (float)track_len/(float)totalSampleNum;
+
+    int totalSampleNum_down = total_time_ms/1000.0f * sampleRate_down;
+    pixPerSample_down = (float)track_len/totalSampleNum_down;
+
     bNeedSaveImg = false;
     ofSetLogLevel(OF_LOG_VERBOSE);
     
@@ -85,27 +95,27 @@ void ofApp::setup(){
     
 }
 
-void ofApp::audioIn(float * input, int bufferSize, int nCh){
+//void ofApp::audioIn(float * input, int bufferSize, int nCh){
+void ofApp::audioIn(ofSoundBuffer& buffer){
     if( bStart ){
-        audioIn_raw = input;
-        currentSamplePos += bufferSize;
+        audioIn_raw = &buffer.getBuffer()[0];
+        currentSamplePos += buffer.getNumFrames();
+        rms.push_back(buffer.getRMSAmplitude());
     }else{
         audioIn_raw = NULL;
     }
-}
-
-void ofApp::clearAudioData(){
-    audioIn_data.clear();
+    
 }
 
 void ofApp::audioPreProcess(){
     
     if( audioIn_raw==NULL ) return;
     
+    int bufferSize = sound_stream.getBufferSize();
+    int nCh = sound_stream.getNumInputChannels();
+    
     // copy
     {
-        int bufferSize = 2048;
-        int nCh = sound_stream.getNumInputChannels();
         audioIn_data.clear();
         audioIn_data.insert( audioIn_data.begin(), audioIn_raw, audioIn_raw+bufferSize*nCh );
     }
@@ -115,9 +125,9 @@ void ofApp::audioPreProcess(){
         float strength = 3;
         float base = log10(1+strength);
         
-        for_each(audioIn_data.begin(), audioIn_data.end(), [&](float &val){
-            float sign = signval<float>(val);
-            float log = log10(1+abs(val)*strength) / base;
+        for_each(audioIn_data.begin(), audioIn_data.end(), [&](double &val){
+            double sign = signval<double>(val);
+            double log = log10(1+abs(val)*strength) / base;
             val = log * sign;
         });
     }
@@ -131,6 +141,28 @@ void ofApp::audioPreProcess(){
             float v4 = audioIn_data[i+1] * 0.3;
             float v5 = audioIn_data[i+2] * 0.1;
             audioIn_data[i] = (v1+v2+v3+v4+v5)/1.3f;
+        }
+    }
+    
+    // Re-sampling process
+    double * downSample;
+    int numDownSample = Resamps->process( &audioIn_data[0], audioIn_data.size(), downSample);
+    audioIn_data_down.insert(audioIn_data_down.end(), downSample, downSample+numDownSample);
+    
+    // THIS SHOULD BE CHANGED, SLOW!!!
+    downWave.clear();
+    if(1){
+        for(int i=0; i<audioIn_data_down.size(); i++){
+            float x = ofMap(i, 0, audioIn_data_down.size(), 0.0, indicator.x);
+            float y = audioIn_data_down[i] * ob::dset.global_amp * 4.0f;
+            downWave.addVertex(x, y);
+        }
+    }else{
+        for(int i=0; i<rms.size(); i++){
+            float x = ofMap(i, 0, rms.size(), 0.0, indicator.x);
+            float y = rms[i] * ob::dset.global_amp;
+            downWave.addVertex(x, 0);
+            downWave.addVertex(x, y);
         }
     }
     
@@ -192,13 +224,10 @@ void ofApp::update(){
     
     if( !bStart ) return;
     
-    float sampleRate = sound_stream.getSampleRate();
-    int totalSampleNum = total_time_ms/1000 * sampleRate;
     indicator.x = (float)currentSamplePos/totalSampleNum * track_len;
     
     if (indicator.x >= track_len) {
         cout << "tracking finished : " << ofGetElapsedTimef() << endl;
-        //bStart = false;
     }
     
     prevSamplePos = currentSamplePos;
@@ -221,7 +250,10 @@ void ofApp::draw(){
             ofTranslate(start_point);
             draw_bg();
             if(bStart) draw_wave();
+            ofSetColor(100);
+            downWave.draw();
             if(bStart) draw_audioStats();
+            
         }ofPopMatrix();
         
         draw_info();
@@ -245,17 +277,25 @@ void ofApp::draw_bg(){
     
     ofSetRectMode(OF_RECTMODE_CORNER);
 
-    ofSetColor(200);
-    if(oralb.isConnected()){
-        ofFill();
-    }else{
+    if(!oralb.isConnected()){
+        ofSetColor(200);
         ofNoFill();
-        ofSetLineWidth(1);
+        ofSetLineWidth(2);
         ofDrawLine(0,-yy, track_len, yy);
         ofDrawLine(0,yy, track_len, -yy);
+        ofDrawRectangle(0, -yy, track_len, yy*2);
+    }else if(!bStart){
+        ofSetColor(200);
+        ofNoFill();
+        ofDrawRectangle(0, -yy, track_len, yy*2);
+    }else{
+        ofSetColor(200);
+        ofFill();
+        ofDrawRectangle(0, -yy, track_len, yy*2);
+        ofSetColor(180);
+        ofNoFill();
+        ofDrawRectangle(0, -yy, track_len, yy*2);
     }
-    ofDrawRectangle(0, -yy, track_len, yy*2);
-    
     
     ofSetColor(255,255,0,255);
     ofFill();
@@ -408,7 +448,7 @@ void ofApp::draw_info(){
     ofSetColor(0);
     ofDrawBitmapString("fps        " + ofToString(ofGetFrameRate()), x, y);
     ofDrawBitmapString("nChannels  " + ofToString(sound_stream.getNumInputChannels() ), x+=os, y);
-    //ofDrawBitmapString("bufferSize " + ofToString(2048), x+=os, y);
+    ofDrawBitmapString("bufferSize " + ofToString(sound_stream.getBufferSize()), x+=os, y);
     ofDrawBitmapString("sampleRate " + ofToString(sound_stream.getSampleRate()), x+=os, y);
     ofDrawBitmapString("track len  " + ofToString((int)track_len), x+=os, y);
 

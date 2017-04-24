@@ -8,6 +8,9 @@
 #include "ofxOralB.h"
 #include "ofxOralBApp.h"
 
+#include "CDSPResampler.h"
+using namespace r8b;
+
 class ofApp : public ofxiOSApp, public ofxOralBApp{
     
 public:
@@ -25,8 +28,7 @@ public:
     void deviceOrientationChanged(int newOrientation) override;
     void exit() override;
 
-    void audioIn(float * input, int bufferSize, int nChannels) override;
-    void clearAudioData();
+    void audioIn( ofSoundBuffer& buffer ) override;
     
     void audioPreProcess();
     void videoPreProcess();
@@ -66,17 +68,27 @@ public:
     float           track_len;
     float           track_offset;
     float           indicator_speed;
+    float           pixPerSample;
+    float           pixPerSample_down;
     
     ofVec2f         start_point; // absolute pix pos
     ofVec2f         indicator;   // relative pix pos(dist from start_point)
     
     // sound
+    int             totalSampleNum;
     int             currentSamplePos;
     int             prevSamplePos;
     float *         audioIn_raw;
-    vector<float>   audioIn_data;
+    vector<double>  audioIn_data;
     ofSoundStream   sound_stream;
+
+    int             sampleRate_down = 300;
+    vector<float>   rms;
     
+    CPtrKeeper<CDSPResampler16*> Resamps;
+    ofPolyline storedWave;
+    vector<double>  audioIn_data_down;
+    ofPolyline      downWave;
 #ifdef USE_GRABBER
     // video
     ofVideoGrabber  grabber;
