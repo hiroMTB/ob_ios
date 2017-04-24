@@ -12,6 +12,16 @@ namespace ob {
         int buffer_size;
         float xrate;
         float global_amp;
+        
+        vector<ofColor> modeColor = {
+            ofColor(220),
+            ofColor(255, 255, 0),
+            ofColor(214, 75, 140),
+            ofColor(37, 185, 199),
+            ofColor(7, 81, 115),
+            ofColor(103, 227, 38),
+            ofColor(200, 200, 200)
+        };
     };
     
     static DrawerSettings dset;

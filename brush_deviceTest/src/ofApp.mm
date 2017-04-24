@@ -15,6 +15,7 @@ inline int signval(T n){
 }
 
 void ofApp::setup(){
+    ofSetLogLevel(OF_LOG_NOTICE);
     
     string appID = "120307cc-05a3-4f07-9e02-2cd40c966e6b";
     string appKey = "387d8361-0345-423d-ac0c-752f57dacd41";
@@ -75,24 +76,6 @@ void ofApp::setup(){
     pixPerSample_down = (float)track_len/totalSampleNum_down;
 
     bNeedSaveImg = false;
-    ofSetLogLevel(OF_LOG_VERBOSE);
-    
-#ifdef USE_GRABBER
-    // video
-    grbW = 360;
-    grbH = 240;
-    grabber.listDevices();
-    grabber.setDeviceID(1);
-    grabber.setUseTexture(false);
-    grabber.setPixelFormat( OF_PIXELS_RGB );
-    grabber.setDesiredFrameRate( target_fps );
-    grabber.setPixelFormat(OF_PIXELS_MONO);
-    grabber.setup( grbW, grbH );
-    
-    colorImg.allocate( grbW, grbH );
-    grayImg.allocate( grbW, grbH );
-#endif
-    
 }
 
 //void ofApp::audioIn(float * input, int bufferSize, int nCh){
@@ -154,15 +137,18 @@ void ofApp::audioPreProcess(){
     if(1){
         for(int i=0; i<audioIn_data_down.size(); i++){
             float x = ofMap(i, 0, audioIn_data_down.size(), 0.0, indicator.x);
-            float y = audioIn_data_down[i] * ob::dset.global_amp * 4.0f;
-            downWave.addVertex(x, y);
+            float y = audioIn_data_down[i] * ob::dset.global_amp * 15.0f;
+            downWave.addVertex( ofVec3f(x, y, 0));
+            OBTBrush * b = oralb.getConnectedToothbrush();
+            int mode = [b brushMode];
+            downWave.addColor( ob::dset.modeColor[mode] );
         }
     }else{
         for(int i=0; i<rms.size(); i++){
             float x = ofMap(i, 0, rms.size(), 0.0, indicator.x);
             float y = rms[i] * ob::dset.global_amp;
-            downWave.addVertex(x, 0);
-            downWave.addVertex(x, y);
+            downWave.addVertex( ofVec3f(x, 0, 0) );
+            downWave.addVertex( ofVec3f(x, y, 0) );
         }
     }
     
@@ -175,52 +161,9 @@ void ofApp::audioPreProcess(){
     }
 }
 
-void ofApp::videoPreProcess(){
-
-#ifdef USE_GRABBER
-    grabber.update();
-    
-    if( grabber.isFrameNew() ){
-        
-        if (grabber.getPixels().getData()!=NULL) {
-            
-            colorImg.setFromPixels( grabber.getPixels().getData(), grbW, grbH  );
-            grayImg = colorImg;
-            grayImg.threshold(70);
-            
-            unsigned char * data = grayImg.getPixels().getData();
-            size_t step = sizeof(unsigned char) * grbW;
-            cv::Mat mat( grbH, grbW, CV_8UC1, data, step );
-            vector<cv::KeyPoint> keys;
-            
-            auto detector = cv::ORB(500, 1.2f, 16, 0, 0, 4);
-            //auto detector = cv::BRISK(10, 1, 1.f);
-            //auto detector = cv::MSER( 5, 60, 14400);
-            //auto detector = cv::FastFeatureDetector( 30, true, cv::FastFeatureDetector::TYPE_9_16 );
-            detector.detect(mat, keys);
-            
-            feat.clear();
-            for( int i=0; i<keys.size(); i++ ){
-                cv::Point2f & p = keys[i].pt;
-                feat.push_back( ofVec2f(p.x, p.y) );
-            }
-            
-            feat.push_back(ofVec2f(0,0));
-            feat.push_back(ofVec2f(0,grbH));
-            feat.push_back(ofVec2f(grbW,0));
-            feat.push_back(ofVec2f(grbW,grbH));
-            
-        }
-    }
-#endif
-    
-}
-
 void ofApp::update(){
     
-    
     audioPreProcess();
-    //videoPreProcess();
     
     if( !bStart ) return;
     
@@ -249,18 +192,14 @@ void ofApp::draw(){
         ofPushMatrix();{
             ofTranslate(start_point);
             draw_bg();
+            downWave.draw(OF_MESH_WIREFRAME);
             if(bStart) draw_wave();
-            ofSetColor(100);
-            downWave.draw();
+            ofSetColor(250);
             if(bStart) draw_audioStats();
-            
         }ofPopMatrix();
         
         draw_info();
     }ofPopMatrix();
-    
-    draw_vid();
-
 }
 
 void ofApp::draw_bg(){
@@ -278,26 +217,29 @@ void ofApp::draw_bg(){
     ofSetRectMode(OF_RECTMODE_CORNER);
 
     if(!oralb.isConnected()){
-        ofSetColor(200);
+        ofSetColor(180);
         ofNoFill();
         ofSetLineWidth(2);
         ofDrawLine(0,-yy, track_len, yy);
         ofDrawLine(0,yy, track_len, -yy);
         ofDrawRectangle(0, -yy, track_len, yy*2);
     }else if(!bStart){
-        ofSetColor(200);
-        ofNoFill();
-        ofDrawRectangle(0, -yy, track_len, yy*2);
-    }else{
-        ofSetColor(200);
+        ofSetColor(230);
         ofFill();
         ofDrawRectangle(0, -yy, track_len, yy*2);
-        ofSetColor(180);
-        ofNoFill();
+    }else{
+        OBTBrush * b = oralb.getConnectedToothbrush();
+        if(b){
+            int mode = (int)[b brushMode];
+            ofSetColor(ob::dset.modeColor[mode]);
+        }
+        ofFill();
         ofDrawRectangle(0, -yy, track_len, yy*2);
     }
     
-    ofSetColor(255,255,0,255);
+
+    //ofSetColor(255,255,0,255); original yellow
+    ofSetColor(200);
     ofFill();
     ofDrawRectangle(0, -yy, indicator.x, yy*2);
     
@@ -390,56 +332,9 @@ void ofApp::draw_audioStats(){
             ofSetColor(0, 0, 200);
             ofDrawLine(track_len, y, track_len+10, y);
         }
-        
     }
 }
 
-void ofApp::draw_vid(){
-
-#ifdef USE_GRABBER
-    ofPushMatrix();{
-        // ofScale( canvas.height/grbW, canvas.width/grbH );
-        ofScale( canvas.height/grbH, canvas.width/grbH );
-        //ofScale( canvas.height/grbW, canvas.width/grbW );
-
-        ofSetColor(255,10);
-        grayImg.draw(0, 0);
-        
-        vector<ofVec2f> lines;
-        int size = feat.size();
-        for( int i=0; i<size-1; i++){
-            for( int j=i+1; j<size; j++){
-                //int id1 = ofRandom(0, size);
-                //int id2 = ofRandom(0, size);
-                int id1 = i;
-                int id2 = j;
-                const ofVec2f & v1 = feat[id1];
-                const ofVec2f & v2 = feat[id2];
-                float dist = v1.distance(v2);
-                float max = 10;
-                float noise = ofNoise(i*j+ofRandomf());
-                if( noise>0.8 ) max = 1000.0f;
-
-                if( 1<dist && dist<max ){
-                    lines.push_back(v1);
-                    lines.push_back(v2);
-                }
-            }
-        }
-
-        ofSetLineWidth(1);
-        ofSetColor(40, 55);
-        ob::drawLines(lines);
-
-        glPointSize(2);
-        ofSetColor(55,155);
-        ob::drawDots(feat);
-
-    }
-    ofPopMatrix();
-#endif
-
-}
 
 void ofApp::draw_info(){
     int y = 10;
@@ -584,7 +479,7 @@ void ofApp::toothbrushDidUpdateBatteryLevel(OBTBrush * toothbrush, float battery
 }
 
 void ofApp::toothbrushDidUpdateBrushMode(OBTBrush * toothbrush, OBTBrushMode brushMode){
-    ofLogVerbose("ofApp", "%s : %i", __FUNCTION__, (int)brushMode);
+    ofLogNotice("ofApp", "%s : %i", __FUNCTION__, (int)brushMode);
 }
 
 void ofApp::toothbrushDidUpdateBrushingDuration(OBTBrush * toothbrush, NSTimeInterval brushingDuration){

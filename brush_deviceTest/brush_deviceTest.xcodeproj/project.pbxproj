@@ -83,6 +83,7 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* ofxiOS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiOS_Prefix.pch; sourceTree = "<group>"; };
+		45459B401EAE19AE00295971 /* toothbrushes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = toothbrushes.plist; path = "../../../../sdk/OralB_SDK/ios-sdk-1.0.3/OBTSDK.framework/toothbrushes.plist"; sourceTree = "<group>"; };
 		457F96071E4B83C700729AD5 /* ofxOralB.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = ofxOralB.h; sourceTree = "<group>"; };
 		4D54C75F1CEFBFDD009C9215 /* obGeoDrawer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = obGeoDrawer.hpp; sourceTree = "<group>"; };
 		4D54C7601CEFBFDD009C9215 /* obStats.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = obStats.hpp; sourceTree = "<group>"; };
@@ -365,20 +366,12 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				84E0EE641EABA3CF00B7625C /* OBTSDK.framework */,
-				4DE8DB9E1D42599F000B9D1A /* Social.framework */,
-				4D83BA811D4180CB0010CCF4 /* Accounts.framework */,
-				678E130917951536005B6D19 /* Icon.png */,
-				678E130717951530005B6D19 /* Icon@2x.png */,
-				678E130B1795153C005B6D19 /* Default.png */,
-				678E130D17951540005B6D19 /* Default@2x.png */,
-				678E130F17951549005B6D19 /* Default-568h@2x~iphone.png */,
 				E4D8936A11527B74007E1F53 /* src */,
-				BB24E1F710DAA51900E9C588 /* openFrameworks */,
 				BB16F26B0F2B646B00518274 /* addons */,
-				BB16E9930F2B1E5900518274 /* libs */,
-				19C28FACFE9D520D11CA2CBB /* Products */,
+				45459B3F1EAE172F00295971 /* data */,
+				BB24E1F710DAA51900E9C588 /* openFrameworks */,
 				457F96031E4B818600729AD5 /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -404,9 +397,26 @@
 			name = "core frameworks";
 			sourceTree = "<group>";
 		};
+		45459B3F1EAE172F00295971 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				678E130917951536005B6D19 /* Icon.png */,
+				678E130717951530005B6D19 /* Icon@2x.png */,
+				678E130B1795153C005B6D19 /* Default.png */,
+				678E130D17951540005B6D19 /* Default@2x.png */,
+				678E130F17951549005B6D19 /* Default-568h@2x~iphone.png */,
+			);
+			name = data;
+			sourceTree = "<group>";
+		};
 		457F96031E4B818600729AD5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				45459B401EAE19AE00295971 /* toothbrushes.plist */,
+				29B97323FDCFA39411CA2CEA /* core frameworks */,
+				84E0EE641EABA3CF00B7625C /* OBTSDK.framework */,
+				4DE8DB9E1D42599F000B9D1A /* Social.framework */,
+				4D83BA811D4180CB0010CCF4 /* Accounts.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -917,14 +927,6 @@
 			path = ../../../addons/r8brain;
 			sourceTree = "<group>";
 		};
-		BB16E9930F2B1E5900518274 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				BBE5E94E0F497BD800F28951 /* core */,
-			);
-			name = libs;
-			sourceTree = "<group>";
-		};
 		BB16F26B0F2B646B00518274 /* addons */ = {
 			isa = PBXGroup;
 			children = (
@@ -946,14 +948,6 @@
 				E41D3ED613B38FB500A75A5D /* Project.xcconfig */,
 			);
 			name = openFrameworks;
-			sourceTree = "<group>";
-		};
-		BBE5E94E0F497BD800F28951 /* core */ = {
-			isa = PBXGroup;
-			children = (
-				29B97323FDCFA39411CA2CEA /* core frameworks */,
-			);
-			name = core;
 			sourceTree = "<group>";
 		};
 		E41D40FE13B3A0D800A75A5D /* Products */ = {

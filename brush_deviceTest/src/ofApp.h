@@ -1,7 +1,5 @@
 #pragma once
 
-//#define USE_GRABBER
-
 #include "ofxiOS.h"
 #include "ofxOpenCv.h"
 #include "ofxiPhoneSocial.h"
@@ -36,7 +34,6 @@ public:
     void draw_bg();
     void draw_info();
     void draw_audioStats();
-    void draw_vid();
     void checkStart();
     
     // OralB event
@@ -88,19 +85,7 @@ public:
     CPtrKeeper<CDSPResampler16*> Resamps;
     ofPolyline storedWave;
     vector<double>  audioIn_data_down;
-    ofPolyline      downWave;
-#ifdef USE_GRABBER
-    // video
-    ofVideoGrabber  grabber;
-    int             grbW;
-    int             grbH;
-    
-    // cv
-    vector<ofVec2f>     feat;
-    ofxCvColorImage     colorImg;
-    ofxCvGrayscaleImage grayImg;
-
-#endif
+    ofVboMesh       downWave;
     
     bool bNeedSaveImg;
 
