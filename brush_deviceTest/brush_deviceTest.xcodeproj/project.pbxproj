@@ -1015,7 +1015,10 @@
 						DevelopmentTeam = WW8R7K6P9Q;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 0;
 							};
 						};
 					};
@@ -1136,7 +1139,7 @@
 				INFOPLIST_FILE = "ofxiOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = hiroshi.emptyExample;
+				PRODUCT_BUNDLE_IDENTIFIER = net.dominofactory.obApp.brush_deviceTest;
 				PRODUCT_NAME = brush_deviceTest;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1161,7 +1164,7 @@
 				INFOPLIST_FILE = "ofxiOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = hiroshi.emptyExample;
+				PRODUCT_BUNDLE_IDENTIFIER = net.dominofactory.obApp.brush_deviceTest;
 				PRODUCT_NAME = brush_deviceTest;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
