@@ -429,12 +429,14 @@ void ofApp::nearbyToothbrushesDidChange( vector<OBTBrush*> bs ){
             //oralb.stopScanning();
             
             OBTBrush * b = oralb.getConnectedToothbrush();
-            ofLogVerbose("ofApp", "%s NEW Brush connected", __FUNCTION__);
-            ofLogVerbose("ofApp", "name            : %s", [[b name] UTF8String]);
-            ofLogVerbose("ofApp", "handleType      : %s", [[b handleType] UTF8String]);
-            ofLogVerbose("ofApp", "localHandleID   : %s", [[b localHandleID] UTF8String]);
-            ofLogVerbose("ofApp", "protocolVersion : %i", [b protocolVersion]);
-            ofLogVerbose("ofApp", "softwareVersion : %i", [b softwareVersion]);
+            if(b){
+                ofLogVerbose("ofApp", "%s NEW Brush connected", __FUNCTION__);
+                ofLogVerbose("ofApp", "name            : %s", [[b name] UTF8String]);
+                ofLogVerbose("ofApp", "handleType      : %s", [[b handleType] UTF8String]);
+                ofLogVerbose("ofApp", "localHandleID   : %s", [[b localHandleID] UTF8String]);
+                ofLogVerbose("ofApp", "protocolVersion : %i", [b protocolVersion]);
+                ofLogVerbose("ofApp", "softwareVersion : %i", [b softwareVersion]);
+            }
         }
     }
 }
