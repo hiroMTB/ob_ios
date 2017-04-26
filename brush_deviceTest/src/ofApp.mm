@@ -15,7 +15,7 @@ inline int signval(T n){
 }
 
 void ofApp::setup(){
-    ofSetLogLevel(OF_LOG_NOTICE);
+    ofSetLogLevel(OF_LOG_ERROR);
     
     string appID = "120307cc-05a3-4f07-9e02-2cd40c966e6b";
     string appKey = "387d8361-0345-423d-ac0c-752f57dacd41";
