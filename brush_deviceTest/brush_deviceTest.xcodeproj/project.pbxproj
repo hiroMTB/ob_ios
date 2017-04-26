@@ -10,6 +10,8 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		45E8347E1EB0E6C00051BFE1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E8347A1EB0E6BF0051BFE1 /* SystemConfiguration.framework */; };
+		45E8347F1EB0E6C00051BFE1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E8347B1EB0E6C00051BFE1 /* Security.framework */; };
 		4D83BA821D4180CB0010CCF4 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D83BA811D4180CB0010CCF4 /* Accounts.framework */; };
 		4DCB97271CF3BC7E00FCE897 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 678E130B1795153C005B6D19 /* Default.png */; };
 		4DCB97281CF3BC7E00FCE897 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 678E130D17951540005B6D19 /* Default@2x.png */; };
@@ -85,6 +87,8 @@
 		32CA4F630368D1EE00C91783 /* ofxiOS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiOS_Prefix.pch; sourceTree = "<group>"; };
 		45459B401EAE19AE00295971 /* toothbrushes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = toothbrushes.plist; path = "../../../../sdk/OralB_SDK/ios-sdk-1.0.3/OBTSDK.framework/toothbrushes.plist"; sourceTree = "<group>"; };
 		457F96071E4B83C700729AD5 /* ofxOralB.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = ofxOralB.h; sourceTree = "<group>"; };
+		45E8347A1EB0E6BF0051BFE1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		45E8347B1EB0E6C00051BFE1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4D54C75F1CEFBFDD009C9215 /* obGeoDrawer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = obGeoDrawer.hpp; sourceTree = "<group>"; };
 		4D54C7601CEFBFDD009C9215 /* obStats.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = obStats.hpp; sourceTree = "<group>"; };
 		4D83BA811D4180CB0010CCF4 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -337,6 +341,7 @@
 				4DCB98371CF3C35D00FCE897 /* AssetsLibrary.framework in Frameworks */,
 				E41D421413B3A95300A75A5D /* libofxiOS_iphoneos_Debug.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				45E8347F1EB0E6C00051BFE1 /* Security.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				BB16EBD20F2B2A9500518274 /* OpenGLES.framework in Frameworks */,
@@ -345,6 +350,7 @@
 				53F323EB10A20EDB00E0DAE4 /* OpenAL.framework in Frameworks */,
 				5326AEA810A23A0500278DE6 /* CoreLocation.framework in Frameworks */,
 				E41D400B13B39D2100A75A5D /* AVFoundation.framework in Frameworks */,
+				45E8347E1EB0E6C00051BFE1 /* SystemConfiguration.framework in Frameworks */,
 				E41D400C13B39D2100A75A5D /* CoreMedia.framework in Frameworks */,
 				E41D400D13B39D2100A75A5D /* CoreVideo.framework in Frameworks */,
 				E41D400E13B39D2100A75A5D /* MapKit.framework in Frameworks */,
@@ -366,6 +372,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				45E8347A1EB0E6BF0051BFE1 /* SystemConfiguration.framework */,
+				45E8347B1EB0E6C00051BFE1 /* Security.framework */,
 				E4D8936A11527B74007E1F53 /* src */,
 				BB16F26B0F2B646B00518274 /* addons */,
 				45459B3F1EAE172F00295971 /* data */,
@@ -1075,7 +1083,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rsync -avz --exclude='.DS_Store' \"${SRCROOT}/bin/data/\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\"";
+			shellScript = "rsync -avz --exclude='.DS_Store' \"${SRCROOT}/bin/data/\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\"\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1118,6 +1126,10 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = WW8R7K6P9Q;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ofxiOS_Prefix.pch;
 				"GCC_WARN_64_TO_32_BIT_CONVERSION[arch=*64]" = NO;
@@ -1139,6 +1151,10 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = WW8R7K6P9Q;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ofxiOS_Prefix.pch;
 				"GCC_WARN_64_TO_32_BIT_CONVERSION[arch=*64]" = NO;
@@ -1161,7 +1177,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LIBRARY = "libc++";
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: matobahiroshi@gmail.com (EJ2G8W36EV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphonesimulator*]" = "";
 				COMPRESS_PNG_FILES = NO;
@@ -1193,6 +1209,7 @@
 					"$(LIB_OCV)",
 					"$(inherited)",
 				);
+				PROVISIONING_PROFILE = "45a444f5-b72b-4dc8-8149-d539e69bc7b9";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1208,7 +1225,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LIBRARY = "libc++";
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: matobahiroshi@gmail.com (EJ2G8W36EV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphonesimulator*]" = "";
 				COMPRESS_PNG_FILES = NO;
@@ -1239,6 +1256,7 @@
 					"$(LIB_OCV)",
 					"$(inherited)",
 				);
+				PROVISIONING_PROFILE = "45a444f5-b72b-4dc8-8149-d539e69bc7b9";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
