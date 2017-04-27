@@ -34,9 +34,13 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.0.1</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Capture user's brushing sound and visualize waveform in realtime</string>
 	<key>UIApplicationExitsOnSuspend</key>
 	<true/>
 	<key>UIStatusBarHidden</key>
@@ -48,9 +52,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Capture user&apos;s brushing sound and visualize waveform in realtime</string>
 </dict>
 </plist>

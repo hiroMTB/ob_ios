@@ -1126,7 +1126,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = WW8R7K6P9Q;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1139,7 +1139,7 @@
 				INFOPLIST_FILE = "ofxiOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.dominofactory.obApp.brush_deviceTest;
+				PRODUCT_BUNDLE_IDENTIFIER = net.dominofactory.obApp.brushDeviceTest;
 				PRODUCT_NAME = brush_deviceTest;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1151,7 +1151,7 @@
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = WW8R7K6P9Q;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1164,7 +1164,7 @@
 				INFOPLIST_FILE = "ofxiOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = net.dominofactory.obApp.brush_deviceTest;
+				PRODUCT_BUNDLE_IDENTIFIER = net.dominofactory.obApp.brushDeviceTest;
 				PRODUCT_NAME = brush_deviceTest;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1180,7 +1180,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LIBRARY = "libc++";
-				CODE_SIGN_IDENTITY = "iPhone Developer: matobahiroshi@gmail.com (EJ2G8W36EV)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Hiroshi Matoba (WW8R7K6P9Q)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphonesimulator*]" = "";
 				COMPRESS_PNG_FILES = NO;
@@ -1213,7 +1213,7 @@
 					"$(inherited)",
 				);
 				PROVISIONING_PROFILE = "45a444f5-b72b-4dc8-8149-d539e69bc7b9";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "45a444f5-b72b-4dc8-8149-d539e69bc7b9";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -1228,7 +1228,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LIBRARY = "libc++";
-				CODE_SIGN_IDENTITY = "iPhone Developer: matobahiroshi@gmail.com (EJ2G8W36EV)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Hiroshi Matoba (WW8R7K6P9Q)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphonesimulator*]" = "";
 				COMPRESS_PNG_FILES = NO;
