@@ -20,31 +20,27 @@ ofxJSONElement ofApp::request(ofHttpRequest & req){
 void ofApp::setup(){
     
     cout << "setup : " << endl;
-    
-    // 1.request bearerToken
-    {
-        ofHttpRequest req;
-        req.url = baseurl + "/bearertoken/" + appId + "?key=" + appKey;
-        req.name = "Request Bearertoken";
-        ofxJSONElement json = request(req);
-        bear = json["bearerToken"].asString();
-        ofLogNotice("setup") << "got BearerToken : "  << bear;
-        result = json;
-    }
-    
-    // 2.request auth page url -> move to safari
-    {
-        ofHttpRequest req;
-        req.url = baseurl + "/authorize";
-        req.headers["Authorization"] = "Bearer " + bear;
-        req.name = "Request Authorize";
-        ofxJSONElement json = request(req);
-        
-        authUrl = json["url"].asString();
-        ofxiOSLaunchBrowser(authUrl);
-        ofLogNotice("setup") << "got auth URL : "  << authUrl;
-        result = json;
-    }
+    bear = requestBearer(appId, appKey);
+    authUrl = requestAuthUrl(bear);
+    ofxiOSLaunchBrowser(authUrl);
+}
+
+string ofApp::requestBearer(string appId, string appKey){
+    ofHttpRequest req;
+    req.url = baseurl + "/bearertoken/" + appId + "?key=" + appKey;
+    req.name = "Request Bearertoken";
+    ofxJSONElement json = request(req);
+    return json["bearerToken"].asString();;
+}
+
+string ofApp::requestAuthUrl(string bearer){
+    ofHttpRequest req;
+    req.url = baseurl + "/authorize";
+    req.headers["Authorization"] = "Bearer " + bearer;
+    req.name = "Request Authorize";
+    ofxJSONElement json = request(req);
+
+    return json["url"].asString();
 }
 
 void ofApp::launchedWithURL(string url){
@@ -62,8 +58,8 @@ void ofApp::launchedWithURL(string url){
     req.headers["Authorization"] = "Bearer " + bear;
     req.name = "Request Session data";
     ofxJSONElement json = request(req);
-    result = json;
-    cout << result.getRawString() << endl;
+    createSessionData(json);    
+    cout << json.getRawString() << endl;
 }
 
 void ofApp::draw(){
@@ -72,38 +68,38 @@ void ofApp::draw(){
     ofPushMatrix();{
         ofTranslate(20, 20);
         ofSetHexColor(0x00FF00);
-        //draw_json(result);
+        //draw_json(data);
     }ofPopMatrix();
-    
 }
 
 /*
  *      parse everything with iterator
  *      alphabetical order because of map container
  */
-void ofApp::draw_json( ofxJSONElement & elem){
+void ofApp::createSessionData( ofxJSONElement & elem){
     
-    std::stringstream ss;
     
-    Json::Value::iterator itrA = elem.begin();
+    const Json::Value& sessions = elem["sessions"];
+    int size = sessions.size();
+    sessionData.clear();
+    sessionData.assign(size, unordered_map<string, int>() );
     
-    for( ; itrA!=elem.end(); itrA++){
+    for (Json::ArrayIndex i=0; i<size; ++i){
         
-        string name = itrA.memberName();
-        string data = (*itrA).asString();
-        ss << name << " : " << data << "\n";
+        unordered_map<string, int> & s = sessionData[i];
         
-        Json::Value::iterator itrB = (*itrA).begin();
-        
-        for( ; itrB!=(*itrA).end(); itrB++){
-            string name = itrB.memberName();
-            string data = (*itrB).asString();
-            ss << name << " : " << data << "\n";
-        }
-        
-        ss << "\n\n";
+        string timeStart    = sessions[i]["timeStart"].asString();
+        string timeEnd      = sessions[i]["timeEnd"].asString();
+        s["timeStartYear"]  = ofToInt(timeStart.substr(0,4));
+        s["timeStartMonth"] = ofToInt(timeStart.substr(5,7));
+        s["timeStartDay"]   = ofToInt(timeStart.substr(8,10));
+        s["timeEndYear"]    = ofToInt(timeEnd.substr(0,4));
+        s["timeEndMonth"]   = ofToInt(timeEnd.substr(5,7));
+        s["timeEndDay"]     = ofToInt(timeEnd.substr(8,10));
+
+        s["duration"]       = sessions[i]["brushingDuration"].asInt();
+        s["pressureCount"]  = sessions[i]["pressureCount"].asInt();
+        s["]pressureTime"]  = sessions[i]["pressureTime"].asInt();
     }
-    
-    ofDrawBitmapString(ss.str(), 0, 0);
 }
 
