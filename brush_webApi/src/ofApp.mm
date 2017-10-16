@@ -1,63 +1,70 @@
 #include "ofApp.h"
 
-void ofApp::setup(){
+ofxJSONElement ofApp::request(ofHttpRequest & req){
+    ofURLFileLoader loader;
+    ofHttpResponse response;
+    ofxJSONElement json;
+    
+    response = loader.handleRequest(req);
+    if(response.status != 200) {
+        cout << "ERROR " << response.status << " : " << response.error << endl;
+        return json;
+    }
+    
+    ofBuffer buf = response.data;
+    string raw = ofToString(buf);
+    bool ok = json.parse(raw);    
+    return json;
+}
 
-    // 1.request
+void ofApp::setup(){
+    
+    cout << "setup : " << endl;
+    
+    // 1.request bearerToken
     {
-        ofURLFileLoader loader;
         ofHttpRequest req;
-        ofHttpResponse response;
-        ofxJSONElement json;
-        
-        string url = baseurl + "/bearertoken/" + appId + "?key=" + appKey;
-        req.url = url;
+        req.url = baseurl + "/bearertoken/" + appId + "?key=" + appKey;
         req.name = "Request Bearertoken";
-        response = loader.handleRequest(req);
-        if(response.status != 200) {
-            cout << "ERROR " << response.status << " : " << response.error << endl;
-            return;
-        }
-        
-        ofBuffer buf = response.data;
-        string raw = ofToString(buf);
-        bool ok = json.parse(raw);
-        if(ok) bear = json["bearerToken"].asString();
-        
+        ofxJSONElement json = request(req);
+        bear = json["bearerToken"].asString();
+        ofLogNotice("setup") << "got BearerToken : "  << bear;
         result = json;
     }
     
-    
-    // 2.request
+    // 2.request auth page url -> move to safari
     {
-        ofURLFileLoader loader;
-        ofHttpResponse response;
         ofHttpRequest req;
-        ofxJSONElement json;
-        string url = baseurl + "/authorize";
-        req.url = url;
+        req.url = baseurl + "/authorize";
         req.headers["Authorization"] = "Bearer " + bear;
         req.name = "Request Authorize";
-        response = loader.handleRequest(req);
-        if(response.status != 200) {
-            cout << "ERROR " << response.status << " : " << response.error << endl;
-            return;
-        }
+        ofxJSONElement json = request(req);
         
-        ofBuffer buf = response.data;
-        string raw = ofToString(buf);
-        bool ok = json.parse(raw);
-        
-        if(ok){
-            authUrl = json["url"].asString();
-            //ofLoadURL( authUrl );
-            ofxiOSLaunchBrowser(authUrl);
-            cout << authUrl << endl;
-        }
-        
+        authUrl = json["url"].asString();
+        ofxiOSLaunchBrowser(authUrl);
+        ofLogNotice("setup") << "got auth URL : "  << authUrl;
         result = json;
     }
 }
 
+void ofApp::launchedWithURL(string url){
+    cout << "launchedWithURL : " << url << endl;
+    
+    // request session data
+    // example https://api.developer.oralb.com/v1/sessions?from=2015-02-20T12:40:45.327-07:00&to=
+    
+    userToken = url.erase(0, 9); // remove obtest://userToken
+    cout << "userToken : " << userToken << endl;
+    
+    ofHttpRequest req;
+    req.url = baseurl + "/sessions?from=2015-02-20T12:40:45.327-07:00";
+    req.headers["X-User-Token"] = userToken;
+    req.headers["Authorization"] = "Bearer " + bear;
+    req.name = "Request Session data";
+    ofxJSONElement json = request(req);
+    result = json;
+    cout << result.getRawString() << endl;
+}
 
 void ofApp::draw(){
     
@@ -65,7 +72,7 @@ void ofApp::draw(){
     ofPushMatrix();{
         ofTranslate(20, 20);
         ofSetHexColor(0x00FF00);
-        draw_json(result);
+        //draw_json(result);
     }ofPopMatrix();
     
 }
@@ -99,6 +106,4 @@ void ofApp::draw_json( ofxJSONElement & elem){
     
     ofDrawBitmapString(ss.str(), 0, 0);
 }
-
-
 

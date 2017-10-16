@@ -9,7 +9,10 @@ public:
     void setup();
     void draw();
     
+    void launchedWithURL(string url);
     void draw_json( ofxJSONElement & elem);
+    
+    ofxJSONElement request(ofHttpRequest & req);
     
     ofxJSONElement result;
     
@@ -19,6 +22,7 @@ public:
     string appKey = "6bb594ec-2860-427e-8e34-891fdb33995d";
     string bear = "n.a";
     string authUrl = "n.a";
+    string userToken = "n.a";
     
 };
 
