@@ -42,35 +42,34 @@ string BrushDataHandler::requestAuthUrl(string bearer){
     return json["url"].asString();
 }
 
-
-/*
- *      parse everything with iterator
- *      alphabetical order because of map container
- */
 void BrushDataHandler::createSessionData( ofxJSONElement & elem){
-    
     
     const Json::Value& sessions = elem["sessions"];
     int size = sessions.size();
     sessionData.clear();
-    sessionData.assign(size, unordered_map<string, int>() );
+    sessionData.assign(size, BrushData());
     
     for (Json::ArrayIndex i=0; i<size; ++i){
         
-        unordered_map<string, int> & s = sessionData[i];
+        BrushData & b = sessionData[i];
         
-        string timeStart    = sessions[i]["timeStart"].asString();
-        string timeEnd      = sessions[i]["timeEnd"].asString();
-        s["timeStartYear"]  = ofToInt(timeStart.substr(0,4));
-        s["timeStartMonth"] = ofToInt(timeStart.substr(5,7));
-        s["timeStartDay"]   = ofToInt(timeStart.substr(8,10));
-        s["timeEndYear"]    = ofToInt(timeEnd.substr(0,4));
-        s["timeEndMonth"]   = ofToInt(timeEnd.substr(5,7));
-        s["timeEndDay"]     = ofToInt(timeEnd.substr(8,10));
+        // "timeEnd" : "2017-10-13T17:38:40.000+02:00",
+        std::istringstream st (sessions[i]["timeStart"].asString().substr(0, 19));
+        std::istringstream end(sessions[i]["timeEnd"].asString().substr(0, 19));
         
-        s["duration"]       = sessions[i]["brushingDuration"].asInt();
-        s["pressureCount"]  = sessions[i]["pressureCount"].asInt();
-        s["]pressureTime"]  = sessions[i]["pressureTime"].asInt();
+        st  >> std::get_time(&b.timeStart, "%Y-%m-%dT%H:%M:%S");
+        end >> std::get_time(&b.timeEnd, "%Y-%m-%dT%H:%M:%S");
+        b.duration      = sessions[i]["brushingDuration"].asInt();
+        b.pressureCount = sessions[i]["pressureCount"].asInt();
+        b.pressureTime  = sessions[i]["pressureTime"].asInt();
+
+        if(ofGetLogLevel() == OF_LOG_VERBOSE){
+            if (st.fail()) {
+                std::cout << "Parse failed\n";
+            } else {
+                std::cout << std::put_time(&b.timeStart, "%c") << endl;
+            }
+        }
     }
 }
 

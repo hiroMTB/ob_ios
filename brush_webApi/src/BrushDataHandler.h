@@ -4,19 +4,26 @@
 #include "ofxJSON.h"
 #include <unordered_map>
 
+class BrushData{
+    
+public:
+    int brushingDuration;
+    int pressureCount;
+    int pressureTime;
+    int duration;
+    std::tm timeEnd;
+    std::tm timeStart;
+};
+
 class BrushDataHandler{
 
 public:
     
     void getDataFromServer();
-    
-    void draw_json( ofxJSONElement & elem);
     void createSessionData(ofxJSONElement & elem);
-    
-    ofxJSONElement request(ofHttpRequest & req);
     void launchedWithURL(string url);
+    ofxJSONElement request(ofHttpRequest & req);
 
-    
     string requestBearer(string appId, string appKey);
     string requestAuthUrl(string bearer);
 
@@ -26,6 +33,6 @@ public:
     string bear = "n.a";
     string authUrl = "n.a";
     string userToken = "n.a";
-    vector<unordered_map<string, int>> sessionData;
+    vector<BrushData> sessionData;
     
 };
