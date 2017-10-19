@@ -1,5 +1,4 @@
 #include "BrushDataHandler.h"
-#include "ofxiOS.h"
 
 void BrushDataHandler::getDummyData(string path){
 
@@ -21,7 +20,7 @@ void BrushDataHandler::getDataFromServer(){
     ofxiOSAlerts.addListener(this);
     bear = requestBearer(appId, appKey);
     authUrl = requestAuthUrl(bear);
-    ofxiOSLaunchBrowser(authUrl);
+    ofLaunchBrowser(authUrl);
 }
 
 ofxJSONElement BrushDataHandler::request(ofHttpRequest & req){
