@@ -2,9 +2,9 @@
 
 #include "ofMain.h"
 #include "ofxJSON.h"
-#include <unordered_map>
+#include "ofxiOSAlerts.h"
 
-class BrushData{
+class BrushSession{
     
 public:
     int brushingDuration;
@@ -15,11 +15,12 @@ public:
     std::tm timeStart;
 };
 
-class BrushDataHandler{
+class BrushDataHandler : public ofxiOSAlertsListener{
 
 public:
     
     void getDataFromServer();
+    void getDummyData(string path);
     void createSessionData(ofxJSONElement & elem);
     void launchedWithURL(string url);
     ofxJSONElement request(ofHttpRequest & req);
@@ -33,6 +34,6 @@ public:
     string bear = "n.a";
     string authUrl = "n.a";
     string userToken = "n.a";
-    vector<BrushData> sessionData;
+    vector<BrushSession> sessionData;
     
 };

@@ -1,6 +1,29 @@
 #include "BrushDataHandler.h"
 #include "ofxiOS.h"
 
+void BrushDataHandler::getDummyData(string path){
+
+    ofLogNotice("BrushDataHandler") << "Loading Dummy file";
+    
+    ofxJSONElement result;
+    bool parsingSuccessful = result.open(path);
+    
+    if (parsingSuccessful){
+        ofLogNotice("BrushDataHandler") << "parse JSON file : OK";
+        cout << result.getRawString() << endl;
+        createSessionData(result);
+    }else{
+        ofLogError("BrushDataHandler")  << "parse JSON file : ERROR";
+    }
+}
+
+void BrushDataHandler::getDataFromServer(){
+    ofxiOSAlerts.addListener(this);
+    bear = requestBearer(appId, appKey);
+    authUrl = requestAuthUrl(bear);
+    ofxiOSLaunchBrowser(authUrl);
+}
+
 ofxJSONElement BrushDataHandler::request(ofHttpRequest & req){
     ofURLFileLoader loader;
     ofHttpResponse response;
@@ -8,7 +31,7 @@ ofxJSONElement BrushDataHandler::request(ofHttpRequest & req){
     
     response = loader.handleRequest(req);
     if(response.status != 200) {
-        cout << "ERROR " << response.status << " : " << response.error << endl;
+        ofLogError() << response.status << " : " << response.error;
         return json;
     }
     
@@ -16,12 +39,6 @@ ofxJSONElement BrushDataHandler::request(ofHttpRequest & req){
     string raw = ofToString(buf);
     bool ok = json.parse(raw);
     return json;
-}
-
-void BrushDataHandler::getDataFromServer(){
-    bear = requestBearer(appId, appKey);
-    authUrl = requestAuthUrl(bear);
-    ofxiOSLaunchBrowser(authUrl);
 }
 
 string BrushDataHandler::requestBearer(string appId, string appKey){
@@ -47,11 +64,11 @@ void BrushDataHandler::createSessionData( ofxJSONElement & elem){
     const Json::Value& sessions = elem["sessions"];
     int size = sessions.size();
     sessionData.clear();
-    sessionData.assign(size, BrushData());
+    sessionData.assign(size, BrushSession());
     
     for (Json::ArrayIndex i=0; i<size; ++i){
         
-        BrushData & b = sessionData[i];
+        BrushSession & b = sessionData[i];
         
         // "timeEnd" : "2017-10-13T17:38:40.000+02:00",
         std::istringstream st (sessions[i]["timeStart"].asString().substr(0, 19));
@@ -65,9 +82,9 @@ void BrushDataHandler::createSessionData( ofxJSONElement & elem){
 
         if(ofGetLogLevel() == OF_LOG_VERBOSE){
             if (st.fail()) {
-                std::cout << "Parse failed\n";
+                ofLogError("createSessionData") << "Date format Parse failed\n";
             } else {
-                std::cout << std::put_time(&b.timeStart, "%c") << endl;
+                ofLogNotice("createSessionData") << ofToString(i,2) << " : " << std::put_time(&b.timeStart,"%c");
             }
         }
     }
@@ -91,5 +108,3 @@ void BrushDataHandler::launchedWithURL(string url){
     createSessionData(json);
     cout << json.getRawString() << endl;
 }
-
-
