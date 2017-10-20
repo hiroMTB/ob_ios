@@ -3,22 +3,30 @@
 #include "ofMain.h"
 #include "ofxJSON.h"
 #include "ofxiOSAlerts.h"
+#include "boost/date_time.hpp"
+
+using namespace boost::date_time;
+using namespace boost::gregorian;
+using namespace boost::local_time;
+using namespace boost::posix_time;
 
 class BrushSession{
     
 public:
+    BrushSession(){};
     int brushingDuration;
     int pressureCount;
     int pressureTime;
     int duration;
-    std::tm timeEnd;
-    std::tm timeStart;
+
+    ptime timeEnd;
+    ptime timeStart;
 };
 
 class BrushDataHandler : public ofxiOSAlertsListener{
 
 public:
-    
+    BrushDataHandler(){};
     void getDataFromServer();
     void getDummyData(string path);
     void createSessionData(ofxJSONElement & elem);

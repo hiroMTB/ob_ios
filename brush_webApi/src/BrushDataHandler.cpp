@@ -69,23 +69,32 @@ void BrushDataHandler::createSessionData( ofxJSONElement & elem){
         
         BrushSession & b = sessionData[i];
         
-        // "timeEnd" : "2017-10-13T17:38:40.000+02:00",
-        std::istringstream st (sessions[i]["timeStart"].asString().substr(0, 19));
-        std::istringstream end(sessions[i]["timeEnd"].asString().substr(0, 19));
+        // ISO 8601 extended format
+        // "timeEnd" : "2017-10-13T17:38:40.000+02:00"
         
-        st  >> std::get_time(&b.timeStart, "%Y-%m-%dT%H:%M:%S");
-        end >> std::get_time(&b.timeEnd, "%Y-%m-%dT%H:%M:%S");
+        // Get std::string
+        string st   = sessions[i]["timeStart"].asString();  //.substr(0, 19);
+        string end  = sessions[i]["timeEnd"].asString();    //.substr(0, 19);
+
+        // Get std::tm
+        std::tm st_tm, end_tm;
+        strptime(st.c_str(), "%Y-%m-%dT%H:%M:%S", &st_tm);
+        strptime(end.c_str(), "%Y-%m-%dT%H:%M:%S", &end_tm);
+
+        // Get posix_time(ptime)
+        // can not use time_from_string
+        // can not use from_iso_extended_string
+        // beause we dont use static library
+        b.timeStart = ptime_from_tm(st_tm);
+        b.timeEnd = ptime_from_tm(end_tm);
+
+        cout << b.timeStart.date() << endl;
+        cout << b.timeStart.time_of_day() << endl;
+        cout << b.timeStart.zone_name() << endl;
+        
         b.duration      = sessions[i]["brushingDuration"].asInt();
         b.pressureCount = sessions[i]["pressureCount"].asInt();
         b.pressureTime  = sessions[i]["pressureTime"].asInt();
-
-        if(ofGetLogLevel() == OF_LOG_VERBOSE){
-            if (st.fail()) {
-                ofLogError("createSessionData") << "Date format Parse failed\n";
-            } else {
-                ofLogNotice("createSessionData") << ofToString(i,2) << " : " << std::put_time(&b.timeStart,"%c");
-            }
-        }
     }
 }
 
