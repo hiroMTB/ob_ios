@@ -9,7 +9,7 @@ void BrushDataHandler::getDummyData(string path){
     
     if (parsingSuccessful){
         ofLogNotice("BrushDataHandler") << "parse JSON file : OK";
-        cout << result.getRawString() << endl;
+        //cout << result.getRawString() << endl;
         createSessionData(result);
     }else{
         ofLogError("BrushDataHandler")  << "parse JSON file : ERROR";
@@ -76,21 +76,14 @@ void BrushDataHandler::createSessionData( ofxJSONElement & elem){
         string st   = sessions[i]["timeStart"].asString();  //.substr(0, 19);
         string end  = sessions[i]["timeEnd"].asString();    //.substr(0, 19);
 
-        // Get std::tm
-        std::tm st_tm, end_tm;
-        strptime(st.c_str(), "%Y-%m-%dT%H:%M:%S", &st_tm);
-        strptime(end.c_str(), "%Y-%m-%dT%H:%M:%S", &end_tm);
-
-        // Get posix_time(ptime)
-        // can not use time_from_string
-        // can not use from_iso_extended_string
-        // beause we dont use static library
-        b.timeStart = ptime_from_tm(st_tm);
-        b.timeEnd = ptime_from_tm(end_tm);
-
-        cout << b.timeStart.date() << endl;
-        cout << b.timeStart.time_of_day() << endl;
-        cout << b.timeStart.zone_name() << endl;
+        // Get local_date_time
+        b.timeStart = get_ldt(st);
+        b.timeEnd   = get_ldt(end);
+        
+        cout << "local_time() " << b.timeStart.local_time() << endl;
+        cout << "utc_time()" << b.timeStart.utc_time() << endl;
+        cout << "zone() " << b.timeStart.zone_name() << endl;
+        cout << endl;
         
         b.duration      = sessions[i]["brushingDuration"].asInt();
         b.pressureCount = sessions[i]["pressureCount"].asInt();
@@ -115,4 +108,25 @@ void BrushDataHandler::launchedWithURL(string url){
     ofxJSONElement json = request(req);
     createSessionData(json);
     cout << json.getRawString() << endl;
+}
+
+local_date_time BrushDataHandler::get_ldt(string s){
+    local_date_time ldt(not_a_date_time);
+    stringstream ss(s);
+
+    try
+    {
+        boost::local_time::local_time_input_facet* ifc= new boost::local_time::local_time_input_facet("%Y-%m-%dT%H:%M:%S%F%Q");
+        ifc->set_iso_extended_format();
+        ss.imbue(std::locale(ss.getloc(), ifc));
+        
+        if(ss >> ldt) {
+        }
+    }
+    catch( std::exception const& e )
+    {
+        cout << "ERROR:" << e.what() <<std::endl;
+    }
+ 
+    return ldt;
 }

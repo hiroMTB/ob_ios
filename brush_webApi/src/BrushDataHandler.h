@@ -19,8 +19,9 @@ public:
     int pressureTime;
     int duration;
 
-    ptime timeEnd;
-    ptime timeStart;
+    local_date_time timeStart = local_date_time(not_a_date_time);
+    local_date_time timeEnd   = local_date_time(not_a_date_time);
+    
 };
 
 class BrushDataHandler : public ofxiOSAlertsListener{
@@ -43,5 +44,7 @@ public:
     string authUrl = "n.a";
     string userToken = "n.a";
     vector<BrushSession> sessionData;
-    
+
+    local_date_time get_ldt(string ss);
 };
+
