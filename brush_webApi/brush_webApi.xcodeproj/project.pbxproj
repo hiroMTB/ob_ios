@@ -14,7 +14,7 @@
 		5326AEA810A23A0500278DE6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5326AEA710A23A0500278DE6 /* CoreLocation.framework */; };
 		53F323EB10A20EDB00E0DAE4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */; };
 		67DFA53619F92A69003B3434 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67DFA53419F92A5E003B3434 /* Accelerate.framework */; };
-		84E7FD2B1F9A324800295CA0 /* CircularVisualizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84E7FD291F9A324800295CA0 /* CircularVisualizer.cpp */; };
+		84E7FD2B1F9A324800295CA0 /* CircularVisualizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84E7FD291F9A324800295CA0 /* CircularVisualizer.mm */; };
 		9936F6101BFA4DEE00891288 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9936F60F1BFA4DEE00891288 /* Images.xcassets */; };
 		9936F6121BFA65F100891288 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9936F6111BFA65F100891288 /* LaunchScreen.storyboard */; };
 		9969E7561C782C4500DEF0F6 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9969E7551C782C4500DEF0F6 /* CoreMotion.framework */; };
@@ -63,8 +63,8 @@
 		53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		61313493CDB52744E22A604D /* json-forwards.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = "json-forwards.h"; path = "../../../addons/ofxJSON/libs/jsoncpp/include/json/json-forwards.h"; sourceTree = SOURCE_ROOT; };
 		67DFA53419F92A5E003B3434 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		84E7FD291F9A324800295CA0 /* CircularVisualizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircularVisualizer.cpp; sourceTree = "<group>"; };
-		84E7FD2A1F9A324800295CA0 /* CircularVisualizer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CircularVisualizer.hpp; sourceTree = "<group>"; };
+		84E7FD291F9A324800295CA0 /* CircularVisualizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CircularVisualizer.mm; sourceTree = "<group>"; };
+		84E7FD2A1F9A324800295CA0 /* CircularVisualizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularVisualizer.h; sourceTree = "<group>"; };
 		91A1DEDBBC0F7C8EC78D1BC9 /* BrushDataHandler.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = BrushDataHandler.h; path = src/BrushDataHandler.h; sourceTree = SOURCE_ROOT; };
 		9936F60F1BFA4DEE00891288 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9936F6111BFA65F100891288 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -279,8 +279,8 @@
 				E4D8936C11527B74007E1F53 /* ofApp.h */,
 				CA3753684244277D15B4AE5C /* BrushDataHandler.cpp */,
 				91A1DEDBBC0F7C8EC78D1BC9 /* BrushDataHandler.h */,
-				84E7FD291F9A324800295CA0 /* CircularVisualizer.cpp */,
-				84E7FD2A1F9A324800295CA0 /* CircularVisualizer.hpp */,
+				84E7FD291F9A324800295CA0 /* CircularVisualizer.mm */,
+				84E7FD2A1F9A324800295CA0 /* CircularVisualizer.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -391,7 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84E7FD2B1F9A324800295CA0 /* CircularVisualizer.cpp in Sources */,
+				84E7FD2B1F9A324800295CA0 /* CircularVisualizer.mm in Sources */,
 				E4D8936E11527B74007E1F53 /* main.mm in Sources */,
 				E4D8936F11527B74007E1F53 /* ofApp.mm in Sources */,
 				38539D3B7B7D7FF75E9454FD /* BrushDataHandler.cpp in Sources */,
