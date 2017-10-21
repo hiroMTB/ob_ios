@@ -16,6 +16,8 @@ public:
     }
     
     BrushDataHandler handler;
+
+    CircularVisualizer viz;
 };
 
 

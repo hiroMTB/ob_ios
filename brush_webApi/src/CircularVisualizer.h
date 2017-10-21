@@ -6,10 +6,10 @@ public:
     
     CircularVisualizer();
     
-    void draw_hour();
-    void draw_day();
-    void draw_week();
-    void draw_month();
-    void draw_year();
+    void draw_hour(float x, float y, float radius);
+    void draw_day(float x, float y, float radius);
+    void draw_week(float x, float y, float radius);
+    void draw_month(float x, float y, float radius);
+    void draw_year(float x, float y, float radius);
     
 };
