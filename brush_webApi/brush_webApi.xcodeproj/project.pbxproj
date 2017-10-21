@@ -14,6 +14,7 @@
 		5326AEA810A23A0500278DE6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5326AEA710A23A0500278DE6 /* CoreLocation.framework */; };
 		53F323EB10A20EDB00E0DAE4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */; };
 		67DFA53619F92A69003B3434 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67DFA53419F92A5E003B3434 /* Accelerate.framework */; };
+		84660C1D1F9BCA2500663AB0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 84660C1A1F9BCA2500663AB0 /* .gitignore */; };
 		84E7FD2B1F9A324800295CA0 /* CircularVisualizer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84E7FD291F9A324800295CA0 /* CircularVisualizer.mm */; };
 		9936F6101BFA4DEE00891288 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9936F60F1BFA4DEE00891288 /* Images.xcassets */; };
 		9936F6121BFA65F100891288 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9936F6111BFA65F100891288 /* LaunchScreen.storyboard */; };
@@ -63,6 +64,8 @@
 		53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		61313493CDB52744E22A604D /* json-forwards.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = "json-forwards.h"; path = "../../../addons/ofxJSON/libs/jsoncpp/include/json/json-forwards.h"; sourceTree = SOURCE_ROOT; };
 		67DFA53419F92A5E003B3434 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		84660C1A1F9BCA2500663AB0 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		84660C1C1F9BCA2500663AB0 /* ofRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofRange.h; sourceTree = "<group>"; };
 		84E7FD291F9A324800295CA0 /* CircularVisualizer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CircularVisualizer.mm; sourceTree = "<group>"; };
 		84E7FD2A1F9A324800295CA0 /* CircularVisualizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularVisualizer.h; sourceTree = "<group>"; };
 		91A1DEDBBC0F7C8EC78D1BC9 /* BrushDataHandler.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = BrushDataHandler.h; path = src/BrushDataHandler.h; sourceTree = SOURCE_ROOT; };
@@ -192,6 +195,24 @@
 			name = local_addons;
 			sourceTree = "<group>";
 		};
+		84660C191F9BCA2500663AB0 /* ofxRange */ = {
+			isa = PBXGroup;
+			children = (
+				84660C1A1F9BCA2500663AB0 /* .gitignore */,
+				84660C1B1F9BCA2500663AB0 /* src */,
+			);
+			name = ofxRange;
+			path = ../../../addons/ofxRange;
+			sourceTree = "<group>";
+		};
+		84660C1B1F9BCA2500663AB0 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				84660C1C1F9BCA2500663AB0 /* ofRange.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		977A836DD2C489CCC5E330FF /* jsoncpp */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +242,7 @@
 		BB16F26B0F2B646B00518274 /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				84660C191F9BCA2500663AB0 /* ofxRange */,
 				2865DAEF86B1907A704CA70B /* ofxJSON */,
 			);
 			name = addons;
@@ -364,6 +386,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9936F6101BFA4DEE00891288 /* Images.xcassets in Resources */,
+				84660C1D1F9BCA2500663AB0 /* .gitignore in Resources */,
 				9936F6121BFA65F100891288 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,6 +443,17 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ofxiOS_Prefix.pch;
 				"GCC_WARN_64_TO_32_BIT_CONVERSION[arch=*64]" = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_CORE_HEADERS)",
+					src,
+					../../../addons/ofxJSON/libs,
+					../../../addons/ofxJSON/libs/jsoncpp,
+					../../../addons/ofxJSON/libs/jsoncpp/include,
+					../../../addons/ofxJSON/libs/jsoncpp/include/json,
+					../../../addons/ofxJSON/libs/jsoncpp/src,
+					../../../addons/ofxJSON/src,
+					../../../addons/ofxRange/src,
+				);
 				INFOPLIST_FILE = "ofxiOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -436,6 +470,17 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ofxiOS_Prefix.pch;
 				"GCC_WARN_64_TO_32_BIT_CONVERSION[arch=*64]" = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(OF_CORE_HEADERS)",
+					src,
+					../../../addons/ofxJSON/libs,
+					../../../addons/ofxJSON/libs/jsoncpp,
+					../../../addons/ofxJSON/libs/jsoncpp/include,
+					../../../addons/ofxJSON/libs/jsoncpp/include/json,
+					../../../addons/ofxJSON/libs/jsoncpp/src,
+					../../../addons/ofxJSON/src,
+					../../../addons/ofxRange/src,
+				);
 				INFOPLIST_FILE = "ofxiOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -473,6 +518,7 @@
 					../../../addons/ofxJSON/libs/jsoncpp/include/json,
 					../../../addons/ofxJSON/libs/jsoncpp/src,
 					../../../addons/ofxJSON/src,
+					../../../addons/ofxRange/src,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
@@ -512,6 +558,7 @@
 					../../../addons/ofxJSON/libs/jsoncpp/include/json,
 					../../../addons/ofxJSON/libs/jsoncpp/src,
 					../../../addons/ofxJSON/src,
+					../../../addons/ofxRange/src,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
