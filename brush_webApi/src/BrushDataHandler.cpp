@@ -63,11 +63,11 @@ void BrushDataHandler::createData( ofxJSONElement & elem){
     const Json::Value& sessions = elem["sessions"];
     int size = sessions.size();
     data.clear();
-    data.assign(size, BrushSession());
+    data.assign(size, BrushData());
     
     for (Json::ArrayIndex i=0; i<size; ++i){
         
-        BrushSession & b = data[i];
+        BrushData & b = data[i];
         
         // ISO 8601 extended format
         // "timeEnd" : "2017-10-13T17:38:40.000+02:00"
@@ -77,13 +77,15 @@ void BrushDataHandler::createData( ofxJSONElement & elem){
         string end_s  = sessions[i]["timeEnd"].asString().substr(0, 19);
 
         // Get std::tm
-        strptime(start_s.c_str(), "%Y-%m-%dT%H:%M:%S", &start);
-        strptime(end_s.c_str(), "%Y-%m-%dT%H:%M:%S", &end);
+        strptime(start_s.c_str(), "%Y-%m-%dT%H:%M:%S", &b.start);
+        strptime(end_s.c_str(), "%Y-%m-%dT%H:%M:%S", &b.end);
         
         b.duration      = sessions[i]["brushingDuration"].asInt();
         b.pressureCount = sessions[i]["pressureCount"].asInt();
         b.pressureTime  = sessions[i]["pressureTime"].asInt();
     }
+    
+    ofLogNotice("BrushDataHandler") << "created " << data.size() << " sesion data";
 }
 
 void BrushDataHandler::launchedWithURL(string url){
@@ -115,9 +117,7 @@ local_date_time BrushDataHandler::get_ldt(string s){
         boost::local_time::local_time_input_facet* ifc= new boost::local_time::local_time_input_facet("%Y-%m-%dT%H:%M:%S%F%Q");
         ifc->set_iso_extended_format();
         ss.imbue(std::locale(ss.getloc(), ifc));
-        
-        if(ss >> ldt) {
-        }
+        ss >> ldt;
     }
     catch( std::exception const& e )
     {
