@@ -10,17 +10,17 @@ using namespace boost::gregorian;
 using namespace boost::local_time;
 using namespace boost::posix_time;
 
-class BrushSession{
+class BrushData{
     
 public:
-    BrushSession(){};
+    BrushData(){};
     int brushingDuration;
     int pressureCount;
     int pressureTime;
     int duration;
 
-    local_date_time timeStart = local_date_time(not_a_date_time);
-    local_date_time timeEnd   = local_date_time(not_a_date_time);
+    std::tm start;
+    std::tm end;
     
 };
 
@@ -30,9 +30,10 @@ public:
     BrushDataHandler(){};
     void getDataFromServer();
     void getDummyData(string path);
-    void createSessionData(ofxJSONElement & elem);
+    void createData(ofxJSONElement & elem);
     void launchedWithURL(string url);
     ofxJSONElement request(ofHttpRequest & req);
+    local_date_time get_ldt(string ss);
 
     string requestBearer(string appId, string appKey);
     string requestAuthUrl(string bearer);
@@ -43,8 +44,8 @@ public:
     string bear = "n.a";
     string authUrl = "n.a";
     string userToken = "n.a";
-    vector<BrushSession> sessionData;
+    
+    vector<BrushData> data;
 
-    local_date_time get_ldt(string ss);
 };
 

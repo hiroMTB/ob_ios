@@ -10,7 +10,7 @@ void BrushDataHandler::getDummyData(string path){
     if (parsingSuccessful){
         ofLogNotice("BrushDataHandler") << "parse JSON file : OK";
         //cout << result.getRawString() << endl;
-        createSessionData(result);
+        createData(result);
     }else{
         ofLogError("BrushDataHandler")  << "parse JSON file : ERROR";
     }
@@ -58,32 +58,27 @@ string BrushDataHandler::requestAuthUrl(string bearer){
     return json["url"].asString();
 }
 
-void BrushDataHandler::createSessionData( ofxJSONElement & elem){
+void BrushDataHandler::createData( ofxJSONElement & elem){
     
     const Json::Value& sessions = elem["sessions"];
     int size = sessions.size();
-    sessionData.clear();
-    sessionData.assign(size, BrushSession());
+    data.clear();
+    data.assign(size, BrushSession());
     
     for (Json::ArrayIndex i=0; i<size; ++i){
         
-        BrushSession & b = sessionData[i];
+        BrushSession & b = data[i];
         
         // ISO 8601 extended format
         // "timeEnd" : "2017-10-13T17:38:40.000+02:00"
         
         // Get std::string
-        string st   = sessions[i]["timeStart"].asString();  //.substr(0, 19);
-        string end  = sessions[i]["timeEnd"].asString();    //.substr(0, 19);
+        string start_s   = sessions[i]["timeStart"].asString().substr(0, 19);
+        string end_s  = sessions[i]["timeEnd"].asString().substr(0, 19);
 
-        // Get local_date_time
-        b.timeStart = get_ldt(st);
-        b.timeEnd   = get_ldt(end);
-        
-        cout << "local_time() " << b.timeStart.local_time() << endl;
-        cout << "utc_time()" << b.timeStart.utc_time() << endl;
-        cout << "zone() " << b.timeStart.zone_name() << endl;
-        cout << endl;
+        // Get std::tm
+        strptime(start_s.c_str(), "%Y-%m-%dT%H:%M:%S", &start);
+        strptime(end_s.c_str(), "%Y-%m-%dT%H:%M:%S", &end);
         
         b.duration      = sessions[i]["brushingDuration"].asInt();
         b.pressureCount = sessions[i]["pressureCount"].asInt();
@@ -106,9 +101,10 @@ void BrushDataHandler::launchedWithURL(string url){
     req.headers["Authorization"] = "Bearer " + bear;
     req.name = "Request Session data";
     ofxJSONElement json = request(req);
-    createSessionData(json);
+    createData(json);
     cout << json.getRawString() << endl;
 }
+
 
 local_date_time BrushDataHandler::get_ldt(string s){
     local_date_time ldt(not_a_date_time);
