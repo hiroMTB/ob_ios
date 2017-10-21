@@ -15,5 +15,5 @@ int main() {
     
     ofCreateWindow(settings);
     
-	return ofRunApp(new ofApp);
+    return ofRunApp(&ofApp::get());
 }
