@@ -14,14 +14,16 @@ class BrushData{
     
 public:
     BrushData(){};
-    int brushingDuration;
     int pressureCount;
     int pressureTime;
     int duration;
 
     std::tm start;
     std::tm end;
-    
+  
+    void print(){
+        // cout << start << " - " << end << ", dur " << duration << ", pcnt " << pressureCount << ", pressureTIme " << pressureTIme << '\n';
+    }
 };
 
 class BrushDataHandler : public ofxiOSAlertsListener{
