@@ -529,6 +529,22 @@
          "timeStart" : "2017-05-03T10:12:35.000+02:00"
       },
       {
+         "brushingDuration" : 99,
+         "createDate" : "2017-10-22T16:23:13.942+00:00",
+         "handleId" : 122931,
+         "handleSessionId" : 3,
+         "hidden" : false,
+         "id" : 3041955,
+         "index" : 0,
+         "preferredBrushMode" : 0,
+         "pressureCount" : 0,
+         "pressureTime" : 0,
+         "sessionId" : 3041955,
+         "source" : 0,
+         "timeEnd" : "2017-09-28T21:53:22.000+02:00",
+         "timeStart" : "2017-09-28T21:51:43.000+02:00"
+      },
+      {
          "brushingDuration" : 41,
          "createDate" : "2017-10-15T22:56:04.801+00:00",
          "handleId" : 10824,
@@ -575,6 +591,70 @@
          "source" : 0,
          "timeEnd" : "2017-10-15T14:37:32.000+02:00",
          "timeStart" : "2017-10-15T14:36:22.000+02:00"
+      },
+      {
+         "brushingDuration" : 140,
+         "createDate" : "2017-10-22T16:23:13.942+00:00",
+         "handleId" : 32409,
+         "handleSessionId" : 74,
+         "hidden" : false,
+         "id" : 3041954,
+         "index" : 0,
+         "preferredBrushMode" : 0,
+         "pressureCount" : 0,
+         "pressureTime" : 0,
+         "sessionId" : 3041954,
+         "source" : 0,
+         "timeEnd" : "2017-10-16T20:16:30.000+02:00",
+         "timeStart" : "2017-10-16T20:14:10.000+02:00"
+      },
+      {
+         "brushingDuration" : 72,
+         "createDate" : "2017-10-22T16:23:13.942+00:00",
+         "handleId" : 32409,
+         "handleSessionId" : 75,
+         "hidden" : false,
+         "id" : 3041953,
+         "index" : 0,
+         "preferredBrushMode" : 0,
+         "pressureCount" : 0,
+         "pressureTime" : 0,
+         "sessionId" : 3041953,
+         "source" : 0,
+         "timeEnd" : "2017-10-17T10:25:52.000+02:00",
+         "timeStart" : "2017-10-17T10:24:40.000+02:00"
+      },
+      {
+         "brushingDuration" : 85,
+         "createDate" : "2017-10-22T16:23:13.942+00:00",
+         "handleId" : 32409,
+         "handleSessionId" : 76,
+         "hidden" : false,
+         "id" : 3041952,
+         "index" : 0,
+         "preferredBrushMode" : 0,
+         "pressureCount" : 0,
+         "pressureTime" : 0,
+         "sessionId" : 3041952,
+         "source" : 0,
+         "timeEnd" : "2017-10-17T17:55:56.000+02:00",
+         "timeStart" : "2017-10-17T17:54:31.000+02:00"
+      },
+      {
+         "brushingDuration" : 110,
+         "createDate" : "2017-10-22T16:23:13.942+00:00",
+         "handleId" : 32409,
+         "handleSessionId" : 77,
+         "hidden" : false,
+         "id" : 3041951,
+         "index" : 0,
+         "preferredBrushMode" : 0,
+         "pressureCount" : 0,
+         "pressureTime" : 0,
+         "sessionId" : 3041951,
+         "source" : 0,
+         "timeEnd" : "2017-10-20T12:59:46.000+02:00",
+         "timeStart" : "2017-10-20T12:57:56.000+02:00"
       }
    ]
 }
