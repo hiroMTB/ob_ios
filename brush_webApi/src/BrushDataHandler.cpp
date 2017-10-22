@@ -14,6 +14,8 @@ void BrushDataHandler::getDummyData(string path){
     }else{
         ofLogError("BrushDataHandler")  << "parse JSON file : ERROR";
     }
+    
+    ofLogNotice("dummy data") << result.getRawString();
 }
 
 void BrushDataHandler::getDataFromServer(){
@@ -79,14 +81,22 @@ void BrushDataHandler::createData( ofxJSONElement & elem){
         // ISO 8601 extended format
         // "timeEnd" : "2017-10-13T17:38:40.000+02:00"
         
-        // Get std::string
-        string start_s   = sessions[i]["timeStart"].asString().substr(0, 19);
-        string end_s  = sessions[i]["timeEnd"].asString().substr(0, 19);
-
         // Get std::tm
-        strptime(start_s.c_str(), "%Y-%m-%dT%H:%M:%S", &b.start);
-        strptime(end_s.c_str(), "%Y-%m-%dT%H:%M:%S", &b.end);
-        
+
+        if(1){
+            string start_s   = sessions[i]["timeStart"].asString().substr(0, 19);
+            string end_s  = sessions[i]["timeEnd"].asString().substr(0, 19);
+            strptime(start_s.c_str(), "%Y-%m-%dT%H:%M:%S", &b.start);
+            strptime(end_s.c_str(), "%Y-%m-%dT%H:%M:%S", &b.end);
+        }else{
+            std::istringstream st (sessions[i]["timeStart"].asString().substr(0, 19));
+            std::istringstream end(sessions[i]["timeEnd"].asString().substr(0, 19));
+            st  >> std::get_time(&b.start, "%Y-%m-%dT%H:%M:%S");
+            end >> std::get_time(&b.end, "%Y-%m-%dT%H:%M:%S");
+        }
+        std::mktime(&b.start);
+        std::mktime(&b.end);
+
         b.duration      = sessions[i]["brushingDuration"].asInt();
         b.pressureCount = sessions[i]["pressureCount"].asInt();
         b.pressureTime  = sessions[i]["pressureTime"].asInt();
