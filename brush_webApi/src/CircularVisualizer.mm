@@ -1,6 +1,7 @@
 #include "CircularVisualizer.h"
 #include "ofApp.h"
 #include "BrushDataHandler.h"
+#include "BrushColor.h"
 #include "ofRange.h"
 
 CircularVisualizer::CircularVisualizer(){
@@ -21,7 +22,7 @@ void CircularVisualizer::draw_hour(float x, float y, float radius){
         float end   = s.end.tm_min + s.end.tm_sec/60.0f;
         float startDeg = start/60.0f * 360.0f - 90.0f;
         float endDeg = end/60.0f * 360.0f - 90.0f;
-        float thickness = MAX(radius*0.01f, 3);
+        float thickness = MAX(radius*0.01f, 4);
     
         ofRange range(startDeg, endDeg);
         int intersect = 0;
@@ -32,13 +33,13 @@ void CircularVisualizer::draw_hour(float x, float y, float radius){
                 }
             }
         }
-        float r = radius+(thickness+2)*intersect;
+        float r = radius+(thickness+5)*intersect;
         ofPath arc;
         arc.arc(x, y, r, r, startDeg, endDeg);
         arc.arcNegative(x, y, r+thickness, r+thickness, endDeg, startDeg);
         arc.close();
         arc.setCircleResolution(360);
-        arc.setColor(ofFloatColor(1,1,1,0.7));
+        arc.setColor(ob::color::hour);
         arc.draw();
         
         ranges.push_back(range);
@@ -54,12 +55,16 @@ void CircularVisualizer::draw_day(float x, float y, float radius){
         float start = s.start.tm_hour + s.start.tm_min/60.0f;
         float startDeg = start/24.0f * 360.0f -90.0f;
         float startRad = ofDegToRad(startDeg);
-        float posx = x + radius * sin(startRad);
-        float posy = y + radius * cos(startRad);
 
-        ofSetLineWidth(1);
-        ofSetColor(ofFloatColor(1,1,1,0.7));
-        ofDrawCircle(posx, posy, 3);
+        float posx = x + radius * cos(startRad);
+        float posy = y + radius * sin(startRad);
+
+        float duration = s.duration;
+        float size = ofGetWidth()*0.01f * duration/120.0f;
+
+        ofFill();
+        ofSetColor(ob::color::day);
+        ofDrawCircle(posx, posy, size);
     }
 }
 
@@ -75,13 +80,15 @@ void CircularVisualizer::draw_week(float x, float y, float radius){
         float startDeg = wday/7.0f * 360.0f - 90.0;
         float startRad = ofDegToRad(startDeg);
 
-        float size = 3.0f;
-        float r = radius + (size+2) * wdayCnt[wday];
-        float posx = x + r * sin(startRad);
-        float posy = y + r * cos(startRad);
+        float gap = 3;
+        float r = radius + (gap+2) * wdayCnt[wday];
+        float posx = x + r * cos(startRad);
+        float posy = y + r * sin(startRad);
 
-        ofSetLineWidth(1);
-        ofSetColor(ofFloatColor(1,1,1,0.7));
+        float duration = s.duration;
+        float size = ofGetWidth()*0.01f * duration/120.0f;
+        ofFill();
+        ofSetColor(ob::color::week);
         ofDrawCircle(posx, posy, size);
         wdayCnt[wday]++;
     }
@@ -98,13 +105,16 @@ void CircularVisualizer::draw_month(float x, float y, float radius){
         int mday = s.start.tm_mday - 1;
         float startDeg = mday/31.0f * 360.0f - 90.0;
         float startRad = ofDegToRad(startDeg);
-        float size = 3.0f;
-        float r = radius + (size+2) * mdayCnt[mday];
-        float posx = x + r * sin(startRad);
-        float posy = y + r * cos(startRad);
+        float gap = 3.0f;
+        float r = radius + (gap+2) * mdayCnt[mday];
+        float posx = x + r * cos(startRad);
+        float posy = y + r * sin(startRad);
         
-        ofSetLineWidth(1);
-        ofSetColor(ofFloatColor(1,1,1,0.7));
+        float duration = s.duration;
+        float size = ofGetWidth()*0.01f * duration/120.0f;
+        
+        ofFill();
+        ofSetColor(ob::color::month);
         ofDrawCircle(posx, posy, size);
         mdayCnt[mday]++;
     }
@@ -121,13 +131,16 @@ void CircularVisualizer::draw_year(float x, float y, float radius){
         int yday = s.start.tm_yday;
         float startDeg = yday/365.0f*360.0f - 90.0;
         float startRad = ofDegToRad(startDeg);
-        float size = 3.0f;
-        float r = radius + (size+2) * ydayCnt[yday];
-        float posx = x + r * sin(startRad);
-        float posy = y + r * cos(startRad);
+        float gap = 3.0f;
+        float r = radius + (gap+2) * ydayCnt[yday];
+        float posx = x + r * cos(startRad);
+        float posy = y + r * sin(startRad);
         
-        ofSetLineWidth(1);
-        ofSetColor(ofFloatColor(1,1,1,0.7));
+        float duration = s.duration;
+        float size = ofGetWidth()*0.01f * duration/120.0f;
+        
+        ofFill();
+        ofSetColor(ob::color::year);
         ofDrawCircle(posx, posy, size);
         ydayCnt[yday]++;
     }
