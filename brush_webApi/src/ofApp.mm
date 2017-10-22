@@ -17,12 +17,16 @@ void ofApp::setup(){
 
 void ofApp::draw(){
     ofBackground(0);
+    
+    float x = ofGetWidth()/2;
+    float y = ofGetHeight()/2;
+    float rad = ofGetWidth()/2;
+    
     ofPushMatrix();{
-        float rad = ofGetWidth()/2;
-        viz.draw_hour   (ofGetWidth()/2, ofGetHeight()/2, rad * 0.1);
-        viz.draw_day    (ofGetWidth()/2, ofGetHeight()/2, rad * 0.2);
-        viz.draw_week   (ofGetWidth()/2, ofGetHeight()/2, rad * 0.4);
-        viz.draw_month  (ofGetWidth()/2, ofGetHeight()/2, rad * 0.6);
-        viz.draw_year   (ofGetWidth()/2, ofGetHeight()/2, rad * 0.8);
+        viz.draw_hour   (x, y, rad * 0.80);
+        viz.draw_day    (x, y, rad * 0.82);
+        viz.draw_week   (x, y, rad * 0.84);
+        viz.draw_month  (x, y, rad * 0.86);
+        viz.draw_year   (x, y, rad * 0.88);
     }ofPopMatrix();
 }

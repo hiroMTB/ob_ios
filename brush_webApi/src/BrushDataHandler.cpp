@@ -17,6 +17,8 @@ void BrushDataHandler::getDummyData(string path){
 }
 
 void BrushDataHandler::getDataFromServer(){
+    ofLogNotice("BrushDataHandler") << "Loading from server";
+
     ofxiOSAlerts.addListener(this);
     bear = requestBearer(appId, appKey);
     authUrl = requestAuthUrl(bear);
@@ -45,7 +47,11 @@ string BrushDataHandler::requestBearer(string appId, string appKey){
     req.url = baseurl + "/bearertoken/" + appId + "?key=" + appKey;
     req.name = "Request Bearertoken";
     ofxJSONElement json = request(req);
-    return json["bearerToken"].asString();;
+    
+    string bear = json["bearerToken"].asString();
+    ofLogNotice("BrushDataHandler") << "got bearer " << bear;
+    
+    return bear;
 }
 
 string BrushDataHandler::requestAuthUrl(string bearer){
@@ -54,8 +60,9 @@ string BrushDataHandler::requestAuthUrl(string bearer){
     req.headers["Authorization"] = "Bearer " + bearer;
     req.name = "Request Authorize";
     ofxJSONElement json = request(req);
-    
-    return json["url"].asString();
+    string url = json["url"].asString();
+    ofLogNotice("BrushDataHandler") << "got authURL " << url;
+    return url;
 }
 
 void BrushDataHandler::createData( ofxJSONElement & elem){
@@ -103,8 +110,9 @@ void BrushDataHandler::launchedWithURL(string url){
     req.headers["Authorization"] = "Bearer " + bear;
     req.name = "Request Session data";
     ofxJSONElement json = request(req);
-    createData(json);
     cout << json.getRawString() << endl;
+
+    createData(json);
 }
 
 
