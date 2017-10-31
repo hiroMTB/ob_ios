@@ -8,32 +8,60 @@ CircularVisualizer::CircularVisualizer(){
     
 }
 
-void CircularVisualizer::draw_hour(float x, float y, float radius){
-    const ofApp & app = ofApp::get();
-    const BrushDataHandler & bd = app.handler;
-    const vector<BrushData> & data = bd.data;
+void CircularVisualizer::create(){
+    ofApp & app = ofApp::get();
+    vector<BrushData> & data = app.data;
     
     vector<ofRange> ranges;
     
     for(int i=0; i<data.size(); i++){
         
-        const BrushData & s = data[i];
-        float start = s.start.tm_min + s.start.tm_sec/60.0f;
-        float end   = s.end.tm_min + s.end.tm_sec/60.0f;
-        float startDeg = start/60.0f * 360.0f - 90.0f;
-        float endDeg = end/60.0f * 360.0f - 90.0f;
-        float thickness = MAX(radius*0.01f, 4);
-    
-        ofRange range(startDeg, endDeg);
-        int intersect = 0;
-        if(range.span() < 5.0f/60.0f*360.0f){
-            for(int j=0; j<ranges.size(); j++){
-                if(ranges[j].intersects(range)){
-                    intersect++;
+        BrushData & s = data[i];
+        
+        {
+            // Hour
+            float start = s.start.tm_min + s.start.tm_sec/60.0f;
+            float end   = s.end.tm_min + s.end.tm_sec/60.0f;
+            float startDeg = start/60.0f * 360.0f - 90.0f;
+            float endDeg = end/60.0f * 360.0f - 90.0f;
+            
+            ofRange range(startDeg, endDeg);
+            int intersect = 0;
+            if(range.span() < 5.0f/60.0f*360.0f){
+                for(int j=0; j<ranges.size(); j++){
+                    if(ranges[j].intersects(range)){
+                        intersect++;
+                    }
                 }
             }
+            
+            s.aHour.x = startDeg;
+            s.aHour.y = endDeg;
+            ranges.push_back(range);
         }
+        
+        {
+            //
+        }
+        
+    }
+}
+
+void CircularVisualizer::draw_hour(float x, float y, float radius){
+    ofApp & app = ofApp::get();
+    vector<BrushData> & data = app.data;
+    
+    for(int i=0; i<data.size(); i++){
+        
+        const BrushData & s = data[i];
+        float startDeg = s.aHour.x;
+        float endDeg = s.aHour.y;
+        float thickness = MAX(radius*0.01f, 4);
+
+        //
+        float intersect = 1;
         float r = radius+(thickness+5)*intersect;
+        
         ofPath arc;
         arc.arc(x, y, r, r, startDeg, endDeg);
         arc.arcNegative(x, y, r+thickness, r+thickness, endDeg, startDeg);
@@ -41,15 +69,12 @@ void CircularVisualizer::draw_hour(float x, float y, float radius){
         arc.setCircleResolution(360);
         arc.setColor(ob::color::hour);
         arc.draw();
-        
-        ranges.push_back(range);
     }
 }
 
 void CircularVisualizer::draw_day(float x, float y, float radius){
-    const ofApp & app = ofApp::get();
-    const BrushDataHandler & bd = app.handler;
-    const vector<BrushData> & data = bd.data;
+    ofApp & app = ofApp::get();
+    vector<BrushData> & data = app.data;
     for(int i=0; i<data.size(); i++){
         const BrushData & s = data[i];
         float start = s.start.tm_hour + s.start.tm_min/60.0f;
@@ -69,9 +94,8 @@ void CircularVisualizer::draw_day(float x, float y, float radius){
 }
 
 void CircularVisualizer::draw_week(float x, float y, float radius){
-    const ofApp & app = ofApp::get();
-    const BrushDataHandler & bd = app.handler;
-    const vector<BrushData> & data = bd.data;
+    ofApp & app = ofApp::get();
+    vector<BrushData> & data = app.data;
     vector<int> wdayCnt;
     wdayCnt.assign(7, 0);
     for(int i=0; i<data.size(); i++){
@@ -95,9 +119,8 @@ void CircularVisualizer::draw_week(float x, float y, float radius){
 }
 
 void CircularVisualizer::draw_month(float x, float y, float radius){
-    const ofApp & app = ofApp::get();
-    const BrushDataHandler & bd = app.handler;
-    const vector<BrushData> & data = bd.data;
+    ofApp & app = ofApp::get();
+    vector<BrushData> & data = app.data;
     vector<int> mdayCnt;
     mdayCnt.assign(31, 0);
     for(int i=0; i<data.size(); i++){
@@ -121,9 +144,8 @@ void CircularVisualizer::draw_month(float x, float y, float radius){
 }
 
 void CircularVisualizer::draw_year(float x, float y, float radius){
-    const ofApp & app = ofApp::get();
-    const BrushDataHandler & bd = app.handler;
-    const vector<BrushData> & data = bd.data;
+    ofApp & app = ofApp::get();
+    vector<BrushData> & data = app.data;
     vector<int> ydayCnt;
     ydayCnt.assign(365, 0);
     for(int i=0; i<data.size(); i++){

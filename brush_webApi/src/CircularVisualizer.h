@@ -1,11 +1,14 @@
 #pragma once
 
+#include "ofMain.h"
+
 class CircularVisualizer{
     
 public:
     
     CircularVisualizer();
-    
+  
+    void create();
     void draw_hour(float x, float y, float radius);
     void draw_day(float x, float y, float radius);
     void draw_week(float x, float y, float radius);
