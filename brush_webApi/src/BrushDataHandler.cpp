@@ -1,109 +1,51 @@
 #include "BrushDataHandler.h"
-
-void BrushDataHandler::getDummyData(string path){
-
-    ofLogNotice("BrushDataHandler") << "Loading Dummy file";
-    
-    ofxJSONElement result;
-    bool parsingSuccessful = result.open(path);
-    
-    if (parsingSuccessful){
-        ofLogNotice("BrushDataHandler") << "parse JSON file : OK";
-        //cout << result.getRawString() << endl;
-        createData(result);
-    }else{
-        ofLogError("BrushDataHandler")  << "parse JSON file : ERROR";
-    }
-    
-    ofLogNotice("dummy data") << result.getRawString();
-}
+#include "ofMain.h"
 
 void BrushDataHandler::getDataFromServer(){
     ofLogNotice("BrushDataHandler") << "Loading from server";
 
     ofxiOSAlerts.addListener(this);
-    bear = requestBearer(appId, appKey);
-    authUrl = requestAuthUrl(bear);
-    ofLaunchBrowser(authUrl);
+    ofRegisterURLNotification(this);
+    
+    requestBearer(appId, appKey);
 }
 
-ofxJSONElement BrushDataHandler::request(ofHttpRequest & req){
-    ofURLFileLoader loader;
-    ofHttpResponse response;
-    ofxJSONElement json;
+ofxJSONElement BrushDataHandler::getDataFromDummyFile(string path){
     
-    response = loader.handleRequest(req);
-    if(response.status != 200) {
-        ofLogError() << response.status << " : " << response.error;
-        return json;
+    ofLogNotice("BrushDataHandler") << "Loading Dummy file";
+    
+    ofxJSONElement json;
+    bool parsingSuccessful = json.open(path);
+    
+    if (parsingSuccessful){
+        ofLogNotice("BrushDataHandler") << "parse JSON file : OK";
+        //cout << result.getRawString() << endl;
+        //createData(result);
+    }else{
+        ofLogError("BrushDataHandler")  << "parse JSON file : ERROR";
     }
     
-    ofBuffer buf = response.data;
-    string raw = ofToString(buf);
-    bool ok = json.parse(raw);
+    ofLogNotice("dummy data") << json.getRawString();
     return json;
 }
 
-string BrushDataHandler::requestBearer(string appId, string appKey){
+void BrushDataHandler::requestBearer(string appId, string appKey){
+    ofLogNotice("BrushDataHandler") << "Request bearer";
     ofHttpRequest req;
     req.url = baseurl + "/bearertoken/" + appId + "?key=" + appKey;
-    req.name = "Request Bearertoken";
-    ofxJSONElement json = request(req);
-    
-    string bear = json["bearerToken"].asString();
-    ofLogNotice("BrushDataHandler") << "got bearer " << bear;
-    
-    return bear;
+    req.name = "bear";
+    loader.handleRequestAsync(req);
 }
 
-string BrushDataHandler::requestAuthUrl(string bearer){
+void BrushDataHandler::requestAuthUrl(string bearer){
+    ofLogNotice("BrushDataHandler") << "Request Auth";
     ofHttpRequest req;
     req.url = baseurl + "/authorize";
     req.headers["Authorization"] = "Bearer " + bearer;
-    req.name = "Request Authorize";
-    ofxJSONElement json = request(req);
-    string url = json["url"].asString();
-    ofLogNotice("BrushDataHandler") << "got authURL " << url;
-    return url;
+    req.name = "auth";
+    loader.handleRequestAsync(req);
 }
 
-void BrushDataHandler::createData( ofxJSONElement & elem){
-    
-    const Json::Value& sessions = elem["sessions"];
-    int size = sessions.size();
-    data.clear();
-    data.assign(size, BrushData());
-    
-    for (Json::ArrayIndex i=0; i<size; ++i){
-        
-        BrushData & b = data[i];
-        
-        // ISO 8601 extended format
-        // "timeEnd" : "2017-10-13T17:38:40.000+02:00"
-        
-        // Get std::tm
-
-        if(1){
-            string start_s   = sessions[i]["timeStart"].asString().substr(0, 19);
-            string end_s  = sessions[i]["timeEnd"].asString().substr(0, 19);
-            strptime(start_s.c_str(), "%Y-%m-%dT%H:%M:%S", &b.start);
-            strptime(end_s.c_str(), "%Y-%m-%dT%H:%M:%S", &b.end);
-        }else{
-            std::istringstream st (sessions[i]["timeStart"].asString().substr(0, 19));
-            std::istringstream end(sessions[i]["timeEnd"].asString().substr(0, 19));
-            st  >> std::get_time(&b.start, "%Y-%m-%dT%H:%M:%S");
-            end >> std::get_time(&b.end, "%Y-%m-%dT%H:%M:%S");
-        }
-        std::mktime(&b.start);
-        std::mktime(&b.end);
-
-        b.duration      = sessions[i]["brushingDuration"].asInt();
-        b.pressureCount = sessions[i]["pressureCount"].asInt();
-        b.pressureTime  = sessions[i]["pressureTime"].asInt();
-    }
-    
-    ofLogNotice("BrushDataHandler") << "created " << data.size() << " sesion data";
-}
 
 void BrushDataHandler::launchedWithURL(string url){
     cout << "launchedWithURL : " << url << endl;
@@ -118,13 +60,10 @@ void BrushDataHandler::launchedWithURL(string url){
     req.url = baseurl + "/sessions?from=2015-02-20T12:40:45.327-07:00";
     req.headers["X-User-Token"] = userToken;
     req.headers["Authorization"] = "Bearer " + bear;
-    req.name = "Request Session data";
-    ofxJSONElement json = request(req);
-    cout << json.getRawString() << endl;
-
-    createData(json);
+    req.name = "session data";
+    loader.handleRequestAsync(req);
+    ofLogNotice("BrushDataHandler") << "Request Session Data";
 }
-
 
 local_date_time BrushDataHandler::get_ldt(string s){
     local_date_time ldt(not_a_date_time);
@@ -143,4 +82,37 @@ local_date_time BrushDataHandler::get_ldt(string s){
     }
  
     return ldt;
+}
+
+void BrushDataHandler::urlResponse(ofHttpResponse & response){
+
+    string name = response.request.name;
+    int status = response.status;
+
+    if(response.status==200){
+        ofxJSONElement json;
+        ofBuffer buf = response.data;
+        string raw = ofToString(buf);
+        json.parse(raw);
+        
+        if(name == "bear"){
+            bear = json["bearerToken"].asString();
+            ofLogNotice("BrushDataHandler") << "got bearer " << bear;
+            requestAuthUrl(bear);
+        }else if(name == "auth"){
+            authUrl = json["url"].asString();
+            ofLogNotice("BrushDataHandler") << "got authURL " << authUrl;
+            ofLaunchBrowser(authUrl);
+        }else if(name == "session data"){
+            //createData(json);
+        }
+    }else{
+        cout << status << " " << response.error << " for request " << name << endl;
+        if(status!=-1){}
+    }
+}
+
+BrushDataHandler::~BrushDataHandler(){
+    ofxiOSAlerts.removeListener(this);
+    ofUnregisterURLNotification(this);
 }

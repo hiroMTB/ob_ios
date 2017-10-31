@@ -4,41 +4,32 @@
 #include "ofxJSON.h"
 #include "ofxiOSAlerts.h"
 #include "boost/date_time.hpp"
+#include "BrushData.h"
 
 using namespace boost::date_time;
 using namespace boost::gregorian;
 using namespace boost::local_time;
 using namespace boost::posix_time;
 
-class BrushData{
-    
-public:
-    BrushData(){};
-    int pressureCount;
-    int pressureTime;
-    int duration;
-
-    std::tm start;
-    std::tm end;
-  
-    void print(){
-        // cout << start << " - " << end << ", dur " << duration << ", pcnt " << pressureCount << ", pressureTIme " << pressureTIme << '\n';
-    }
-};
-
 class BrushDataHandler : public ofxiOSAlertsListener{
 
 public:
     BrushDataHandler(){};
+    ~BrushDataHandler();
+
     void getDataFromServer();
-    void getDummyData(string path);
-    void createData(ofxJSONElement & elem);
-    void launchedWithURL(string url);
-    ofxJSONElement request(ofHttpRequest & req);
+    ofxJSONElement getDataFromDummyFile(string path);
+    void createData(ofxJSONElement & elem, vector<BrushData> & data);
+    
+    void urlResponse(ofHttpResponse & response);    // oF callback
+    void launchedWithURL(string url);               // iOS callback
+    
     local_date_time get_ldt(string ss);
 
-    string requestBearer(string appId, string appKey);
-    string requestAuthUrl(string bearer);
+    void requestBearer(string appId, string appKey);
+    void requestAuthUrl(string bearer);
+
+    ofURLFileLoader loader;
 
     string baseurl = "https://api.developer.oralb.com/v1";
     string appId = "fac078cd-1cf0-4e04-82ab-385a98359d09";
@@ -47,7 +38,5 @@ public:
     string authUrl = "n.a";
     string userToken = "n.a";
     
-    vector<BrushData> data;
-
 };
 
