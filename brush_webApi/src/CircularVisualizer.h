@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "BrushData.h"
 
 class CircularVisualizer{
     
@@ -8,7 +9,7 @@ public:
     
     CircularVisualizer();
   
-    void create();
+    void composePlotData(vector<BrushData> & data);
     void draw_hour(float x, float y, float radius);
     void draw_day(float x, float y, float radius);
     void draw_week(float x, float y, float radius);

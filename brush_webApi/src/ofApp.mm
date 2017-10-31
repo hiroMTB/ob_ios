@@ -9,8 +9,9 @@ void ofApp::setup(){
     ofLogNotice("setup") << "width : " << ofGetWidth() << ", height : " << ofGetHeight();
 
 #ifdef USE_DUMMY_DATA
-    handler.getDataFromDummyFile("sessionExample.json");
+    ofxJSONElement json = handler.getDataFromDummyFile("sessionExample.json");
     BrushData::createData(json, data);
+    viz.composePlotData(data);
 #else
     ofRegisterURLNotification(this);
     handler.getDataFromServer();
@@ -30,9 +31,9 @@ void ofApp::draw(){
     ofPushMatrix();{
         viz.draw_hour   (x, y, rad * 0.2);
         viz.draw_day    (x, y, rad * 0.4);
-        viz.draw_week   (x, y, rad * 0.5);
-        viz.draw_month  (x, y, rad * 0.6);
-        viz.draw_year   (x, y, rad * 0.7);
+//        viz.draw_week   (x, y, rad * 0.5);
+//        viz.draw_month  (x, y, rad * 0.6);
+//        viz.draw_year   (x, y, rad * 0.7);
     }ofPopMatrix();
 }
 
@@ -47,7 +48,7 @@ void ofApp::urlResponse(ofHttpResponse & response){
         
         if(name == "session data"){
             BrushData::createData(json, data);
-            viz.create();
+            viz.composePlotData(data);
         }
     }
 }

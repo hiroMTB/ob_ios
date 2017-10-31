@@ -1,6 +1,5 @@
 #include "CircularVisualizer.h"
 #include "ofApp.h"
-#include "BrushDataHandler.h"
 #include "BrushColor.h"
 #include "ofRange.h"
 
@@ -8,9 +7,7 @@ CircularVisualizer::CircularVisualizer(){
     
 }
 
-void CircularVisualizer::create(){
-    ofApp & app = ofApp::get();
-    vector<BrushData> & data = app.data;
+void CircularVisualizer::composePlotData(vector<BrushData> & data){
     
     vector<ofRange> ranges;
     
@@ -35,13 +32,35 @@ void CircularVisualizer::create(){
                 }
             }
             
-            s.aHour.x = startDeg;
-            s.aHour.y = endDeg;
+            PlotData & p = s.pHour;
+            p.radius     = 0.3 * ofGetWidth()/2;
+            p.size       = MAX(p.radius*0.01f, 4);  // thickness
+            p.stAngle    = startDeg;
+            p.endAngle   = endDeg;
+            p.stPos.x    = p.radius * cos(ofDegToRad(p.stAngle));
+            p.stPos.y    = p.radius * sin(ofDegToRad(p.stAngle));
+            p.endPos.x   = p.radius * cos(ofDegToRad(p.endAngle));
+            p.endPos.y   = p.radius * sin(ofDegToRad(p.endAngle));
+            p.level      = intersect;
+            p.color      = ob::color::hour;
             ranges.push_back(range);
         }
         
         {
-            //
+            // day
+            PlotData & p = s.pDay;
+            p.radius = 0.5 * ofGetWidth()/2;
+            float start = s.start.tm_hour + s.start.tm_min/60.0f;
+            p.stAngle   = p.endAngle = start/24.0f * 360.0f -90.0f;
+            p.stPos.x   = p.radius * cos(ofDegToRad(p.stAngle));
+            p.stPos.y   = p.radius * sin(ofDegToRad(p.stAngle));
+            p.size      = ofGetWidth()*0.01f * s.duration/120.0f;
+            p.color     = ob::color::day;
+        }
+        
+        {
+            // week
+            
         }
         
     }
@@ -54,41 +73,37 @@ void CircularVisualizer::draw_hour(float x, float y, float radius){
     for(int i=0; i<data.size(); i++){
         
         const BrushData & s = data[i];
-        float startDeg = s.aHour.x;
-        float endDeg = s.aHour.y;
-        float thickness = MAX(radius*0.01f, 4);
-
-        //
-        float intersect = 1;
-        float r = radius+(thickness+5)*intersect;
+        const PlotData & p = s.pHour;
+        float startDeg  = p.stAngle;
+        float endDeg    = p.endAngle;
+       
+        int intersect   = p.level;
+        float size      = p.size;
+        float r         = p.radius + (2+size)*intersect;
         
         ofPath arc;
         arc.arc(x, y, r, r, startDeg, endDeg);
-        arc.arcNegative(x, y, r+thickness, r+thickness, endDeg, startDeg);
+        arc.arcNegative(x, y, r+size, r+size, endDeg, startDeg);
         arc.close();
         arc.setCircleResolution(360);
-        arc.setColor(ob::color::hour);
+        arc.setColor(p.color);
         arc.draw();
     }
 }
 
-void CircularVisualizer::draw_day(float x, float y, float radius){
+void CircularVisualizer::draw_day(float x, float y, float scale){
     ofApp & app = ofApp::get();
     vector<BrushData> & data = app.data;
     for(int i=0; i<data.size(); i++){
         const BrushData & s = data[i];
-        float start = s.start.tm_hour + s.start.tm_min/60.0f;
-        float startDeg = start/24.0f * 360.0f -90.0f;
-        float startRad = ofDegToRad(startDeg);
+        const PlotData & p = s.pDay;
 
-        float posx = x + radius * cos(startRad);
-        float posy = y + radius * sin(startRad);
-
-        float duration = s.duration;
-        float size = ofGetWidth()*0.01f * duration/120.0f;
+        float posx = x + p.stPos.x;
+        float posy = y + p.stPos.y;
+        float size = p.size;
 
         ofFill();
-        ofSetColor(ob::color::day);
+        ofSetColor(p.color);
         ofDrawCircle(posx, posy, size);
     }
 }

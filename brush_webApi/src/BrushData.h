@@ -3,6 +3,23 @@
 #include "ofMain.h"
 #include "ofxJSON.h"
 
+class PlotData{
+    
+public:
+    PlotData(){}
+    
+    glm::vec2 stPos;
+    glm::vec2 endPos;
+    
+    float stAngle;
+    float endAngle;
+    float radius;    // dist from center
+    float size;           // circle size, arc thickness, etc
+    int level;            // override level
+    ofColor color;
+};
+
+
 class BrushData{
     
 public:
@@ -15,10 +32,11 @@ public:
     std::tm end;
     
     // x: start_deg, y: end_deg
-    glm::vec2 aHour;
-    glm::vec2 aDay;
-    glm::vec2 aWeek;
-    glm::vec2 aYear;
+    PlotData pHour;
+    PlotData pDay;
+    PlotData pWeek;
+    PlotData pMonth;
+    PlotData pYear;
 
     static void createData(ofxJSONElement & elem, vector<BrushData> & data);
     
