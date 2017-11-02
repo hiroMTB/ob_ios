@@ -13,12 +13,6 @@ public:
     
     std::tm start;
     std::tm end;
-    
-    // x: start_deg, y: end_deg
-    glm::vec2 aHour;
-    glm::vec2 aDay;
-    glm::vec2 aWeek;
-    glm::vec2 aYear;
 
     static void createData(ofxJSONElement & elem, vector<BrushData> & data);
     

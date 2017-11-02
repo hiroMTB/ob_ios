@@ -9,7 +9,7 @@ void ofApp::setup(){
     ofLogNotice("setup") << "width : " << ofGetWidth() << ", height : " << ofGetHeight();
 
 #ifdef USE_DUMMY_DATA
-    handler.getDataFromDummyFile("sessionExample.json");
+    ofxJSONElement json = handler.getDataFromDummyFile("sessionExample.json");
     BrushData::createData(json, data);
 #else
     ofRegisterURLNotification(this);
@@ -47,7 +47,6 @@ void ofApp::urlResponse(ofHttpResponse & response){
         
         if(name == "session data"){
             BrushData::createData(json, data);
-            viz.create();
         }
     }
 }
