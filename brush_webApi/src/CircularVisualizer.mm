@@ -15,58 +15,126 @@ void CircularVisualizer::composePlotData(vector<BrushData> & data){
         
         BrushData & s = data[i];
         
-        {
-            // Hour
-            float start = s.start.tm_min + s.start.tm_sec/60.0f;
-            float end   = s.end.tm_min + s.end.tm_sec/60.0f;
-            float startDeg = start/60.0f * 360.0f - 90.0f;
-            float endDeg = end/60.0f * 360.0f - 90.0f;
-            
-            ofRange range(startDeg, endDeg);
-            int intersect = 0;
-            if(range.span() < 5.0f/60.0f*360.0f){
-                for(int j=0; j<ranges.size(); j++){
-                    if(ranges[j].intersects(range)){
-                        intersect++;
-                    }
+        // Hour
+        float start = s.start.tm_min + s.start.tm_sec/60.0f;
+        float end   = s.end.tm_min + s.end.tm_sec/60.0f;
+        float startDeg = start/60.0f * 360.0f - 90.0f;
+        float endDeg = end/60.0f * 360.0f - 90.0f;
+        float startRad = ofDegToRad(startDeg);
+        float endRad = ofDegToRad(endDeg);
+        
+        ofRange range(startDeg, endDeg);
+        int intersect = 0;
+        if(range.span() < 5.0f/60.0f*360.0f){
+            for(int j=0; j<ranges.size(); j++){
+                if(ranges[j].intersects(range)){
+                    intersect++;
                 }
             }
-            
-            PlotData & p = s.pHour;
-            p.radius     = 0.3 * ofGetWidth()/2;
-            p.size       = MAX(p.radius*0.01f, 4);  // thickness
-            p.stAngle    = startDeg;
-            p.endAngle   = endDeg;
-            p.stPos.x    = p.radius * cos(ofDegToRad(p.stAngle));
-            p.stPos.y    = p.radius * sin(ofDegToRad(p.stAngle));
-            p.endPos.x   = p.radius * cos(ofDegToRad(p.endAngle));
-            p.endPos.y   = p.radius * sin(ofDegToRad(p.endAngle));
-            p.level      = intersect;
-            p.color      = ob::color::hour;
-            ranges.push_back(range);
         }
         
-        {
-            // day
-            PlotData & p = s.pDay;
-            p.radius = 0.5 * ofGetWidth()/2;
-            float start = s.start.tm_hour + s.start.tm_min/60.0f;
-            p.stAngle   = p.endAngle = start/24.0f * 360.0f -90.0f;
-            p.stPos.x   = p.radius * cos(ofDegToRad(p.stAngle));
-            p.stPos.y   = p.radius * sin(ofDegToRad(p.stAngle));
-            p.size      = ofGetWidth()*0.01f * s.duration/120.0f;
-            p.color     = ob::color::day;
-        }
+        PlotData & p = s.pHour;
+        p.radius     = 0.3 * ofGetWidth()/2;
+        p.size       = MAX(p.radius*0.01f, 4);  // thickness
+        p.stAngle    = startDeg;
+        p.endAngle   = endDeg;
+        p.stPos.x    = p.radius * cos(startRad);
+        p.stPos.y    = p.radius * sin(startRad);
+        p.endPos.x   = p.radius * cos(endRad);
+        p.endPos.y   = p.radius * sin(endRad);
+        p.level      = intersect;
+        p.color      = ob::color::hour;
+        ranges.push_back(range);
+    }
+    
+    for(int i=0; i<data.size(); i++){
         
-        {
-            // week
-            
-        }
+        BrushData & s = data[i];
         
+        // day
+        PlotData & p = s.pDay;
+        p.radius = 0.5 * ofGetWidth()/2;
+        float start = s.start.tm_hour + s.start.tm_min/60.0f;
+        p.stAngle   = p.endAngle = start/24.0f * 360.0f -90.0f;
+        p.stPos.x   = p.radius * cos(ofDegToRad(p.stAngle));
+        p.stPos.y   = p.radius * sin(ofDegToRad(p.stAngle));
+        p.size      = ofGetWidth()*0.005f * s.duration/120.0f;
+        p.color     = ob::color::day;
+    }
+
+    // week
+    vector<int> wdayCnt;
+    wdayCnt.assign(7, 0);
+
+    for(int i=0; i<data.size(); i++){
+        
+        BrushData & s = data[i];
+        PlotData & p = s.pWeek;
+        int wday = s.start.tm_wday;
+        float startDeg = wday/7.0f * 360.0f - 90.0;
+        float startRad = ofDegToRad(startDeg);
+        float gap = 3;
+        float baseRadius = 0.6 * ofGetWidth()/2;
+        p.level = wdayCnt[wday];
+        p.radius = baseRadius + (gap+2) * wdayCnt[wday];
+
+        p.stAngle   = p.endAngle = startDeg;
+        p.stPos.x   = p.radius * cos(startRad);
+        p.stPos.y   = p.radius * sin(startRad);
+        p.size      = ofGetWidth()*0.005f * s.duration/120.0f;
+        p.color     = ob::color::week;
+        p.size = ofGetWidth()*0.005f * s.duration/120.0f;
+        
+        wdayCnt[wday]++;
+    }
+    
+    
+    vector<int> mdayCnt;
+    mdayCnt.assign(31, 0);
+    for(int i=0; i<data.size(); i++){
+        
+        BrushData & s = data[i];
+        PlotData & p = s.pMonth;
+
+        int mday = s.start.tm_mday - 1;
+        float startDeg = mday/31.0f * 360.0f - 90.0;
+        float startRad = ofDegToRad(startDeg);
+        float gap = 3.0f;
+        float baseRadius = 0.7 * ofGetWidth()/2;
+        p.radius = baseRadius + (gap+2) * mdayCnt[mday];
+        
+        p.stAngle   = p.endAngle = startDeg;
+        p.stPos.x   = p.radius * cos(startRad);
+        p.stPos.y   = p.radius * sin(startRad);
+        p.size      = ofGetWidth()*0.005f * s.duration/120.0f;
+        p.color     = ob::color::month;
+        p.size = ofGetWidth()*0.005f * s.duration/120.0f;
+    }
+    
+    vector<int> ydayCnt;
+    ydayCnt.assign(365, 0);
+    for(int i=0; i<data.size(); i++){
+        
+        BrushData & s = data[i];
+        PlotData & p = s.pMonth;
+        
+        int yday = s.start.tm_yday;
+        float startDeg = yday/365.0f*360.0f - 90.0;
+        float startRad = ofDegToRad(startDeg);
+        float gap = 3.0f;
+        float baseRadius = 0.8 * ofGetWidth()/2;
+        p.radius = baseRadius + (gap+2) * ydayCnt[yday];
+        
+        p.stAngle   = p.endAngle = startDeg;
+        p.stPos.x   = p.radius * cos(startRad);
+        p.stPos.y   = p.radius * sin(startRad);
+        p.size      = ofGetWidth()*0.005f * s.duration/120.0f;
+        p.color     = ob::color::year;
+        p.size = ofGetWidth()*0.005f * s.duration/120.0f;
     }
 }
 
-void CircularVisualizer::draw_hour(float x, float y, float radius){
+void CircularVisualizer::draw_hour(float x, float y, float scale){
     ofApp & app = ofApp::get();
     vector<BrushData> & data = app.data;
     
@@ -108,77 +176,55 @@ void CircularVisualizer::draw_day(float x, float y, float scale){
     }
 }
 
-void CircularVisualizer::draw_week(float x, float y, float radius){
+void CircularVisualizer::draw_week(float x, float y, float scale){
     ofApp & app = ofApp::get();
     vector<BrushData> & data = app.data;
-    vector<int> wdayCnt;
-    wdayCnt.assign(7, 0);
     for(int i=0; i<data.size(); i++){
+
         const BrushData & s = data[i];
-        int wday = s.start.tm_wday;
-        float startDeg = wday/7.0f * 360.0f - 90.0;
-        float startRad = ofDegToRad(startDeg);
-
-        float gap = 3;
-        float r = radius + (gap+2) * wdayCnt[wday];
-        float posx = x + r * cos(startRad);
-        float posy = y + r * sin(startRad);
-
-        float duration = s.duration;
-        float size = ofGetWidth()*0.01f * duration/120.0f;
+        const PlotData & p = s.pWeek;
+        
+        float posx = x + p.stPos.x;
+        float posy = y + p.stPos.y;
+        float size = p.size;
+        
         ofFill();
-        ofSetColor(ob::color::week);
+        ofSetColor(p.color);
         ofDrawCircle(posx, posy, size);
-        wdayCnt[wday]++;
     }
 }
 
-void CircularVisualizer::draw_month(float x, float y, float radius){
+void CircularVisualizer::draw_month(float x, float y, float scale){
     ofApp & app = ofApp::get();
     vector<BrushData> & data = app.data;
-    vector<int> mdayCnt;
-    mdayCnt.assign(31, 0);
+
     for(int i=0; i<data.size(); i++){
-        const BrushData & s = data[i];
-        int mday = s.start.tm_mday - 1;
-        float startDeg = mday/31.0f * 360.0f - 90.0;
-        float startRad = ofDegToRad(startDeg);
-        float gap = 3.0f;
-        float r = radius + (gap+2) * mdayCnt[mday];
-        float posx = x + r * cos(startRad);
-        float posy = y + r * sin(startRad);
         
-        float duration = s.duration;
-        float size = ofGetWidth()*0.01f * duration/120.0f;
+        const BrushData & s = data[i];
+        const PlotData & p = s.pMonth;
+        float posx = x + p.stPos.x;
+        float posy = y + p.stPos.y;
+        float size = p.size;
         
         ofFill();
-        ofSetColor(ob::color::month);
+        ofSetColor(p.color);
         ofDrawCircle(posx, posy, size);
-        mdayCnt[mday]++;
     }
 }
 
-void CircularVisualizer::draw_year(float x, float y, float radius){
+void CircularVisualizer::draw_year(float x, float y, float scale){
     ofApp & app = ofApp::get();
     vector<BrushData> & data = app.data;
-    vector<int> ydayCnt;
-    ydayCnt.assign(365, 0);
     for(int i=0; i<data.size(); i++){
-        const BrushData & s = data[i];
-        int yday = s.start.tm_yday;
-        float startDeg = yday/365.0f*360.0f - 90.0;
-        float startRad = ofDegToRad(startDeg);
-        float gap = 3.0f;
-        float r = radius + (gap+2) * ydayCnt[yday];
-        float posx = x + r * cos(startRad);
-        float posy = y + r * sin(startRad);
         
-        float duration = s.duration;
-        float size = ofGetWidth()*0.01f * duration/120.0f;
+        const BrushData & s = data[i];
+        const PlotData & p = s.pMonth;
+        float posx = x + p.stPos.x;
+        float posy = y + p.stPos.y;
+        float size = p.size;
         
         ofFill();
-        ofSetColor(ob::color::year);
+        ofSetColor(p.color);
         ofDrawCircle(posx, posy, size);
-        ydayCnt[yday]++;
     }
 }

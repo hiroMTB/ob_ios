@@ -31,9 +31,9 @@ void ofApp::draw(){
     ofPushMatrix();{
         viz.draw_hour   (x, y, rad * 0.2);
         viz.draw_day    (x, y, rad * 0.4);
-//        viz.draw_week   (x, y, rad * 0.5);
-//        viz.draw_month  (x, y, rad * 0.6);
-//        viz.draw_year   (x, y, rad * 0.7);
+        viz.draw_week   (x, y, rad * 0.5);
+        viz.draw_month  (x, y, rad * 0.6);
+        viz.draw_year   (x, y, rad * 0.7);
     }ofPopMatrix();
 }
 

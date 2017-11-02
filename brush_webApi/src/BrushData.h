@@ -14,8 +14,8 @@ public:
     float stAngle;
     float endAngle;
     float radius;    // dist from center
-    float size;           // circle size, arc thickness, etc
-    int level;            // override level
+    float size;      // circle size, arc thickness, etc
+    int level;       // override level
     ofColor color;
 };
 
