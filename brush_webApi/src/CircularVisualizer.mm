@@ -8,15 +8,13 @@ CircularVisualizer::CircularVisualizer(){
     
 }
 
-void CircularVisualizer::draw_hour(float x, float y, float radius){
+void CircularVisualizer::draw_hour(float x, float y, float radius, const vector<BrushData> & data, int num){
     
     plotHour.clear();
     
-    vector<BrushData> & data = ofApp::get().data;
-    
     vector<ofRange> ranges;
     
-    for(int i=0; i<data.size(); i++){
+    for(int i=0; i<num; i++){
         
         const BrushData & s = data[i];
         float start = s.start.tm_min + s.start.tm_sec/60.0f;
@@ -59,13 +57,11 @@ void CircularVisualizer::draw_hour(float x, float y, float radius){
     }
 }
 
-void CircularVisualizer::draw_day(float x, float y, float radius){
+void CircularVisualizer::draw_day(float x, float y, float radius, const vector<BrushData> & data, int num){
     
     plotDay.clear();
-    
-    vector<BrushData> & data = ofApp::get().data;
-    
-    for(int i=0; i<data.size(); i++){
+
+    for(int i=0; i<num; i++){
         const BrushData & s = data[i];
         float start = s.start.tm_hour + s.start.tm_min/60.0f;
         float startDeg = start/24.0f * 360.0f -90.0f;
@@ -85,14 +81,13 @@ void CircularVisualizer::draw_day(float x, float y, float radius){
     }
 }
 
-void CircularVisualizer::draw_week(float x, float y, float radius){
+void CircularVisualizer::draw_week(float x, float y, float radius, const vector<BrushData> & data, int num){
     plotWeek.clear();
     
-    vector<BrushData> & data = ofApp::get().data;    vector<int> wdayCnt;
-    
+    vector<int> wdayCnt;
     wdayCnt.assign(7, 0);
     
-    for(int i=0; i<data.size(); i++){
+    for(int i=0; i<num; i++){
         const BrushData & s = data[i];
         int wday = s.start.tm_wday;
         float start = wday + s.start.tm_hour/23.0f;
@@ -115,15 +110,14 @@ void CircularVisualizer::draw_week(float x, float y, float radius){
     }
 }
 
-void CircularVisualizer::draw_month(float x, float y, float radius){
+void CircularVisualizer::draw_month(float x, float y, float radius, const vector<BrushData> & data, int num){
     
     plotMonth.clear();
     
-    vector<BrushData> & data = ofApp::get().data;    vector<int> mdayCnt;
-    
+    vector<int> mdayCnt;
     mdayCnt.assign(31, 0);
     
-    for(int i=0; i<data.size(); i++){
+    for(int i=0; i<num; i++){
         const BrushData & s = data[i];
         int mday = s.start.tm_mday - 1; // 0 - 30 days
         float start = mday + s.start.tm_hour/23.0f;
@@ -146,16 +140,13 @@ void CircularVisualizer::draw_month(float x, float y, float radius){
     }
 }
 
-void CircularVisualizer::draw_year(float x, float y, float radius){
+void CircularVisualizer::draw_year(float x, float y, float radius, const vector<BrushData> & data, int num){
     
     plotYear.clear();
-    
-    vector<BrushData> & data = ofApp::get().data;
-    
     vector<int> ydayCnt;
     
     ydayCnt.assign(365, 0);
-    for(int i=0; i<data.size(); i++){
+    for(int i=0; i<num; i++){
         const BrushData & s = data[i];
         int yday = s.start.tm_yday;
         float start = yday + s.start.tm_hour/23.0f;

@@ -28,6 +28,8 @@ public:
 
     CircularVisualizer viz;
     Voro voro;
+    
+    int num = 0;
 };
 
 

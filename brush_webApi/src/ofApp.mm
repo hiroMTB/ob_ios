@@ -19,7 +19,8 @@ void ofApp::setup(){
 }
 
 void ofApp::update(){
-    
+    num = ofGetFrameNum()*0.5f;
+    num = MIN(data.size(), num);
 }
 
 void ofApp::draw(){
@@ -30,11 +31,11 @@ void ofApp::draw(){
     float rad = ofGetWidth()/2;
 
     ofPushMatrix();{
-        viz.draw_hour   (x, y, rad * 0.4);
-        viz.draw_day    (x, y, rad * 0.6);
-        viz.draw_week   (x, y, rad * 0.7);
-        viz.draw_month  (x, y, rad * 0.8);
-        viz.draw_year   (x, y, rad * 0.9);
+        viz.draw_hour   (x, y, rad * 0.4, data, num);
+        viz.draw_day    (x, y, rad * 0.6, data, num);
+        viz.draw_week   (x, y, rad * 0.7, data, num);
+        viz.draw_month  (x, y, rad * 0.8, data, num);
+        viz.draw_year   (x, y, rad * 0.9, data, num);
 
         ofBackground(255);
 
@@ -56,11 +57,11 @@ void ofApp::draw(){
         ofNoFill();
         ofDrawCircle(x, y, rad*0.4);
         
-        viz.draw_hour   (x, y, rad * 0.25);
-        viz.draw_day    (x, y, rad * 0.28);
-        viz.draw_week   (x, y, rad * 0.30);
-        viz.draw_month  (x, y, rad * 0.32);
-        viz.draw_year   (x, y, rad * 0.35);
+        viz.draw_hour   (x, y, rad * 0.25, data, num);
+        viz.draw_day    (x, y, rad * 0.28, data, num);
+        viz.draw_week   (x, y, rad * 0.30, data, num);
+        viz.draw_month  (x, y, rad * 0.32, data, num);
+        viz.draw_year   (x, y, rad * 0.35, data, num);
     }ofPopMatrix();
 }
 
