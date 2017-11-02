@@ -19,8 +19,10 @@ public:
     
     Voro(){};
     
+    void addVertices(const vector<glm::vec2> & pos);
     void create();
     void draw();
+    void clear();
     
     vector<vPoint> vPs;
     voronoi_diagram<double> vD;

@@ -13,6 +13,7 @@ public:
     ~ofApp(){ cout << "destruct  ofApp" << endl; }
 
     void setup();
+    void update();
     void draw();
     void exit();
     void urlResponse(ofHttpResponse & response);

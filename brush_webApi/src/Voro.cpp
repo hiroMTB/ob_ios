@@ -1,10 +1,20 @@
 #include "Voro.h"
 
-void Voro::create(){
-    // fill vertices
-    
+void Voro::clear(){
+    vPs.clear();
     vD.clear();
-    boost::polygon::construct_voronoi( vPs.begin(), vPs.end(), &vD);
+}
+
+void Voro::addVertices(const vector<glm::vec2> & pos){
+    // add vertices
+    for(int i=0; i<pos.size(); i++){
+        vPs.push_back(vPoint(pos[i].x, pos[i].y));
+    }
+}
+
+void Voro::create(){
+    vD.clear();
+    boost::polygon::construct_voronoi(vPs.begin(), vPs.end(), &vD);
 }
 
 void Voro::draw(){
@@ -30,9 +40,9 @@ void Voro::draw(){
                             bool xOver = ( abs(x0)>limitx || abs(x1)>limitx );
                             bool yOver = ( abs(y0)>limity || abs(y1)>limity );
                             
-                            bool draw = !xOver && !yOver;
+                            bool draw = 1; //!xOver && !yOver;
                             
-                            ofSetColor(0,0,0);
+                            ofSetColor(0,0,0, 100);
                             
                             if(draw){
                                 ofDrawLine(x0,y0,0,x1,y1,0);
@@ -66,7 +76,7 @@ void Voro::draw(){
     // draw Point
     if( 0 ){
         glPointSize(3);
-        ofSetColor(255, 255, 255, 200);
+        ofSetColor(255, 0,0);
         for( auto v : vPs ){
             ofDrawCircle(v.x(), v.y(), 2);
         }

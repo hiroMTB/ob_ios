@@ -9,8 +9,11 @@ CircularVisualizer::CircularVisualizer(){
 }
 
 void CircularVisualizer::draw_hour(float x, float y, float radius){
-    ofApp & app = ofApp::get();
-    vector<BrushData> & data = app.data;
+    
+    plotHour.clear();
+    
+    vector<BrushData> & data = ofApp::get().data;
+    
     vector<ofRange> ranges;
     
     for(int i=0; i<data.size(); i++){
@@ -42,12 +45,26 @@ void CircularVisualizer::draw_hour(float x, float y, float radius){
         arc.draw();
         ranges.push_back(range);
         
+        float startRad = ofDegToRad(startDeg);
+        float endRad = ofDegToRad(endDeg);
+        
+        float posStx = x + r*cos(startRad);
+        float posSty = y + r*sin(startRad);
+
+        float posEndx = x + r*cos(endRad);
+        float posEndy = y + r*sin(endRad);
+
+        plotHour.push_back(glm::vec2(posStx, posSty));
+        plotHour.push_back(glm::vec2(posEndx, posEndy));        
     }
 }
 
 void CircularVisualizer::draw_day(float x, float y, float radius){
-    ofApp & app = ofApp::get();
-    vector<BrushData> & data = app.data;
+    
+    plotDay.clear();
+    
+    vector<BrushData> & data = ofApp::get().data;
+    
     for(int i=0; i<data.size(); i++){
         const BrushData & s = data[i];
         float start = s.start.tm_hour + s.start.tm_min/60.0f;
@@ -63,14 +80,18 @@ void CircularVisualizer::draw_day(float x, float y, float radius){
         ofFill();
         ofSetColor(ob::color::day);
         ofDrawCircle(posx, posy, size);
+        
+        plotDay.push_back(glm::vec2(posx, posy));
     }
 }
 
 void CircularVisualizer::draw_week(float x, float y, float radius){
-    ofApp & app = ofApp::get();
-    vector<BrushData> & data = app.data;
-    vector<int> wdayCnt;
+    plotWeek.clear();
+    
+    vector<BrushData> & data = ofApp::get().data;    vector<int> wdayCnt;
+    
     wdayCnt.assign(7, 0);
+    
     for(int i=0; i<data.size(); i++){
         const BrushData & s = data[i];
         int wday = s.start.tm_wday;
@@ -89,14 +110,19 @@ void CircularVisualizer::draw_week(float x, float y, float radius){
         ofSetColor(ob::color::week);
         ofDrawCircle(posx, posy, size);
         wdayCnt[wday]++;
+        
+        plotWeek.push_back(glm::vec2(posx, posy));
     }
 }
 
 void CircularVisualizer::draw_month(float x, float y, float radius){
-    ofApp & app = ofApp::get();
-    vector<BrushData> & data = app.data;
-    vector<int> mdayCnt;
+    
+    plotMonth.clear();
+    
+    vector<BrushData> & data = ofApp::get().data;    vector<int> mdayCnt;
+    
     mdayCnt.assign(31, 0);
+    
     for(int i=0; i<data.size(); i++){
         const BrushData & s = data[i];
         int mday = s.start.tm_mday - 1; // 0 - 30 days
@@ -115,13 +141,19 @@ void CircularVisualizer::draw_month(float x, float y, float radius){
         ofSetColor(ob::color::month);
         ofDrawCircle(posx, posy, size);
         mdayCnt[mday]++;
+        
+        plotMonth.push_back(glm::vec2(posx, posy));
     }
 }
 
 void CircularVisualizer::draw_year(float x, float y, float radius){
-    ofApp & app = ofApp::get();
-    vector<BrushData> & data = app.data;
+    
+    plotYear.clear();
+    
+    vector<BrushData> & data = ofApp::get().data;
+    
     vector<int> ydayCnt;
+    
     ydayCnt.assign(365, 0);
     for(int i=0; i<data.size(); i++){
         const BrushData & s = data[i];
@@ -141,5 +173,8 @@ void CircularVisualizer::draw_year(float x, float y, float radius){
         ofSetColor(ob::color::year);
         ofDrawCircle(posx, posy, size);
         ydayCnt[yday]++;
+        
+        plotYear.push_back(glm::vec2(posx, posy));
+
     }
 }

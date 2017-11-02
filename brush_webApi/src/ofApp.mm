@@ -16,8 +16,10 @@ void ofApp::setup(){
     handler.getDataFromServer();
 #endif
 
+}
 
-
+void ofApp::update(){
+    
 }
 
 void ofApp::draw(){
@@ -28,11 +30,37 @@ void ofApp::draw(){
     float rad = ofGetWidth()/2;
 
     ofPushMatrix();{
-        viz.draw_hour   (x, y, rad * 0.2);
-        viz.draw_day    (x, y, rad * 0.4);
-        viz.draw_week   (x, y, rad * 0.5);
-        viz.draw_month  (x, y, rad * 0.6);
-        viz.draw_year   (x, y, rad * 0.7);
+        viz.draw_hour   (x, y, rad * 0.4);
+        viz.draw_day    (x, y, rad * 0.6);
+        viz.draw_week   (x, y, rad * 0.7);
+        viz.draw_month  (x, y, rad * 0.8);
+        viz.draw_year   (x, y, rad * 0.9);
+
+        ofBackground(255);
+
+        voro.addVertices(viz.plotHour);
+        voro.addVertices(viz.plotDay);
+        voro.addVertices(viz.plotWeek);
+        voro.addVertices(viz.plotMonth);
+        voro.addVertices(viz.plotYear);
+
+        voro.create();
+        voro.draw();
+        
+//        ofSetColor(255);
+//        ofFill();
+//        ofDrawCircle(x, y, rad*0.4);
+
+        ofSetColor(150,200);
+        ofSetLineWidth(1);
+        ofNoFill();
+        ofDrawCircle(x, y, rad*0.4);
+        
+        viz.draw_hour   (x, y, rad * 0.25);
+        viz.draw_day    (x, y, rad * 0.28);
+        viz.draw_week   (x, y, rad * 0.30);
+        viz.draw_month  (x, y, rad * 0.32);
+        viz.draw_year   (x, y, rad * 0.35);
     }ofPopMatrix();
 }
 
