@@ -71,12 +71,12 @@ void CircularVisualizer::composePlotData(vector<BrushData> & data){
         BrushData & s = data[i];
         PlotData & p = s.pWeek;
         int wday = s.start.tm_wday;
-        float startDeg = wday/7.0f * 360.0f - 90.0;
+        float start = wday + s.start.tm_hour/23.0f;
+        float startDeg = start/7.0f * 360.0f - 90.0;
         float startRad = ofDegToRad(startDeg);
-        float gap = 3;
         float baseRadius = 0.6 * ofGetWidth()/2;
         p.level = wdayCnt[wday];
-        p.radius = baseRadius + (gap+2) * wdayCnt[wday];
+        p.radius = baseRadius + 2.0f * wdayCnt[wday];
 
         p.stAngle   = p.endAngle = startDeg;
         p.stPos.x   = p.radius * cos(startRad);
@@ -88,7 +88,7 @@ void CircularVisualizer::composePlotData(vector<BrushData> & data){
         wdayCnt[wday]++;
     }
     
-    
+    // month
     vector<int> mdayCnt;
     mdayCnt.assign(31, 0);
     for(int i=0; i<data.size(); i++){
@@ -96,13 +96,12 @@ void CircularVisualizer::composePlotData(vector<BrushData> & data){
         BrushData & s = data[i];
         PlotData & p = s.pMonth;
 
-        int mday = s.start.tm_mday - 1;
-        float startDeg = mday/31.0f * 360.0f - 90.0;
+        int mday = s.start.tm_mday - 1; // 0 - 30 days
+        float start = mday + s.start.tm_hour/23.0f;
+        float startDeg = start/31.0f * 360.0f - 90.0;
         float startRad = ofDegToRad(startDeg);
-        float gap = 3.0f;
         float baseRadius = 0.7 * ofGetWidth()/2;
-        p.radius = baseRadius + (gap+2) * mdayCnt[mday];
-        
+        p.radius = baseRadius + 3.0f * mdayCnt[mday];
         p.stAngle   = p.endAngle = startDeg;
         p.stPos.x   = p.radius * cos(startRad);
         p.stPos.y   = p.radius * sin(startRad);
@@ -119,11 +118,11 @@ void CircularVisualizer::composePlotData(vector<BrushData> & data){
         PlotData & p = s.pMonth;
         
         int yday = s.start.tm_yday;
-        float startDeg = yday/365.0f*360.0f - 90.0;
+        float start = yday + s.start.tm_hour/23.0f;
+        float startDeg = start/365.0f*360.0f - 90.0;
         float startRad = ofDegToRad(startDeg);
-        float gap = 3.0f;
         float baseRadius = 0.8 * ofGetWidth()/2;
-        p.radius = baseRadius + (gap+2) * ydayCnt[yday];
+        p.radius = baseRadius + 4.0f * ydayCnt[yday];
         
         p.stAngle   = p.endAngle = startDeg;
         p.stPos.x   = p.radius * cos(startRad);
