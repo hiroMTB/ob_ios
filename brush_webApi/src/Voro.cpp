@@ -19,9 +19,8 @@ void Voro::create(){
 
 void Voro::draw(){
     if( 1 ){
-        ofSetLineWidth(1);
         voronoi_diagram<double>::const_cell_iterator it = vD.cells().begin();
-        for (; it!= vD.cells().end(); ++it) {
+        for (int i=0; it!= vD.cells().end(); ++it, i++) {
             
             const cell_type& cell = *it;
             const edge_type* edge = cell.incident_edge();
@@ -35,22 +34,35 @@ void Voro::draw(){
                             float x1 = edge->vertex1()->x();
                             float y1 = edge->vertex1()->y();
                             
-                            float limity = 800;
-                            float limitx = 4000;
-                            bool xOver = ( abs(x0)>limitx || abs(x1)>limitx );
-                            bool yOver = ( abs(y0)>limity || abs(y1)>limity );
+                            if(0){
+                                glm::vec2 v0(x0, y0);
+                                glm::vec2 v1(x1, y1);
+                                glm::vec2 d = v1 - v0;
+                                float length = glm::length(d);
+                                float space = ofGetWidth() * 0.01;
+                                if(length>space*2){
+                                    v0 += d*(space/length);
+                                    v1 -= d*(space/length);
+                                    
+                                    x0 = v0.x;
+                                    y0 = v0.y;
+                                    x1 = v1.x;
+                                    y1 = v1.y;
+                                }
+                            }
+//                            float limity = 800;
+//                            float limitx = 4000;
+//                            bool xOver = ( abs(x0)>limitx || abs(x1)>limitx );
+//                            bool yOver = ( abs(y0)>limity || abs(y1)>limity );
                             
                             bool draw = 1; //!xOver && !yOver;
                             
-                            ofSetColor(0,0,0, 100);
-                            
                             if(draw){
+                                ofSetColor(0,0,0, 100);
+                                ofSetLineWidth(1);
                                 ofDrawLine(x0,y0,0,x1,y1,0);
-                            }else{
-                                if( ofRandom(0.0, 1.0)>0.9){
-                                    ofSetColor(0.5, 0.5, 0.5, 0.5);
-                                    ofDrawLine(x0,y0,0,x1,y1,0);
-                                }
+                                ofDrawCircle(x0,y0,2);
+                                ofDrawCircle(x1,y1,2);
                             }
                         }
                     }else{
