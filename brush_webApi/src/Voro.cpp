@@ -1,14 +1,28 @@
 #include "Voro.h"
+#include <unordered_map>
 
 void Voro::clear(){
     vPs.clear();
     vD.clear();
 }
 
-void Voro::addVertices(const vector<glm::vec2> & pos){
+void Voro::addVertices(const vector<BrushData> & data, ob::plot::TYPE type){
     // add vertices
-    for(int i=0; i<pos.size(); i++){
-        vPs.push_back(vPoint(pos[i].x, pos[i].y));
+    for(int i=0; i<data.size(); i++){
+        
+        const PlotData & p = data[i].plot.at(type);
+
+        if(type == ob::plot::TYPE::HOUR){
+                // @TODO
+                // this should be segment
+                const glm::vec2 & pos1 = p.stPos;
+                const glm::vec2 & pos2 = p.endPos;
+                vPs.push_back(vPoint(pos1.x, pos1.y));
+//                vPs.push_back(vPoint(pos2.x, pos2.y));
+        }else{
+            const glm::vec2 & pos = p.stPos;
+            vPs.push_back(vPoint(pos.x, pos.y));
+        }
     }
 }
 

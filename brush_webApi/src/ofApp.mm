@@ -11,16 +11,27 @@ void ofApp::setup(){
 #ifdef USE_DUMMY_DATA
     ofxJSONElement json = handler.getDataFromDummyFile("sessionExample.json");
     BrushData::createData(json, data);
+    viz.composePlotData(data);
 #else
     ofRegisterURLNotification(this);
     handler.getDataFromServer();
 #endif
 
+    voro.addVertices(data, ob::plot::TYPE::HOUR);
+    voro.addVertices(data, ob::plot::TYPE::DAY);
+    voro.addVertices(data, ob::plot::TYPE::WEEK);
+    voro.addVertices(data, ob::plot::TYPE::MONTH);
+    voro.addVertices(data, ob::plot::TYPE::YEAR);
+
+    // put a vertex at center
+    voro.vPs.push_back(vPoint(0,0));
+    voro.create();
 }
 
 void ofApp::update(){
     num = ofGetFrameNum()*0.5f;
     num = MIN(data.size(), num);
+
 }
 
 void ofApp::draw(){
@@ -31,37 +42,20 @@ void ofApp::draw(){
     float rad = ofGetWidth()/2;
 
     ofPushMatrix();{
-        viz.draw_hour   (x, y, rad * 0.4, data, num);
-        viz.draw_day    (x, y, rad * 0.6, data, num);
-        viz.draw_week   (x, y, rad * 0.7, data, num);
-        viz.draw_month  (x, y, rad * 0.8, data, num);
-        viz.draw_year   (x, y, rad * 0.9, data, num);
-
-        ofBackground(255);
-
-        voro.addVertices(viz.plotHour);
-        voro.addVertices(viz.plotDay);
-        voro.addVertices(viz.plotWeek);
-        voro.addVertices(viz.plotMonth);
-        voro.addVertices(viz.plotYear);
-
-        voro.create();
+        ofTranslate(x, y);
         voro.draw();
-        
-//        ofSetColor(255);
-//        ofFill();
-//        ofDrawCircle(x, y, rad*0.4);
 
         ofSetColor(150,200);
         ofSetLineWidth(1);
         ofNoFill();
-        ofDrawCircle(x, y, rad*0.4);
+        ofDrawCircle(0, 0, rad*0.4);
         
-        viz.draw_hour   (x, y, rad * 0.25, data, num);
-        viz.draw_day    (x, y, rad * 0.28, data, num);
-        viz.draw_week   (x, y, rad * 0.30, data, num);
-        viz.draw_month  (x, y, rad * 0.32, data, num);
-        viz.draw_year   (x, y, rad * 0.35, data, num);
+        viz.draw_hour   (rad * 0.4, data, num);
+        viz.draw_day    (rad * 0.6, data, num);
+        viz.draw_week   (rad * 0.7, data, num);
+        viz.draw_month  (rad * 0.8, data, num);
+        viz.draw_year   (rad * 0.9, data, num);
+
     }ofPopMatrix();
 }
 
@@ -76,10 +70,10 @@ void ofApp::urlResponse(ofHttpResponse & response){
         
         if(name == "session data"){
             BrushData::createData(json, data);
+            viz.composePlotData(data);
         }
     }
 }
-
 
 void ofApp::exit() {
     ofxiOSAlerts.removeListener(this);

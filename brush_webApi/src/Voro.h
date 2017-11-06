@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "boost/polygon/voronoi.hpp"
 #include "boost/polygon/segment_data.hpp"
+#include "BrushData.h"
 
 using namespace std;
 using boost::polygon::voronoi_builder;
@@ -19,7 +20,7 @@ public:
     
     Voro(){};
     
-    void addVertices(const vector<glm::vec2> & pos);
+    void addVertices(const vector<BrushData> & data, ob::plot::TYPE type);
     void create();
     void draw();
     void clear();
