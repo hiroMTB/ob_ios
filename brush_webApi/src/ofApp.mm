@@ -36,7 +36,7 @@ void ofApp::setup(){
     np.addVertices(data, ob::plot::TYPE::WEEK,  minRad, maxRad);
     np.addVertices(data, ob::plot::TYPE::MONTH, minRad, maxRad);
     np.addVertices(data, ob::plot::TYPE::YEAR,  minRad, maxRad);
-    np.create(10);
+    np.create(2);
     
 }
 
@@ -55,6 +55,7 @@ void ofApp::draw(){
     ofPushMatrix();{
         ofTranslate(x, y);
         
+        ofFill();
         viz.draw_hour   (rad * 0.4, data, num);
         viz.draw_day    (rad * 0.6, data, num);
         viz.draw_week   (rad * 0.7, data, num);

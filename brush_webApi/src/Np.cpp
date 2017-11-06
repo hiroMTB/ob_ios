@@ -45,7 +45,7 @@ void Np::create(int numLine){
             glm::vec2 & p2 = pos[j];
             
             float dist = glm::distance(p1, p2);
-            if(50<dist && dist<300){
+            if(50<dist && dist<80){
                 
                 multimap<float, glm::vec2>::iterator itr = near_p.end();
                 itr--;
@@ -63,8 +63,8 @@ void Np::create(int numLine){
             if(p2.x != -12345){
                 mesh.addVertex(glm::vec3(p1.x, p1.y, 0));
                 mesh.addVertex(glm::vec3(p2.x, p2.y, 0));
-                mesh.addColor(ofFloatColor(0,0,0,0.2));
-                mesh.addColor(ofFloatColor(0,0,0,0.2));
+                mesh.addColor(ofFloatColor(0,0,0,0.5));
+                mesh.addColor(ofFloatColor(0,0,0,0.5));
             }
         }
     }

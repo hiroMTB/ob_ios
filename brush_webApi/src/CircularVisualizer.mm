@@ -55,7 +55,7 @@ void CircularVisualizer::composePlotData(vector<BrushData> & data){
         p.stAngle   = p.endAngle = start/24.0f * 360.0f -90.0f;
         p.stPos.x   = p.radius * cos(ofDegToRad(p.stAngle));
         p.stPos.y   = p.radius * sin(ofDegToRad(p.stAngle));
-        p.size      = ofGetWidth()*0.005f * s.duration/120.0f;
+        p.size      = ofGetWidth()*0.003f * s.duration/120.0f;
         p.color     = ob::color::day;
     }
     
@@ -77,9 +77,8 @@ void CircularVisualizer::composePlotData(vector<BrushData> & data){
         p.stAngle   = p.endAngle = startDeg;
         p.stPos.x   = p.radius * cos(startRad);
         p.stPos.y   = p.radius * sin(startRad);
-        p.size      = ofGetWidth()*0.005f * s.duration/120.0f;
+        p.size      = ofGetWidth()*0.003f * s.duration/120.0f;
         p.color     = ob::color::week;
-        p.size = ofGetWidth()*0.005f * s.duration/120.0f;
         
         wdayCnt[wday]++;
     }
@@ -101,9 +100,8 @@ void CircularVisualizer::composePlotData(vector<BrushData> & data){
         p.stAngle   = p.endAngle = startDeg;
         p.stPos.x   = p.radius * cos(startRad);
         p.stPos.y   = p.radius * sin(startRad);
-        p.size      = ofGetWidth()*0.005f * s.duration/120.0f;
+        p.size      = ofGetWidth()*0.003f * s.duration/120.0f;
         p.color     = ob::color::month;
-        p.size = ofGetWidth()*0.005f * s.duration/120.0f;
     }
     
     // year
@@ -124,9 +122,8 @@ void CircularVisualizer::composePlotData(vector<BrushData> & data){
         p.stAngle   = p.endAngle = startDeg;
         p.stPos.x   = p.radius * cos(startRad);
         p.stPos.y   = p.radius * sin(startRad);
-        p.size      = ofGetWidth()*0.005f * s.duration/120.0f;
+        p.size      = ofGetWidth()*0.003f * s.duration/120.0f;
         p.color     = ob::color::year;
-        p.size = ofGetWidth()*0.005f * s.duration/120.0f;
     }
 }
 
@@ -161,7 +158,6 @@ void CircularVisualizer::draw_day(float scale, const vector<BrushData> & data, i
         float posy = p.stPos.y;
         float size = p.size;
         
-        ofFill();
         ofSetColor(p.color);
         ofDrawCircle(posx, posy, size);
     }
@@ -176,7 +172,6 @@ void CircularVisualizer::draw_week(float scale, const vector<BrushData> & data, 
         float posy = p.stPos.y;
         float size = p.size;
         
-        ofFill();
         ofSetColor(p.color);
         ofDrawCircle(posx, posy, size);
     }
@@ -191,7 +186,6 @@ void CircularVisualizer::draw_month(float scale, const vector<BrushData> & data,
         float posy = p.stPos.y;
         float size = p.size;
         
-        ofFill();
         ofSetColor(p.color);
         ofDrawCircle(posx, posy, size);
     }
@@ -206,7 +200,6 @@ void CircularVisualizer::draw_year(float scale, const vector<BrushData> & data, 
         float posy = p.stPos.y;
         float size = p.size;
         
-        ofFill();
         ofSetColor(p.color);
         ofDrawCircle(posx, posy, size);
     }
