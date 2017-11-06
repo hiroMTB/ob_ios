@@ -6,22 +6,19 @@ void Voro::clear(){
     vD.clear();
 }
 
-void Voro::addVertices(const vector<BrushData> & data, ob::plot::TYPE type){
-    // add vertices
+void Voro::addVertices(const vector<BrushData> & data, ob::plot::TYPE type, float minRad, float maxRad){
+
+    static const glm::vec2 xAxis(1,0);
+
     for(int i=0; i<data.size(); i++){
         
         const PlotData & p = data[i].plot.at(type);
-
-        if(type == ob::plot::TYPE::HOUR){
-                // @TODO
-                // this should be segment
-                const glm::vec2 & pos1 = p.stPos;
-                const glm::vec2 & pos2 = p.endPos;
-                vPs.push_back(vPoint(pos1.x, pos1.y));
-//                vPs.push_back(vPoint(pos2.x, pos2.y));
-        }else{
-            const glm::vec2 & pos = p.stPos;
-            vPs.push_back(vPoint(pos.x, pos.y));
+        const glm::vec2 & pos1 = p.stPos;
+        glm::vec2 n1 = glm::normalize(pos1);
+        float angle = glm::angle(xAxis, n1);
+        
+        if(minRad<angle && angle<=maxRad){
+            vPs.push_back(vPoint(pos1.x, pos1.y));
         }
     }
 }
@@ -48,7 +45,7 @@ void Voro::draw(){
                             float x1 = edge->vertex1()->x();
                             float y1 = edge->vertex1()->y();
                             
-                            if(0){
+                            if(1){
                                 glm::vec2 v0(x0, y0);
                                 glm::vec2 v1(x1, y1);
                                 glm::vec2 d = v1 - v0;
@@ -64,15 +61,16 @@ void Voro::draw(){
                                     y1 = v1.y;
                                 }
                             }
-//                            float limity = 800;
-//                            float limitx = 4000;
-//                            bool xOver = ( abs(x0)>limitx || abs(x1)>limitx );
-//                            bool yOver = ( abs(y0)>limity || abs(y1)>limity );
+                            float limity = ofGetHeight()/2;
+                            float limitx = ofGetWidth()/2;
+                            bool xOver = ( abs(x0)>limitx || abs(x1)>limitx );
+                            bool yOver = ( abs(y0)>limity || abs(y1)>limity );
                             
-                            bool draw = 1; //!xOver && !yOver;
+                            bool draw = !xOver && !yOver;
                             
                             if(draw){
-                                ofSetColor(0,0,0, 100);
+                                ofFill();
+                                ofSetColor(0,0,0, 150);
                                 ofSetLineWidth(1);
                                 ofDrawLine(x0,y0,0,x1,y1,0);
                                 ofDrawCircle(x0,y0,2);

@@ -20,7 +20,7 @@ public:
     
     Voro(){};
     
-    void addVertices(const vector<BrushData> & data, ob::plot::TYPE type);
+    void addVertices(const vector<BrushData> & data, ob::plot::TYPE type, float minRad, float maxRad);
     void create();
     void draw();
     void clear();

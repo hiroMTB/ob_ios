@@ -2,9 +2,10 @@
 
 #include "ofxiOS.h"
 #include "CircularVisualizer.h"
-#include "Voro.h"
 #include "BrushDataHandler.h"
 #include "BrushData.h"
+#include "Voro.h"
+#include "Np.h"
 
 class ofApp : public ofxiOSApp{
     
@@ -28,6 +29,7 @@ public:
 
     CircularVisualizer viz;
     Voro voro;
+    Np np;
     
     int num = 0;
 };

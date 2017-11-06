@@ -17,21 +17,32 @@ void ofApp::setup(){
     handler.getDataFromServer();
 #endif
 
-    voro.addVertices(data, ob::plot::TYPE::HOUR);
-    voro.addVertices(data, ob::plot::TYPE::DAY);
-    voro.addVertices(data, ob::plot::TYPE::WEEK);
-    voro.addVertices(data, ob::plot::TYPE::MONTH);
-    voro.addVertices(data, ob::plot::TYPE::YEAR);
+    float minRad, maxRad;
+    minRad = 0;
+    maxRad = TWO_PI;
+    voro.addVertices(data, ob::plot::TYPE::HOUR, minRad, maxRad);
+    voro.addVertices(data, ob::plot::TYPE::DAY,  minRad, maxRad);
+    voro.addVertices(data, ob::plot::TYPE::WEEK, minRad, maxRad);
+    voro.addVertices(data, ob::plot::TYPE::MONTH,minRad, maxRad);
+    voro.addVertices(data, ob::plot::TYPE::YEAR, minRad, maxRad);
 
-    // put a vertex at center
-    voro.vPs.push_back(vPoint(0,0));
+    voro.vPs.push_back(vPoint(0,0)); // put a vertex at center
     voro.create();
+    
+    minRad = 0;
+    maxRad = TWO_PI;
+    np.addVertices(data, ob::plot::TYPE::HOUR,  minRad, maxRad);
+    np.addVertices(data, ob::plot::TYPE::DAY,   minRad, maxRad);
+    np.addVertices(data, ob::plot::TYPE::WEEK,  minRad, maxRad);
+    np.addVertices(data, ob::plot::TYPE::MONTH, minRad, maxRad);
+    np.addVertices(data, ob::plot::TYPE::YEAR,  minRad, maxRad);
+    np.create(10);
+    
 }
 
 void ofApp::update(){
     num = ofGetFrameNum()*0.5f;
     num = MIN(data.size(), num);
-
 }
 
 void ofApp::draw(){
@@ -43,18 +54,20 @@ void ofApp::draw(){
 
     ofPushMatrix();{
         ofTranslate(x, y);
-        voro.draw();
-
-        ofSetColor(150,200);
-        ofSetLineWidth(1);
-        ofNoFill();
-        ofDrawCircle(0, 0, rad*0.4);
         
         viz.draw_hour   (rad * 0.4, data, num);
         viz.draw_day    (rad * 0.6, data, num);
         viz.draw_week   (rad * 0.7, data, num);
         viz.draw_month  (rad * 0.8, data, num);
         viz.draw_year   (rad * 0.9, data, num);
+        
+        voro.draw();
+        np.draw();
+        
+        ofSetColor(150,200);
+        ofSetLineWidth(1);
+        ofNoFill();
+        ofDrawCircle(0, 0, rad*0.4);
 
     }ofPopMatrix();
 }

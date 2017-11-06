@@ -13,6 +13,7 @@
 		38539D3B7B7D7FF75E9454FD /* BrushDataHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA3753684244277D15B4AE5C /* BrushDataHandler.cpp */; };
 		4579AC931FA8B9B300846C4B /* Voro.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4579AC911FA8B9B300846C4B /* Voro.cpp */; };
 		4579AC961FA8D0A100846C4B /* BrushData.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4579AC941FA8D0A100846C4B /* BrushData.mm */; };
+		45826E191FB0C83A00C16B5D /* Np.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45826E171FB0C83A00C16B5D /* Np.cpp */; };
 		5326AEA810A23A0500278DE6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5326AEA710A23A0500278DE6 /* CoreLocation.framework */; };
 		53F323EB10A20EDB00E0DAE4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */; };
 		67DFA53619F92A69003B3434 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67DFA53419F92A5E003B3434 /* Accelerate.framework */; };
@@ -66,6 +67,8 @@
 		4579AC921FA8B9B300846C4B /* Voro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Voro.h; sourceTree = "<group>"; };
 		4579AC941FA8D0A100846C4B /* BrushData.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BrushData.mm; sourceTree = "<group>"; };
 		4579AC951FA8D0A100846C4B /* BrushData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrushData.h; sourceTree = "<group>"; };
+		45826E171FB0C83A00C16B5D /* Np.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Np.cpp; sourceTree = "<group>"; };
+		45826E181FB0C83A00C16B5D /* Np.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Np.h; sourceTree = "<group>"; };
 		5326AEA710A23A0500278DE6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		61313493CDB52744E22A604D /* json-forwards.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = "json-forwards.h"; path = "../../../addons/ofxJSON/libs/jsoncpp/include/json/json-forwards.h"; sourceTree = SOURCE_ROOT; };
@@ -316,6 +319,8 @@
 				84E7FD291F9A324800295CA0 /* CircularVisualizer.mm */,
 				4579AC921FA8B9B300846C4B /* Voro.h */,
 				4579AC911FA8B9B300846C4B /* Voro.cpp */,
+				45826E181FB0C83A00C16B5D /* Np.h */,
+				45826E171FB0C83A00C16B5D /* Np.cpp */,
 				841F98D51F9D04410037AA13 /* BrushColor.h */,
 			);
 			path = src;
@@ -436,6 +441,7 @@
 				84E7FD2B1F9A324800295CA0 /* CircularVisualizer.mm in Sources */,
 				E4D8936E11527B74007E1F53 /* main.mm in Sources */,
 				4579AC931FA8B9B300846C4B /* Voro.cpp in Sources */,
+				45826E191FB0C83A00C16B5D /* Np.cpp in Sources */,
 				E4D8936F11527B74007E1F53 /* ofApp.mm in Sources */,
 				4579AC961FA8D0A100846C4B /* BrushData.mm in Sources */,
 				38539D3B7B7D7FF75E9454FD /* BrushDataHandler.cpp in Sources */,
