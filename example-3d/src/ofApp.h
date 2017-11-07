@@ -3,7 +3,6 @@
 #include "ofxiOS.h"
 #include "ofMain.h"
 #include "ofxSpaceColonization.h"
-#include "ofxGui.h"
 
 class ofApp : public ofxiOSApp{
     
