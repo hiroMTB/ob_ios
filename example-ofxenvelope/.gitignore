@@ -1,5 +1,0 @@
-bin
-*.app
-*/*/xcuserdata
-*/*/*/xcuserdata
-.DS_Store

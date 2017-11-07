@@ -1,4 +1,0 @@
-ofxBranchesPrimitive
-ofxEnvelope
-ofxGui
-ofxSpaceColonization
