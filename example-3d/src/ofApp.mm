@@ -4,7 +4,6 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    // gui envelope
     auto opt = ofxSpaceColonizationOptions({
         200,                            // max_dist
         10,                             // min_dist
@@ -42,6 +41,7 @@ void ofApp::setPointsAndBuild(){
         p = glm::rotate(p, theta, glm::vec3(0,1,0));
         
         p += glm::vec3(600,0,0);
+        //p.z = 0;
         
         points.push_back(p);
         

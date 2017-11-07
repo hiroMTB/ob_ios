@@ -6,6 +6,7 @@
 #include "BrushData.h"
 #include "Voro.h"
 #include "Np.h"
+#include "Colo.h"
 
 class ofApp : public ofxiOSApp{
     
@@ -30,8 +31,11 @@ public:
     CircularVisualizer viz;
     Voro voro;
     Np np;
+    Colo colo;
     
     int num = 0;
+    
+    bool bInitialized = false;
 };
 
 

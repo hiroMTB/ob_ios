@@ -11,9 +11,14 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		38539D3B7B7D7FF75E9454FD /* BrushDataHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA3753684244277D15B4AE5C /* BrushDataHandler.cpp */; };
+		454F460A1FB2284B00CC7445 /* Colo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 454F46081FB2284B00CC7445 /* Colo.cpp */; };
 		4579AC931FA8B9B300846C4B /* Voro.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4579AC911FA8B9B300846C4B /* Voro.cpp */; };
 		4579AC961FA8D0A100846C4B /* BrushData.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4579AC941FA8D0A100846C4B /* BrushData.mm */; };
 		45826E191FB0C83A00C16B5D /* Np.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45826E171FB0C83A00C16B5D /* Np.cpp */; };
+		45C23B3E1FB227FA0021634E /* ofxSpaceColonization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C23B1D1FB227FA0021634E /* ofxSpaceColonization.cpp */; };
+		45C23B3F1FB227FA0021634E /* ofxSpaceColonizationBranch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C23B1F1FB227FA0021634E /* ofxSpaceColonizationBranch.cpp */; };
+		45C23B401FB227FA0021634E /* ofxSpaceColonizationHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C23B211FB227FA0021634E /* ofxSpaceColonizationHelper.cpp */; };
+		45C23B411FB227FA0021634E /* ofxSpaceColonizationLeaf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C23B231FB227FA0021634E /* ofxSpaceColonizationLeaf.cpp */; };
 		5326AEA810A23A0500278DE6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5326AEA710A23A0500278DE6 /* CoreLocation.framework */; };
 		53F323EB10A20EDB00E0DAE4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */; };
 		67DFA53619F92A69003B3434 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67DFA53419F92A5E003B3434 /* Accelerate.framework */; };
@@ -63,12 +68,22 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		2C7CF000B7B4F782C187C353 /* json.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = json.h; path = ../../../addons/ofxJSON/libs/jsoncpp/include/json/json.h; sourceTree = SOURCE_ROOT; };
 		32CA4F630368D1EE00C91783 /* ofxiOS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiOS_Prefix.pch; sourceTree = "<group>"; };
+		454F46081FB2284B00CC7445 /* Colo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Colo.cpp; sourceTree = "<group>"; };
+		454F46091FB2284B00CC7445 /* Colo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Colo.h; sourceTree = "<group>"; };
 		4579AC911FA8B9B300846C4B /* Voro.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Voro.cpp; sourceTree = "<group>"; };
 		4579AC921FA8B9B300846C4B /* Voro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Voro.h; sourceTree = "<group>"; };
 		4579AC941FA8D0A100846C4B /* BrushData.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BrushData.mm; sourceTree = "<group>"; };
 		4579AC951FA8D0A100846C4B /* BrushData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrushData.h; sourceTree = "<group>"; };
 		45826E171FB0C83A00C16B5D /* Np.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Np.cpp; sourceTree = "<group>"; };
 		45826E181FB0C83A00C16B5D /* Np.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Np.h; sourceTree = "<group>"; };
+		45C23B1D1FB227FA0021634E /* ofxSpaceColonization.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSpaceColonization.cpp; sourceTree = "<group>"; };
+		45C23B1E1FB227FA0021634E /* ofxSpaceColonization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSpaceColonization.h; sourceTree = "<group>"; };
+		45C23B1F1FB227FA0021634E /* ofxSpaceColonizationBranch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSpaceColonizationBranch.cpp; sourceTree = "<group>"; };
+		45C23B201FB227FA0021634E /* ofxSpaceColonizationBranch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSpaceColonizationBranch.h; sourceTree = "<group>"; };
+		45C23B211FB227FA0021634E /* ofxSpaceColonizationHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSpaceColonizationHelper.cpp; sourceTree = "<group>"; };
+		45C23B221FB227FA0021634E /* ofxSpaceColonizationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSpaceColonizationHelper.h; sourceTree = "<group>"; };
+		45C23B231FB227FA0021634E /* ofxSpaceColonizationLeaf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSpaceColonizationLeaf.cpp; sourceTree = "<group>"; };
+		45C23B241FB227FA0021634E /* ofxSpaceColonizationLeaf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSpaceColonizationLeaf.h; sourceTree = "<group>"; };
 		5326AEA710A23A0500278DE6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		61313493CDB52744E22A604D /* json-forwards.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = "json-forwards.h"; path = "../../../addons/ofxJSON/libs/jsoncpp/include/json/json-forwards.h"; sourceTree = SOURCE_ROOT; };
@@ -191,6 +206,30 @@
 			name = "core frameworks";
 			sourceTree = "<group>";
 		};
+		45C23AF21FB227FA0021634E /* ofxSpaceColonization */ = {
+			isa = PBXGroup;
+			children = (
+				45C23B1C1FB227FA0021634E /* src */,
+			);
+			name = ofxSpaceColonization;
+			path = ../../../addons/ofxSpaceColonization;
+			sourceTree = "<group>";
+		};
+		45C23B1C1FB227FA0021634E /* src */ = {
+			isa = PBXGroup;
+			children = (
+				45C23B1D1FB227FA0021634E /* ofxSpaceColonization.cpp */,
+				45C23B1E1FB227FA0021634E /* ofxSpaceColonization.h */,
+				45C23B1F1FB227FA0021634E /* ofxSpaceColonizationBranch.cpp */,
+				45C23B201FB227FA0021634E /* ofxSpaceColonizationBranch.h */,
+				45C23B211FB227FA0021634E /* ofxSpaceColonizationHelper.cpp */,
+				45C23B221FB227FA0021634E /* ofxSpaceColonizationHelper.h */,
+				45C23B231FB227FA0021634E /* ofxSpaceColonizationLeaf.cpp */,
+				45C23B241FB227FA0021634E /* ofxSpaceColonizationLeaf.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		58AD3BD71B781D9BC25763C8 /* json */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +293,7 @@
 		BB16F26B0F2B646B00518274 /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				45C23AF21FB227FA0021634E /* ofxSpaceColonization */,
 				84660C191F9BCA2500663AB0 /* ofxRange */,
 				2865DAEF86B1907A704CA70B /* ofxJSON */,
 			);
@@ -322,6 +362,8 @@
 				45826E181FB0C83A00C16B5D /* Np.h */,
 				45826E171FB0C83A00C16B5D /* Np.cpp */,
 				841F98D51F9D04410037AA13 /* BrushColor.h */,
+				454F46081FB2284B00CC7445 /* Colo.cpp */,
+				454F46091FB2284B00CC7445 /* Colo.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -438,9 +480,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				454F460A1FB2284B00CC7445 /* Colo.cpp in Sources */,
 				84E7FD2B1F9A324800295CA0 /* CircularVisualizer.mm in Sources */,
 				E4D8936E11527B74007E1F53 /* main.mm in Sources */,
 				4579AC931FA8B9B300846C4B /* Voro.cpp in Sources */,
+				45C23B411FB227FA0021634E /* ofxSpaceColonizationLeaf.cpp in Sources */,
+				45C23B3E1FB227FA0021634E /* ofxSpaceColonization.cpp in Sources */,
+				45C23B3F1FB227FA0021634E /* ofxSpaceColonizationBranch.cpp in Sources */,
+				45C23B401FB227FA0021634E /* ofxSpaceColonizationHelper.cpp in Sources */,
 				45826E191FB0C83A00C16B5D /* Np.cpp in Sources */,
 				E4D8936F11527B74007E1F53 /* ofApp.mm in Sources */,
 				4579AC961FA8D0A100846C4B /* BrushData.mm in Sources */,
