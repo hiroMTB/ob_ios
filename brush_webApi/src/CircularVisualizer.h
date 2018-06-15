@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "BrushData.h"
+#include <unordered_map>
 
 class CircularVisualizer{
     
@@ -9,7 +10,7 @@ public:
     
     CircularVisualizer();
     
-    void composePlotData(vector<BrushData> & data);
+    void composePlotData(vector<BrushData> & data, unordered_map<ob::plot::TYPE, float> & radiusData);
 
     void draw_hour(float radius, const vector<BrushData> & data, int num);
     void draw_day(float radius, const vector<BrushData> & data, int num);

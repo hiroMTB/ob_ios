@@ -10,7 +10,7 @@ public:
     Np();
     
     void addVertices(const vector<BrushData> & data, ob::plot::TYPE type, float minRad, float maxRad);
-    void create(int numLine);
+    void create(int numLine, float minDist, float maxDist);
     void draw();
     void clear();
     

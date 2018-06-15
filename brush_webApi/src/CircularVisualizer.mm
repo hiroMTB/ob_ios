@@ -3,11 +3,13 @@
 #include "BrushColor.h"
 #include "ofRange.h"
 
+using namespace ob::plot;
+
 CircularVisualizer::CircularVisualizer(){
     
 }
 
-void CircularVisualizer::composePlotData(vector<BrushData> & data){
+void CircularVisualizer::composePlotData(vector<BrushData> & data, unordered_map<TYPE, float> & radiusData){
     
     vector<ofRange> ranges;
     
@@ -32,9 +34,9 @@ void CircularVisualizer::composePlotData(vector<BrushData> & data){
             }
         }
         
-        PlotData & p = s.plot[ob::plot::TYPE::HOUR];
-        p.radius     = 0.3 * ofGetWidth()/2;
-        p.size       = MAX(p.radius*0.01f, 4);  // thickness
+        PlotData & p = s.plot[TYPE::HOUR];
+        p.radius     = radiusData[TYPE::HOUR] * ofGetWidth()/2;
+        p.size       = MAX(p.radius*0.01f, 2);  // thickness
         p.stAngle    = startDeg;
         p.endAngle   = endDeg;
         p.stPos.x    = p.radius * cos(startRad);
@@ -49,8 +51,8 @@ void CircularVisualizer::composePlotData(vector<BrushData> & data){
     // day
     for(int i=0; i<data.size(); i++){
         BrushData & s = data[i];
-        PlotData & p = s.plot[ob::plot::TYPE::DAY];
-        p.radius = 0.5 * ofGetWidth()/2;
+        PlotData & p = s.plot[TYPE::DAY];
+        p.radius = radiusData[TYPE::DAY] * ofGetWidth()/2;
         float start = s.start.tm_hour + s.start.tm_min/60.0f;
         p.stAngle   = p.endAngle = start/24.0f * 360.0f -90.0f;
         p.stPos.x   = p.radius * cos(ofDegToRad(p.stAngle));
@@ -65,12 +67,12 @@ void CircularVisualizer::composePlotData(vector<BrushData> & data){
     
     for(int i=0; i<data.size(); i++){
         BrushData & s = data[i];
-        PlotData & p = s.plot[ob::plot::TYPE::WEEK];
+        PlotData & p = s.plot[TYPE::WEEK];
         int wday = s.start.tm_wday;
         float start = wday + s.start.tm_hour/23.0f;
         float startDeg = start/7.0f * 360.0f - 90.0;
         float startRad = ofDegToRad(startDeg);
-        float baseRadius = 0.6 * ofGetWidth()/2;
+        float baseRadius = radiusData[TYPE::WEEK] * ofGetWidth()/2;
         p.level = wdayCnt[wday];
         p.radius = baseRadius + 2.0f * wdayCnt[wday];
         
@@ -89,13 +91,13 @@ void CircularVisualizer::composePlotData(vector<BrushData> & data){
     
     for(int i=0; i<data.size(); i++){
         BrushData & s = data[i];
-        PlotData & p = s.plot[ob::plot::TYPE::MONTH];
+        PlotData & p = s.plot[TYPE::MONTH];
         
         int mday = s.start.tm_mday - 1; // 0 - 30 days
         float start = mday + s.start.tm_hour/23.0f;
         float startDeg = start/31.0f * 360.0f - 90.0;
         float startRad = ofDegToRad(startDeg);
-        float baseRadius = 0.7 * ofGetWidth()/2;
+        float baseRadius = radiusData[TYPE::MONTH] * ofGetWidth()/2;
         p.radius = baseRadius + 3.0f * mdayCnt[mday];
         p.stAngle   = p.endAngle = startDeg;
         p.stPos.x   = p.radius * cos(startRad);
@@ -110,13 +112,13 @@ void CircularVisualizer::composePlotData(vector<BrushData> & data){
     
     for(int i=0; i<data.size(); i++){
         BrushData & s = data[i];
-        PlotData & p = s.plot[ob::plot::TYPE::YEAR];
+        PlotData & p = s.plot[TYPE::YEAR];
         
         int yday = s.start.tm_yday;
         float start = yday + s.start.tm_hour/23.0f;
         float startDeg = start/365.0f*360.0f - 90.0;
         float startRad = ofDegToRad(startDeg);
-        float baseRadius = 0.8 * ofGetWidth()/2;
+        float baseRadius = radiusData[TYPE::YEAR] * ofGetWidth()/2;
         p.radius = baseRadius + 4.0f * ydayCnt[yday];
         
         p.stAngle   = p.endAngle = startDeg;
@@ -131,7 +133,7 @@ void CircularVisualizer::draw_hour(float scale, const vector<BrushData> & data, 
     
     for(int i=0; i<num; i++){
         const BrushData & s = data[i];
-        const PlotData & p = s.plot.at(ob::plot::TYPE::HOUR);
+        const PlotData & p = s.plot.at(TYPE::HOUR);
         float startDeg  = p.stAngle;
         float endDeg    = p.endAngle;
         
@@ -153,7 +155,7 @@ void CircularVisualizer::draw_day(float scale, const vector<BrushData> & data, i
     
     for(int i=0; i<num; i++){
         const BrushData & s = data[i];
-        const PlotData & p = s.plot.at(ob::plot::TYPE::DAY);
+        const PlotData & p = s.plot.at(TYPE::DAY);
         float posx = p.stPos.x;
         float posy = p.stPos.y;
         float size = p.size;
@@ -167,7 +169,7 @@ void CircularVisualizer::draw_week(float scale, const vector<BrushData> & data, 
     
     for(int i=0; i<num; i++){
         const BrushData & s = data[i];
-        const PlotData & p = s.plot.at(ob::plot::TYPE::WEEK);
+        const PlotData & p = s.plot.at(TYPE::WEEK);
         float posx = p.stPos.x;
         float posy = p.stPos.y;
         float size = p.size;
@@ -181,7 +183,7 @@ void CircularVisualizer::draw_month(float scale, const vector<BrushData> & data,
     
     for(int i=0; i<num; i++){
         const BrushData & s = data[i];
-        const PlotData & p = s.plot.at(ob::plot::TYPE::MONTH);
+        const PlotData & p = s.plot.at(TYPE::MONTH);
         float posx = p.stPos.x;
         float posy = p.stPos.y;
         float size = p.size;
@@ -195,7 +197,7 @@ void CircularVisualizer::draw_year(float scale, const vector<BrushData> & data, 
 
     for(int i=0; i<num; i++){
         const BrushData & s = data[i];
-        const PlotData & p = s.plot.at(ob::plot::TYPE::YEAR);
+        const PlotData & p = s.plot.at(TYPE::YEAR);
         float posx = p.stPos.x;
         float posy = p.stPos.y;
         float size = p.size;

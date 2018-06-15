@@ -13,10 +13,12 @@ public:
     void draw();
     void clear();
     void update();
+    void setOffset(glm::vec3 offset);
     
     vector<glm::vec3> pos;
     ofVboMesh mesh;
 
     ofxSpaceColonization tree;
+    glm::vec3 offset;
 
 };

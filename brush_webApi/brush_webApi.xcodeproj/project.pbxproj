@@ -15,6 +15,7 @@
 		4579AC931FA8B9B300846C4B /* Voro.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4579AC911FA8B9B300846C4B /* Voro.cpp */; };
 		4579AC961FA8D0A100846C4B /* BrushData.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4579AC941FA8D0A100846C4B /* BrushData.mm */; };
 		45826E191FB0C83A00C16B5D /* Np.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45826E171FB0C83A00C16B5D /* Np.cpp */; };
+		458372B61FB4B70100EE03E2 /* Guide.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 458372B41FB4B70100EE03E2 /* Guide.cpp */; };
 		45C23B3E1FB227FA0021634E /* ofxSpaceColonization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C23B1D1FB227FA0021634E /* ofxSpaceColonization.cpp */; };
 		45C23B3F1FB227FA0021634E /* ofxSpaceColonizationBranch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C23B1F1FB227FA0021634E /* ofxSpaceColonizationBranch.cpp */; };
 		45C23B401FB227FA0021634E /* ofxSpaceColonizationHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45C23B211FB227FA0021634E /* ofxSpaceColonizationHelper.cpp */; };
@@ -76,6 +77,8 @@
 		4579AC951FA8D0A100846C4B /* BrushData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrushData.h; sourceTree = "<group>"; };
 		45826E171FB0C83A00C16B5D /* Np.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Np.cpp; sourceTree = "<group>"; };
 		45826E181FB0C83A00C16B5D /* Np.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Np.h; sourceTree = "<group>"; };
+		458372B41FB4B70100EE03E2 /* Guide.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Guide.cpp; sourceTree = "<group>"; };
+		458372B51FB4B70100EE03E2 /* Guide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Guide.h; sourceTree = "<group>"; };
 		45C23B1D1FB227FA0021634E /* ofxSpaceColonization.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSpaceColonization.cpp; sourceTree = "<group>"; };
 		45C23B1E1FB227FA0021634E /* ofxSpaceColonization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSpaceColonization.h; sourceTree = "<group>"; };
 		45C23B1F1FB227FA0021634E /* ofxSpaceColonizationBranch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSpaceColonizationBranch.cpp; sourceTree = "<group>"; };
@@ -84,6 +87,7 @@
 		45C23B221FB227FA0021634E /* ofxSpaceColonizationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSpaceColonizationHelper.h; sourceTree = "<group>"; };
 		45C23B231FB227FA0021634E /* ofxSpaceColonizationLeaf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSpaceColonizationLeaf.cpp; sourceTree = "<group>"; };
 		45C23B241FB227FA0021634E /* ofxSpaceColonizationLeaf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSpaceColonizationLeaf.h; sourceTree = "<group>"; };
+		45C863161FB480AD00600168 /* Sandbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sandbox.h; sourceTree = "<group>"; };
 		5326AEA710A23A0500278DE6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		61313493CDB52744E22A604D /* json-forwards.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = "json-forwards.h"; path = "../../../addons/ofxJSON/libs/jsoncpp/include/json/json-forwards.h"; sourceTree = SOURCE_ROOT; };
@@ -362,8 +366,11 @@
 				45826E181FB0C83A00C16B5D /* Np.h */,
 				45826E171FB0C83A00C16B5D /* Np.cpp */,
 				841F98D51F9D04410037AA13 /* BrushColor.h */,
-				454F46081FB2284B00CC7445 /* Colo.cpp */,
 				454F46091FB2284B00CC7445 /* Colo.h */,
+				454F46081FB2284B00CC7445 /* Colo.cpp */,
+				45C863161FB480AD00600168 /* Sandbox.h */,
+				458372B41FB4B70100EE03E2 /* Guide.cpp */,
+				458372B51FB4B70100EE03E2 /* Guide.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -490,6 +497,7 @@
 				45C23B401FB227FA0021634E /* ofxSpaceColonizationHelper.cpp in Sources */,
 				45826E191FB0C83A00C16B5D /* Np.cpp in Sources */,
 				E4D8936F11527B74007E1F53 /* ofApp.mm in Sources */,
+				458372B61FB4B70100EE03E2 /* Guide.cpp in Sources */,
 				4579AC961FA8D0A100846C4B /* BrushData.mm in Sources */,
 				38539D3B7B7D7FF75E9454FD /* BrushDataHandler.cpp in Sources */,
 				BEDFEE7400C58EA4E412B757 /* ofxJSONElement.cpp in Sources */,

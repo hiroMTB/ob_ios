@@ -15,7 +15,7 @@ void Voro::addVertices(const vector<BrushData> & data, ob::plot::TYPE type, floa
         const PlotData & p = data[i].plot.at(type);
         const glm::vec2 & pos1 = p.stPos;
         glm::vec2 n1 = glm::normalize(pos1);
-        float angle = glm::angle(xAxis, n1);
+        float angle = glm::orientedAngle(xAxis, n1);
         
         if(minRad<angle && angle<=maxRad){
             vPs.push_back(vPoint(pos1.x, pos1.y));
@@ -68,7 +68,7 @@ void Voro::draw(){
                             
                             bool draw = !xOver && !yOver;
                             
-                            if(draw){
+                            if(1){
                                 ofFill();
                                 ofSetColor(0,0,0, 150);
                                 ofSetLineWidth(1);
@@ -78,7 +78,7 @@ void Voro::draw(){
                             }
                         }
                     }else{
-                        if( 0 ){
+                        if( 1 ){
                             const vertex_type * v0 = edge->vertex0();
                             if( v0 ){
                                 vPoint p1 = vPs[edge->cell()->source_index()];
@@ -87,7 +87,15 @@ void Voro::draw(){
                                 float y0 = edge->vertex0()->y();
                                 float end_x = (p1.y() - p2.y()) * ofGetWidth();
                                 float end_y = (p1.x() - p2.x()) * -ofGetWidth();
-                                ofDrawLine(x0,y0,0,end_x,end_y,0);
+                                
+                                glm::vec2 v0(x0, y0);
+                                glm::vec2 v1(end_x, end_y);
+                                glm::vec2 dir = v1 - v0;
+                                float rate = (ofGetWidth()*0.1)/glm::length(dir);
+                                glm::vec2 v3 = v0 + dir*(rate);
+                                
+                                ofSetLineWidth(1);
+                                ofDrawLine(x0,y0,0,v3.x, v3.y, 0);
                             }
                         }
                     }

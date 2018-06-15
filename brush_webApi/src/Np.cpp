@@ -15,7 +15,7 @@ void Np::addVertices(const vector<BrushData> & data, ob::plot::TYPE type, float 
         const PlotData & p = data[i].plot.at(type);
         const glm::vec2 & pos1 = p.stPos;
         glm::vec2 n1 = glm::normalize(pos1);
-        float angle = glm::angle(xAxis, n1);
+        float angle = glm::orientedAngle(xAxis, n1);
         
         if(minRad<angle && angle<=maxRad){
             pos.push_back(pos1);
@@ -23,7 +23,7 @@ void Np::addVertices(const vector<BrushData> & data, ob::plot::TYPE type, float 
     }
 }
 
-void Np::create(int numLine){
+void Np::create(int numLine, float minDist, float maxDist){
     
     //float min = std::numeric_limits<float>::min();
     float max = std::numeric_limits<float>::max();
@@ -45,7 +45,7 @@ void Np::create(int numLine){
             glm::vec2 & p2 = pos[j];
             
             float dist = glm::distance(p1, p2);
-            if(50<dist && dist<80){
+            if(minDist<dist && dist<maxDist){
                 
                 multimap<float, glm::vec2>::iterator itr = near_p.end();
                 itr--;

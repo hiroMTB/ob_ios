@@ -7,11 +7,14 @@
 #include "Voro.h"
 #include "Np.h"
 #include "Colo.h"
+#include "Guide.h"
+
+#include <unordered_map>
 
 class ofApp : public ofxiOSApp{
     
 public:
-     ofApp(){ cout << "construct ofApp" << endl; }
+    ofApp();
     ~ofApp(){ cout << "destruct  ofApp" << endl; }
 
     void setup();
@@ -24,14 +27,16 @@ public:
         static ofApp app;
         return app;
     }
-      
+    
+    unordered_map<ob::plot::TYPE, float> radiusData;
     vector<BrushData> data;
     BrushDataHandler handler;
 
     CircularVisualizer viz;
     Voro voro;
     Np np;
-    Colo colo;
+    Guide guide;
+    vector<Colo> colos;
     
     int num = 0;
     

@@ -4,6 +4,7 @@ Colo::Colo(){
     
     mesh.setMode(OF_PRIMITIVE_LINES);
     mesh.setUsage(GL_STATIC_DRAW);
+    
     auto opt = ofxSpaceColonizationOptions({
         300,                            // max_dist
         5,                             // min_dist
@@ -22,19 +23,23 @@ Colo::Colo(){
     tree.setup(opt);
 }
 
+void Colo::setOffset(glm::vec3 _offset){
+    offset = _offset;
+}
+
 void Colo::addVertices(const vector<BrushData> & data, ob::plot::TYPE type, float minRad, float maxRad){
 
     static const glm::vec2 xAxis(1,0);
-    
+        
     for(int i=0; i<data.size(); i++){
         
         const PlotData & p = data[i].plot.at(type);
         const glm::vec2 & pos1 = p.stPos;
         glm::vec2 n1 = glm::normalize(pos1);
-        float angle = glm::angle(xAxis, n1);
+        float angle = glm::orientedAngle(xAxis, n1);
         
         if(minRad<angle && angle<=maxRad){
-            pos.push_back(glm::vec3(pos1.x, pos1.y, 0));
+            pos.push_back(glm::vec3(pos1.x, pos1.y, 0) + offset);
         }
     }
 }
@@ -57,19 +62,24 @@ void Colo::update(){
         const glm::vec3 & end = b->getEndPos();
         mesh.addVertex(st);
         mesh.addVertex(end);
-        mesh.addColor(ofFloatColor(1,0,0.5,1));
-        mesh.addColor(ofFloatColor(1,0,0.5,1));
+        mesh.addColor(ofFloatColor(0,0,0.2,0.7));
+        mesh.addColor(ofFloatColor(0,0,0.2,0.7));
     }
 }
 
 void Colo::draw(){
+    
+    ofPushMatrix();
+    ofTranslate(-offset);
     mesh.draw();
     
 //    for(int i=0; i<pos.size(); i++){
 //        ofFill();
-//        ofSetColor(0,0,0,200);
-//        ofDrawCircle(pos[i].x, pos[i].y, 2);
+//        ofSetColor(0,0,0);
+//        ofDrawCircle(pos[i].x, pos[i].y, 1);
 //    }
+    
+    ofPopMatrix();
 }
 
 void Colo::clear(){
